@@ -1,0 +1,70 @@
+#package.xml file is recreated on the fly by Copado, no need to track unnecessary changes of this file 
+package.xml
+
+reports/*
+dashboards/*
+
+classes/copado__*
+triggers/copado__*
+pages/copado__*
+staticresources/copado__*
+
+classes/pi__*
+triggers/pi__*
+pages/pi__*
+staticresources/pi__*
+
+classes/APXTConga4__*
+triggers/APXTConga4__*
+pages/APXTConga4__*
+staticresources/APXTConga4__*
+fields/APXTConga4__*
+
+classes/APXT_CongaSign_*
+triggers/APXT_CongaSign_*
+pages/APXT_CongaSign_*
+objects/APXT_CongaSign_*
+labels/APXT_CongaSign_*
+staticresources/APXT_CongaSign_*
+fields/APXT_CongaSign_*
+
+classes/et4ae5__*
+triggers/et4ae5__*
+pages/et4ae5__*
+objects/et4ae5__*
+labels/et4ae5__*
+staticresources/et4ae5__*
+fields/et4ae5__*
+
+classes/trailheadapp__*
+triggers/trailheadapp__*
+pages/trailheadapp__*
+objects/trailheadapp__*
+labels/trailheadapp__*
+staticresources/trailheadapp__*
+fields/trailheadapp__*
+
+classes/leadfeederapp__*
+triggers/leadfeederapp__*
+pages/leadfeederapp__*
+objects/leadfeederapp__*
+labels/leadfeederapp__*
+staticresources/leadfeederapp__*
+fields/leadfeederapp__*
+
+#Translations are complex since get updated indirectly across multiple files, they can make a deployment fail
+#if a field is translated in source and it doesn't exist on destination. 
+#If you are committing incrementally new fields and new Translations you can track them in Git, just be careful. 
+#If you choose  to ignore them in Git, you can always create a deployment with the Copado Deployer "Translation" Step. 
+
+# translations/*
+# objectTranslations/*
+
+#Sites which has Domain mapping has environment specific information. 
+#Make sure you setup Copado Environment Variables to make sites config files environment agnostic.
+#Until the above is achieved, you can ignore them as follows
+
+# sites/*
+# siteDotComSites/*
+
+#Documents are mostly created in Production and are not deployed between Sandboxes. You can safely ignore them in Git.
