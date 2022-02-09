@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Conga Sign-ის ტრანზაქციის დასრულების თარიღი - Conga Sign-ის ტრანზაქციის შექმნის თარიღი. აბრუნებს 1 დღის და მთელი რიცხვის მინიმალურ მნიშვნელობას.</help>
+    <label><!-- Duration Days --></label>
+    <name>APXT_CongaSign__Duration__c</name>
+</CustomFieldTranslation>

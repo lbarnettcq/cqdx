@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the name of the CMDT Extension for which you are creating the record. --></help>
+    <label><!-- Extension Name --></label>
+    <name>copado__Extension_Name__c</name>
+    <picklistValues>
+        <masterLabel>None</masterLabel>
+        <translation><!-- None --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

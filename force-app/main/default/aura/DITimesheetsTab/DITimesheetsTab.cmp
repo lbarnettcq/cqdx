@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable">
+    <div class="di-tab-container">
+        <c:DITimesheetsContainer/>
+    </div>
+</aura:component>

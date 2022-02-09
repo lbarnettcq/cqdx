@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_Total_Cost__c</fullName>
+    <externalId>false</externalId>
+    <formula>Monthly_Base_Cost__c + Monthly_Case_Overage_Cost__c + Monthly_Developer_Overage_Cost__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This is the monthly case cost, plus any overages.</inlineHelpText>
+    <label>Monthly Total Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

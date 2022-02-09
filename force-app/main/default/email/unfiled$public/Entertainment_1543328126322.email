@@ -1,0 +1,12 @@
+<html><head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;"><span style="font-size:12px;"><font face="arial, helvetica, sans-serif">{{{Recipient.FirstName}}},</font><br />
+<br />
+I hope you had a great Thanksgiving break and that you and the entire {{{Recipient.Company}}} team are doing well.<br />
+<br />
+I wanted to share some information regarding one of Salesforce's announcements this week about a new product feature enabling users to build end-to-end AI-driven automation. Please see this <a href="https://www.salesforce.com/news/press-releases/2020/12/02/introducing-salesforce-einstein-automate/">link</a>&nbsp;and the attached document and let me know if you'd like additional information or to discuss how CloudQnect can work with your team to enable such processes.<br />
+<br />
+I look forward to hearing from you.<br />
+<br />
+{{{Sender.Signature}}}</span></body></html>

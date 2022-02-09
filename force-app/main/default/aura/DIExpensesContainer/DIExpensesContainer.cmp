@@ -1,0 +1,95 @@
+<aura:component controller="ExpensesController">
+        <aura:attribute name="stateProcess" type="String" description="State processs" />
+
+        <aura:attribute name="dependencies" type="List" default="[]"/>
+
+        <aura:attribute name="contractsIds" type="List" default="[]"/>        
+
+        <aura:attribute name="options" type="Map"/>
+        
+        <aura:attribute name="title" type="String"/>
+        <aura:attribute name="message" type="Object"/>
+        <aura:attribute name="data" type="Object"/>
+        <aura:attribute name="columns" type="List"/>
+        <aura:attribute name="selectedRows" type="List" />
+        <aura:attribute name="maxRowSelection" type="Integer" default="5"/>
+        <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+        <aura:attribute name="draftValues" type="Object" default="[]"/>
+
+        <aura:attribute name="startDate" type="String"/>
+        <aura:attribute name="endDate" type="String"/>
+
+        <aura:attribute name="timesheetId" type="String"/>
+        <aura:attribute name="timesheetStatus" type="String"/>
+        <aura:attribute name="invoiceId" type="String"/>        
+        <aura:attribute name="employeeId" type="String"/>
+        <aura:attribute name="paymentId" type="String"/>
+
+        <aura:attribute name="openedModalDialog" type="Boolean" default="false"/>
+        <aura:attribute name="openedModalDialogConfirm" type="Boolean" default="false"/>
+        
+        <aura:attribute name="enableAddExpense" type="Boolean" default="true"/>
+
+        <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+
+        <aura:method name="update" action="{!c.update}" access="public"> 
+            <aura:attribute name="data" type="Object"/>
+        </aura:method>
+            
+        <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+        
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        
+        <div id="diExpensesContainer">
+            <div class="slds-grid slds-m-top_large slds-p-left_large slds-p-right_large slds-grid_vertical-align-center">
+                <div class="slds-grid slds-grid_vertical-align-center">
+                    <div class="di-icon-expenses">
+                        <lightning:icon 
+                            iconName="custom:custom93"
+                            alternative-text="Expenses">
+                        </lightning:icon>
+                    </div>
+                    <div class="di-expenses-header__logo-title">
+                        <aura:if isTrue="{!v.title}">
+                            <div class="slds-text-color_weak">{!v.title}</div>
+                        </aura:if>   
+                        <div class="di-expenses-header__logo-title-bottom">
+                            Expenses
+                        </div>
+                    </div>
+                </div>         
+                <aura:if isTrue="{!v.enableAddExpense}">
+                    <div class="slds-col_bump-left">
+                    <lightning:button 
+                        name="newExpense"
+                        iconName="utility:add"
+                        label="Add Expense"
+                        title="Add Expense"
+                        iconPosition="left"
+                        onclick="{!c.handleCreateExpense}"/> 
+                    </div> 
+                </aura:if>                   
+            </div>
+            <div class="slds-m-top_large">
+                <lightning:datatable 
+                    class="di-expenses-table" 
+                    columns="{!v.columns}"
+                    data="{!v.data}"
+                    keyField="id"
+                    showRowNumberColumn="false"
+                    rowNumberOffset="0"                                
+                    selectedRows="{!v.selectedRows}"
+                    maxRowSelection="{!v.maxRowSelection}"                              
+                    enableInfiniteLoading="{!v.enableInfiniteLoading}"
+                    hideCheckboxColumn="true"
+                    onrowaction="{!c.handleRowAction}"
+                    draftValues="{!v.draftValues}"                        
+                />
+                <aura:if isTrue="{!v.message.show}">
+                    <div class="slds-p-around_large slds-text-align_center">{!v.message.description}</div>
+                </aura:if>            
+            </div>
+        </div>
+        <c:DIModalDialogExpenses aura:id="diModalDialogExpenses" opened="{!v.openedModalDialog}" changeEvent="{!c.handleChange}"></c:DIModalDialogExpenses>
+        <c:DIModalDialogConfirm aura:id="diModalDialogConfirm" opened="{!v.openedModalDialogConfirm}" changeEvent="{!c.handleChangeModalDialogConfirm}"></c:DIModalDialogConfirm>
+</aura:component>

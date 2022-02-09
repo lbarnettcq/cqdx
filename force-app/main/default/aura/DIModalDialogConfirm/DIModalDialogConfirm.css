@@ -1,0 +1,62 @@
+.THIS .di-modal-dialog-content {
+    display: flex;
+    justify-content: center;
+    color: #2b2826;
+    font-family: "Salesforce Sans";
+    font-weight: 400;
+}
+
+.THIS .di-modal-dialog-title {
+    font-size: 20px;    
+}
+
+.THIS .di-modal-dialog-description {
+    text-align: center;
+}
+
+.THIS .di-modal-dialog-text {
+    font-size: 24px;
+}
+
+.THIS .di-modal-dialog-hint {
+    font-size: 14px;
+}
+
+.THIS .di-modal-dialog-content_margin {
+    margin: 16px 128px 33px 128px;
+}
+
+.THIS .di-modal-dialog__header {
+    padding: 7px 41px 12px 10px;
+    color: #080707;
+    font-family: "Salesforce Sans";
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.THIS .slds-table_bordered {
+    border-top: none;
+}
+
+.THIS .slds-table thead th {
+    background-color: inherit !important;
+}
+
+.THIS .slds-modal__close svg {
+    fill: #ffffff;
+}
+
+.THIS.di-modal-dialog .slds-button_brand {
+    background-color: #0070d2;
+}
+
+.THIS.di-modal-dialog .slds-button_brand[disabled] {
+    background: rgb(201, 199, 197);
+    border-color: rgb(201, 199, 197);
+    color: rgb(255, 255, 255);
+}
+
+.THIS .slds-modal__header_border-none {
+    border: none !important;
+}

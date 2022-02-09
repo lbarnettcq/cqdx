@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Automatically populated according to the field selected. This value will be dynamically passed to the second filter of the report. Using a plus sign (+) specifies that a blank value should be used. --></help>
+    <label><!-- pv1 --></label>
+    <name>APXTConga4__pv1__c</name>
+</CustomFieldTranslation>

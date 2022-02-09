@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Follow-up to VN for SF AEs</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Salesforce AEs</name>
+    <relatedEntityType>Lead</relatedEntityType>
+    <style>none</style>
+    <subject>Growing the Use of Salesforce</subject>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

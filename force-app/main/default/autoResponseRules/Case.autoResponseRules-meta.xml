@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Support Cases</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Email,Phone,Web</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>support@cloudqnect.com</replyToEmail>
+            <senderEmail>team@cloudqnect.com</senderEmail>
+            <senderName>CloudQnect</senderName>
+            <template>unfiled$public/Support_Auto_Response</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

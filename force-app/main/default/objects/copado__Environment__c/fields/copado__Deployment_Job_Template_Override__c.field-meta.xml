@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>copado__Deployment_Job_Template_Override__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Deployment Job Template Override</label>
+    <referenceTo>copado__JobTemplate__c</referenceTo>
+    <relationshipLabel>Environments (Deployment Job Template Override)</relationshipLabel>
+    <relationshipName>Environments1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

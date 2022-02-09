@@ -1,0 +1,1 @@
+<apex:page action="{!URLFOR('/apex/dsfs__DocuSign_EditEnvelope', null, [SourceID=$CurrentPage.parameters.sourceid,DSEID=$CurrentPage.parameters.dseid])}"></apex:page>

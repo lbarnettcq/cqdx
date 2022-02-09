@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demo_View</fullName>
+    <columns>NAME</columns>
+    <columns>copado__Environment__c</columns>
+    <columns>copado__Status__c</columns>
+    <columns>copado__Promote_Change__c</columns>
+    <columns>copado__Promote_and_Deploy__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>copado__Project__c</field>
+        <operation>contains</operation>
+        <value>Dyna</value>
+    </filters>
+    <label>Demo View</label>
+</ListView>

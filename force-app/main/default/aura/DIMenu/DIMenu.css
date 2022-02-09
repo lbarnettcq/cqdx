@@ -1,0 +1,79 @@
+.THIS.di-list {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+}
+
+.THIS .di-list-selected-item {
+    color: #1589ee;
+    font-family: "Salesforce Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+}
+
+.THIS .di-list-margin-left {
+    margin-left: 16px;
+}
+
+.THIS .slds-button:hover, .THIS .slds-button:focus {
+    color: rgb(0, 95, 178);
+}
+
+.THIS .slds-dropdown__list {
+    padding: 10px;
+}
+
+.THIS .slds-dropdown__list-item-title {
+    color: #706e6b;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    text-transform: uppercase;
+}
+
+.THIS .slds-dropdown__item-title_top {
+    margin-top: 15px;
+}
+
+.THIS .slds-dropdown__sow-margin {
+    margin: 8px 0;
+}
+
+.THIS .slds-dropdown__item {
+    color: #2b2826;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.THIS .slds-dropdown__item>a {
+    padding: 0 !important;
+}
+
+.THIS .slds-dropdown__item .slds-listbox__icon-selected-c {
+    opacity: 0;
+}
+
+.THIS .slds-dropdown__item.slds-is-selected .slds-listbox__icon-selected-c {
+    opacity: 1;
+}
+
+.THIS .slds-dropdown__item .slds-listbox__icon-selected-c svg {
+    fill: rgb(112, 110, 107);
+}
+.THIS .slds-dropdown__item.slds-is-selected .slds-listbox__icon-selected-c svg {
+    fill: #0070d2;
+}
+
+.THIS .sow-lable_margin-left {
+    margin-left: 8px;
+}
+
+.THIS .sow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

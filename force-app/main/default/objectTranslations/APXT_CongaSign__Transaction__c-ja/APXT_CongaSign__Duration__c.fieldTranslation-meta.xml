@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Conga Sign 取引完了日 - Conga Sign 取引作成日 最小値の 1 日と整数値を返します。</help>
+    <label><!-- Duration Days --></label>
+    <name>APXT_CongaSign__Duration__c</name>
+</CustomFieldTranslation>

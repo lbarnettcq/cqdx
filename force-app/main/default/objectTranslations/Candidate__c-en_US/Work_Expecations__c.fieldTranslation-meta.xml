@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Work Expecations --></label>
+    <name>Work_Expecations__c</name>
+    <picklistValues>
+        <masterLabel>Onsite</masterLabel>
+        <translation><!-- Onsite --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Remote</masterLabel>
+        <translation><!-- Remote --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Will Relocate</masterLabel>
+        <translation><!-- Will Relocate --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Will Travel</masterLabel>
+        <translation><!-- Will Travel --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

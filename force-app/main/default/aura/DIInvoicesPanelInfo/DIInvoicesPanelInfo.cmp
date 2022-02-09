@@ -1,0 +1,85 @@
+<aura:component controller="InvoicesController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+
+    <aura:attribute name="invoiceId" type="String"/>
+
+    <aura:attribute name="status" type="String"/>
+    <aura:attribute name="client" type="String"/>
+    <aura:attribute name="issueDate" type="String"/>
+    <aura:attribute name="dueDate" type="String"/>
+    <aura:attribute name="timePeriod" type="String"/>
+    <aura:attribute name="totalExpenses" type="String"/>
+    <aura:attribute name="totalHours" type="String"/>
+    <aura:attribute name="totalAmount" type="String"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+    
+    <aura:method name="update" action="{!c.update}" access="public"> 
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="slds-grid slds-p-around_large slds-grid_vertical-align-center" >
+        
+                <aura:if isTrue="{!v.status}">
+                    <div>
+                        <c:DILabel type="{!v.status}"></c:DILabel>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!v.client}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Account Name</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.client}</div>
+                    </div>
+                </aura:if>
+    
+                <aura:if isTrue="{!v.timePeriod}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Time Period</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.timePeriod}</div>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!v.issueDate}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Invoice Date</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.issueDate}</div>
+                    </div>
+                </aura:if>
+    
+                <aura:if isTrue="{!v.dueDate}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Due Date</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.dueDate}</div>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!v.totalHours}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Hours Total</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.totalHours}</div>
+                    </div>
+                </aura:if>                
+    
+                <aura:if isTrue="{!v.totalExpenses}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Total for Expenses</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.totalExpenses}</div>
+                    </div>
+                </aura:if>
+    
+                <aura:if isTrue="{!v.totalAmount}">
+                    <div class="slds-col_bump-left">
+                        <div class="di-label">Final Total</div>
+                        <div class="slds-text-heading_small slds-m-top_small"><b>{!v.totalAmount}</b></div>
+                    </div>
+                </aura:if>
+ 
+        </div>
+</aura:component>

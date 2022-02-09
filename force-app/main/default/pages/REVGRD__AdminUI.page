@@ -1,0 +1,36 @@
+<!--
+-Author:         serhiivolynets
+-Date:           13.01.2020
+-Description:   
+-->
+<apex:page id="AdminUI" controller="REVGRD.VFC002_Canvas">
+    <head>
+        <title>Admin UI</title>
+    </head>
+
+    <style>
+        html {
+            overflow: hidden !important;
+        }
+        html body.sfdcBody {
+            padding: 0;
+            overflow: hidden !important;
+        }
+        body.sfdcBody iframe {
+            height: 100vh;
+        }
+    </style>
+<!--    ,'RevenueGridTenantUrl':'{!RevenueGridTenantUrl}'-->
+    <apex:canvasApp developerName="{!CanvasApp}"
+                    namespacePrefix="{!CanvasAppNameSpace}"
+                    parameters="{'serverSyncTenantUrl':'{!ServerSyncTenantUrl}','redirectUrl':'{!ServerSyncTenantUrl}/ui/admin.html#/signinSingleUseToken?token={singleUseToken}&culture={!LocaleStr}&canvasApp=true','errorRedirectUrl':'{!ServerSyncTenantUrl}/ui/error.html?errorCode={errorCode}'}"
+                    width="100%" height="100%"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script  type="text/javascript">
+        var jq = $.noConflict();
+        jq(document).ready(function(){
+            SfdcApp.projectOneNavigator.sendTitleToParent('Revenue Inbox - Sync Admin');
+        });// End of DOM LOAD
+    </script>
+</apex:page>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Case_is_Closed</fullName>
+        <description>Case is Closed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Support_Case_Closed_Email</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Set_Case_RecordType</fullName>
+        <description>Sets the Case RecordType to &quot;External&quot;</description>
+        <field>RecordTypeId</field>
+        <lookupValue>External</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Set Case RecordType</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Case Closed Email</fullName>
+        <actions>
+            <name>Case_is_Closed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>External</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <description>Sends a Case is Closed notification when Status set to closed for external cases</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Web to Case Record Type</fullName>
+        <actions>
+            <name>Set_Case_RecordType</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Web</value>
+        </criteriaItems>
+        <description>Sets the Record Type to &quot;External&quot; when the Case Origin is &quot;Web&quot;.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

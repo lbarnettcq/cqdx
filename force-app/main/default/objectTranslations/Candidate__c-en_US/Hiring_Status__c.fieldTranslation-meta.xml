@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Hiring Status --></label>
+    <name>Hiring_Status__c</name>
+    <picklistValues>
+        <masterLabel>Application Received</masterLabel>
+        <translation><!-- Application Received --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Candidate Screen</masterLabel>
+        <translation><!-- Candidate Screen --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Customer Interview</masterLabel>
+        <translation><!-- Customer Interview --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Hired</masterLabel>
+        <translation><!-- Hired --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>On Hold</masterLabel>
+        <translation><!-- On Hold --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Phone Interview</masterLabel>
+        <translation><!-- Phone Interview --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Technical Screen</masterLabel>
+        <translation><!-- Technical Screen --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Video Interview</masterLabel>
+        <translation><!-- Video Interview --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

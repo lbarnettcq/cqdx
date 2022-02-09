@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Type --></label>
+    <name>Type__c</name>
+    <picklistValues>
+        <masterLabel>Airfare</masterLabel>
+        <translation><!-- Airfare --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Hotel Room</masterLabel>
+        <translation><!-- Hotel Room --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Meal</masterLabel>
+        <translation><!-- Meal --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rental Car</masterLabel>
+        <translation><!-- Rental Car --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

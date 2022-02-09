@@ -1,0 +1,19 @@
+.THIS.di-spinner-container {
+    position: relative;
+    display: inline-block;
+}
+
+.THIS .di-container_size_40 {
+    width: 40px;
+    height: 40px;
+}
+
+.THIS .di-container_size_18 {
+    width: 18px;
+    height: 18px;
+}
+
+.THIS .di-icon__size_20 svg {
+    width : 18px;
+    height: 18px;
+}

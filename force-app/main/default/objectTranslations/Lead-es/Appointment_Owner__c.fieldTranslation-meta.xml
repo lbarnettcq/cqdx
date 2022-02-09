@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Appointment Owner --></label>
+    <name>Appointment_Owner__c</name>
+    <picklistValues>
+        <masterLabel>Alexa Olah</masterLabel>
+        <translation><!-- Alexa Olah --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Becky Coppa</masterLabel>
+        <translation><!-- Becky Coppa --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

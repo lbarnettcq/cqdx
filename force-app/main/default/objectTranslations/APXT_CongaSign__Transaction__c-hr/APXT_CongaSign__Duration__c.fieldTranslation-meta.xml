@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Datum dovršetka transkacije Conga Sign-a - Datum izrade transkacije Conga Sign-a Vraća minimalnu vrijednost od jednog dana i cjelobrojnu vrijednost.</help>
+    <label><!-- Duration Days --></label>
+    <name>APXT_CongaSign__Duration__c</name>
+</CustomFieldTranslation>

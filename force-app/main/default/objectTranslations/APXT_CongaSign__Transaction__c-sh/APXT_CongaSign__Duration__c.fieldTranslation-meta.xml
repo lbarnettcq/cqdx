@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Datum završetka Conga Sign transakcije – datum pravljenja Conga Sign transakcije. Prikazuje minimalnu vrednost koja iznosi 1 dan i ceo broj.</help>
+    <label><!-- Duration Days --></label>
+    <name>APXT_CongaSign__Duration__c</name>
+</CustomFieldTranslation>

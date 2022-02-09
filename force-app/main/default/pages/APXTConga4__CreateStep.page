@@ -1,0 +1,23 @@
+<apex:page controller="APXTConga4.BaseStepController" sidebar="false">
+	<apex:includeLightning />
+    <script type="text/javascript">
+        var ns = "{!JSENCODE(namespace)}";
+        var UIThemeDisplayed = "{!$User.UIThemeDisplayed}";
+        if(ns == undefined || ns.length == 0) {
+            ns = "c";
+        }
+        $Lightning.use(ns+":AppForVisualForcePages", function() {
+            $Lightning.createComponent(ns+":CreateStep", {
+                inVFPage: "true",
+                masterObject: "{!JSENCODE($CurrentPage.parameters.mo)}",
+                masterObjectLabel: "{!JSENCODE($CurrentPage.parameters.mol)}",
+                solutionName: "{!JSENCODE($CurrentPage.parameters.sn)}"
+            },
+            "lightning",
+            function(cmp) {
+                cmp.set("v.theme", UIThemeDisplayed);
+            });
+        });
+    </script>
+    <div id="lightning" />
+</apex:page>

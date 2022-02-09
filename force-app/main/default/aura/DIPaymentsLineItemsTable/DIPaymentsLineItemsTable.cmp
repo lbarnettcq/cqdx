@@ -1,0 +1,85 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="PaymentsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+    
+    <aura:attribute name="options" type="Map"/>
+    
+    <aura:attribute name="message" type="Object"/>
+
+    <aura:attribute name="filteredData" type="List"/>
+
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>
+    
+    <aura:attribute name="filter" type="String" />
+
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="selectedRowsDetails" type="Object" />
+    <aura:attribute name="selectedRowsList" type="List" />
+    
+    <aura:attribute name="maxRowSelection" type="Integer" default="5"/>
+    <aura:attribute name="selectedRows" type="List" />
+    
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+
+    <aura:attribute name="limitRows" type="Integer" default="20"/>
+    <aura:attribute name="offsetRows" type="Integer" default="0"/>    
+    <aura:attribute name="totalNumberRows" type="Integer" default="0"/>
+    <aura:attribute name="totalNumberRowsLabel" type="Integer" default="0 Items"/>
+    <aura:attribute name="currentCountRows" type="Integer" default="0"/>
+
+    <aura:attribute name="rowsToLoad" type="Integer" default="20"/>
+    <aura:attribute name="rowsToAdd" type="Integer" default="20"/>
+
+    <aura:attribute name="loadMoreStatus" type="String" default="Loading .... "/>
+    <aura:attribute name="showRowNumberColumn" type="Boolean" default="false"/>  
+   
+    <aura:attribute name="activeFilter" type="string" default="All" description="The currently selected actions filter"/>
+    
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedByLabel" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="defaultSortDirection" type="String"/>
+
+    <aura:attribute name="lastModifiedLabel" type="String"/>   
+    
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+
+    <aura:attribute name="searchValue" type="String"/>
+
+    <aura:attribute name="paymentId" type="String"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+            
+    <lightning:datatable 
+        class="paymentsLineItemsTable" 
+        columns="{!v.columns}"
+        data="{!v.data}"
+        keyField="id"
+        showRowNumberColumn="true"
+        rowNumberOffset="0"                                
+        selectedRows="{!v.selectedRows}"
+        maxRowSelection="{!v.maxRowSelection}"                              
+        enableInfiniteLoading="{!v.enableInfiniteLoading}"
+        hideCheckboxColumn="true"                                                          
+        sortedBy="{!v.sortedBy}"
+        sortedDirection="{!v.sortedDirection}"
+        defaultSortDirection="{!v.defaultSortDirection}"
+        onsort="{!c.updateColumnSorting}"
+        onloadmore="{!c.loadMoreData}" 
+        loadMoreOffset="{!v.loadMoreOffset}"
+        draftValues="{!v.draftValues}"
+    />
+   
+    <aura:if isTrue="{!v.message.show}">
+        <div class="di__message">{!v.message.description}</div>
+    </aura:if>  
+    <c:DIModalDialogConfirm aura:id="diModalDialogConfirm" opened="{!v.isModalOpen}" changeEvent="{!c.handleChange}"></c:DIModalDialogConfirm>
+</aura:component>

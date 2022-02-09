@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>WebToLead</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>Sales_Queue</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <formula>ISNEW()</formula>
+            <template>unfiled$public/CQNewAssignmentLead</template>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>

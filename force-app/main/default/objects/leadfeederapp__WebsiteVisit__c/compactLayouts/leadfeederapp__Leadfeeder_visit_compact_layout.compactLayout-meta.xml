@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>leadfeederapp__Leadfeeder_visit_compact_layout</fullName>
+    <fields>Name</fields>
+    <fields>leadfeederapp__LandingPage__c</fields>
+    <fields>leadfeederapp__Referrer__c</fields>
+    <fields>leadfeederapp__Source__c</fields>
+    <fields>leadfeederapp__Medium__c</fields>
+    <fields>leadfeederapp__Campaign__c</fields>
+    <fields>leadfeederapp__Pageviews__c</fields>
+    <fields>leadfeederapp__Duration__c</fields>
+    <fields>leadfeederapp__Time__c</fields>
+    <label>Leadfeeder Visit</label>
+</CompactLayout>

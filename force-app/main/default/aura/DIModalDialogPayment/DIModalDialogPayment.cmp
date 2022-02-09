@@ -1,0 +1,189 @@
+<aura:component controller="PaymentsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />     
+
+    <aura:attribute name="opened" type="Boolean" default="false"/>
+
+    <aura:attribute name="view" type="String" default="none"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="description" type="List"/>
+
+    <aura:attribute name="message" type="Object"/>
+
+    <aura:attribute name="submitLabel" type="String" default="Create"/>
+    <aura:attribute name="disableSubmit" type="Boolean" default="false"/>
+    
+    <aura:attribute name="receivers" type="List" default="[]"/>
+    <aura:attribute name="receiverId" type="String"/>
+
+    <aura:attribute name="paymentTypes" type="List" default="[]"/>
+    <aura:attribute name="paymentTypeId" type="String"/>
+
+    <aura:attribute name="paymentId" type="String"/>
+
+    <aura:attribute name="startDate" type="String"/>
+    <aura:attribute name="endDate" type="String"/>
+    <aura:attribute name="pendingInvoicesStartDate" type="String"/>
+    
+    <aura:attribute name="paidInvoices" type="Boolean" default="false"/>
+    <aura:attribute name="disabledPaidInvoices" type="Boolean" default="false"/>
+
+    <aura:attribute name="pendingInvoices" type="Boolean" default="false"/>
+    <aura:attribute name="disabledPendingInvoices" type="Boolean" default="false"/>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorsFields" type="String" default=""/>
+    <aura:attribute name="errorBlankField" type="String" description="Message for empty field" default="Complete this field"/>
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+    <aura:if isTrue="{!v.opened}">
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon 
+                            iconName="utility:close"
+                            onclick="{! c.closeModel }"
+                            alternativeText="close"
+                            variant="bare-inverse"
+                            size="large"
+                            class="slds-modal__close"/>
+                        <div class="slds-text-heading_medium slds-text-color_weak">
+                            <b>{!v.title}</b>
+                        </div>
+                        <aura:if isTrue="{!v.showError}">
+                            <c:DIErrorsModal errorsFields="{!v.errorsFields}"/>
+                        </aura:if>
+                    </header>                  
+                    <div class="slds-modal__content slds-p-around_medium slds-modal__content_padding" id="modal-content-id-1">
+                        <div>
+                            <aura:iteration items="{!v.description}" var="descr">
+                                <div>{!descr}</div>
+                            </aura:iteration>
+                        </div>             
+                        <div class="slds-grid slds-grid_align-center">
+                            <div class="slds-col slds-size_7-of-12">
+                            <aura:if isTrue="{!v.message.show}">
+                                {!v.message.description}
+                            <aura:set attribute="else">
+                                <div class="slds-grid slds-gutters_x-small slds-m-top_large">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:combobox 
+                                            aura:id="paymentTypeId" 
+                                            name="general" 
+                                            value="{!v.paymentTypeId}" 
+                                            label="Payment Type" 
+                                            required="true"
+                                            messageWhenValueMissing="{!v.errorBlankField}"
+                                            messageWhenBadInput="Incorrect Payment Type"
+                                            placeholder="" 
+                                            options="{!v.paymentTypes}" 
+                                            onchange="{!c.handleSelectPaymentType}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning:combobox 
+                                            aura:id="receiverId" 
+                                            name="general" 
+                                            value="{!v.receiverId}" 
+                                            label="Account Name" 
+                                            required="true"
+                                            messageWhenValueMissing="{!v.errorBlankField}"
+                                            messageWhenBadInput="Incorrect Client Name"
+                                            placeholder="" 
+                                            options="{!v.receivers}" 
+                                            onchange="{!c.handleSelectReceiver}"/>
+                                    </div> 
+                                </div>  
+                                <div class="slds-grid slds-gutters_x-small slds-m-top_large">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <ui:inputDate 
+                                            aura:id="startDate" 
+                                            label="Start Date" 
+                                            value="{!v.startDate}" 
+                                            requiredIndicatorClass="start-date-error"
+                                            required="true"
+                                            displayDatePicker="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <ui:inputDate 
+                                            aura:id="endDate" 
+                                            label="End Date" 
+                                            value="{!v.endDate}" 
+                                            requiredIndicatorClass="start-date-error"
+                                            required="true"
+                                            displayDatePicker="true"/>
+                                    </div>                                                                                
+                                </div>    
+                                <aura:if isTrue="{!v.paymentTypeId != 'Expenses Reimbursement'}">
+                                    <div class="slds-grid slds-gutters_x-small slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-1">
+                                            <b>Calculate Payment Based on</b>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-gutters_x-small slds-m-top_medium">
+                                        <div class="slds-col slds-size_1-of-2">
+                                                <div>
+                                                    <lightning:input 
+                                                        aura:id="paidInvoices"
+                                                        type="checkbox" 
+                                                        name="paidInvoices" 
+                                                        label="Paid Invoices"
+                                                        checked="{!v.paidInvoices}"
+                                                        disabled="{!v.disabledPaidInvoices}"
+                                                    />
+                                                </div>
+                                                <div class="slds-m-top_small slds-m-bottom_small">
+                                                    <lightning:input 
+                                                        aura:id="pendingInvoices"
+                                                        type="checkbox" 
+                                                        name="pendingInvoices" 
+                                                        label="Pending Invoices"
+                                                        checked="{!v.pendingInvoices}"
+                                                        disabled="{!v.disabledPendingInvoices}"
+                                                    />
+                                                </div>
+                                        </div>   
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <aura:if isTrue="{!v.pendingInvoices}">
+                                                <ui:inputDate 
+                                                    aura:id="pendingInvoicesStartDate" 
+                                                    label="Sent Starting from" 
+                                                    value="{!v.pendingInvoicesStartDate}" 
+                                                    requiredIndicatorClass="start-date-error"
+                                                    required="true"
+                                                    displayDatePicker="true"/>
+                                            </aura:if>
+                                        </div>                                                                         
+                                    </div>    
+                                </aura:if>
+                            </aura:set>
+                            </aura:if>
+                            </div>
+                        </div>                       
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button 
+                            variant="neutral"
+                            label="Cancel"
+                            title="Cancel"
+                            onclick="{!c.closeModel}"/>
+                        <lightning:button 
+                            disabled="{!v.disableSubmit}"
+                            variant="brand"
+                            label="{!v.submitLabel}"
+                            title="{!v.submitLabel}"
+                            onclick="{!c.submit}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

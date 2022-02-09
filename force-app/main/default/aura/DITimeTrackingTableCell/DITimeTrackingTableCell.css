@@ -1,0 +1,27 @@
+.THIS input {
+    display: block;
+    width: 100%;
+    padding: 10px 23px 7px 23px;   
+    border-radius: 4px;
+    border: 1px solid rgb(221, 219, 218);
+    box-sizing: border-box;
+    text-align: center; 
+    font-size: var(--lwc-varSpacingSmall, "14px");
+    font-weight: var(--lwc-fontWeightBold, "700");
+    font-family: var(--lwc-fontFamilyHeading, "Salesforce Sans");
+    line-height: var(--lwc-varFontSize6, "21px");
+    color: #000000 !important;
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.THIS input:disabled  {
+    color: #706e6b !important;
+}
+
+.THIS input:focus:not([disabled]), 
+.THIS input:active:not([disabled]) {
+    outline: 0;
+    border-color: rgb(21, 137, 238); /* This is the blue color of the border */
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 3px #0070d2; /* This is the blue color of the shadow */
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Catch All</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <formula>ISNEW()</formula>
+            <senderEmail>info@cloudqnect.com</senderEmail>
+            <senderName>CloudQnect</senderName>
+            <template>unfiled$public/CQWebToLead</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

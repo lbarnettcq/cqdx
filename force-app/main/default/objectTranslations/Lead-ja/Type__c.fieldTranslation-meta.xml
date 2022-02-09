@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Type --></label>
+    <name>Type__c</name>
+    <picklistValues>
+        <masterLabel>Existing Client/ Account</masterLabel>
+        <translation><!-- Existing Client/ Account --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Investor</masterLabel>
+        <translation><!-- Investor --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New prospect</masterLabel>
+        <translation><!-- New prospect --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Partner</masterLabel>
+        <translation><!-- Partner --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Vendor</masterLabel>
+        <translation><!-- Vendor --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

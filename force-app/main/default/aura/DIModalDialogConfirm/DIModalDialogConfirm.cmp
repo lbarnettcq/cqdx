@@ -1,0 +1,106 @@
+<aura:component controller="TimesheetsController">
+    <aura:attribute name="stateProcess" type="String" description="State processs" />
+
+    <aura:attribute name="opened" type="Boolean" default="false"/>
+    
+    <aura:attribute name="view" type="String"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="description" type="String"/>
+    <aura:attribute name="hintFirst" type="String"/>
+    <aura:attribute name="hintSecond" type="String"/>
+
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="showHint" type="Boolean" default="false"/>
+
+    <aura:attribute name="paymentDate" type="String"/>
+    <aura:attribute name="showPaymentDate" type="Boolean" default="false"/>
+
+    <aura:attribute name="cssBorder" type="String"/>
+
+    <aura:attribute name="submitLabel" type="String" default="Confirm"/>
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorsFields" type="String"/>
+    <aura:attribute name="errorBlankField" type="String" description="Message for empty field" default="Complete this field"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <aura:if isTrue="{!v.opened}">
+        <div class="di-modal-dialog slds-m-around_xx-large">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="{!'slds-modal__header ' + v.cssBorder}">
+                            <lightning:buttonIcon 
+                                iconName="utility:close"
+                                onclick="{! c.cancel}"
+                                alternativeText="close"
+                                variant="bare-inverse"
+                                size="large"
+                                class="slds-modal__close"/>
+                            <div class="di-modal-dialog-title">
+                                {!v.title}
+                            </div>
+                            <aura:if isTrue="{!v.showError}">
+                                <c:DIErrorsModal errorsFields="{!v.errorsFields}"/>
+                            </aura:if>
+                        </header>
+                      
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <div class="di-modal-dialog-description" style="margin: 72px 132px;">
+                                <div class="di-modal-dialog-text">
+                                    {!v.description}   
+                                </div>
+                                <aura:if isTrue="{!v.showHint}">
+                                    <div class="di-modal-dialog-hint" style="margin-top:36px;">
+                                        {!v.hintFirst} 
+                                    </div>
+                                    <div class="di-modal-dialog-hint" style="margin-top:14px;">
+                                        {!v.hintSecond} 
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!v.showPaymentDate}">
+                                    <div class="slds-grid slds-gutters slds-grid_vertical-align-center">
+                                        <div class="slds-col slds-text-align_left slds-size_6-of-12">Please select the date when payment was received</div>
+                                        <div class="slds-col slds-text-align_left slds-size_6-of-12">
+                                            <ui:inputDate 
+                                                aura:id="paymentDate" 
+                                                label="Payment Date" 
+                                                value="{!v.paymentDate}" 
+                                                requiredIndicatorClass="start-date-error"
+                                                displayDatePicker="true"
+                                                required="false"/>
+                                        </div>
+                                    </div>
+                                </aura:if>                                 
+                            </div>                     
+                        </div>
+                        
+                        <footer class="slds-modal__footer">
+                            <lightning:button 
+                                variant="neutral"
+                                label="Cancel"
+                                title="Cancel"
+                                onclick="{!c.cancel}"
+                                />
+                            <lightning:button 
+                                variant="brand"
+                                label="{!v.submitLabel}"
+                                title="{!v.submitLabel}"
+                                onclick="{!c.submit}"
+                                />
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

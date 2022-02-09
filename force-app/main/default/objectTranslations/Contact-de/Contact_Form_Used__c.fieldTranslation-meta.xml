@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Contact Form Used --></label>
+    <name>Contact_Form_Used__c</name>
+    <picklistValues>
+        <masterLabel>Contact Us</masterLabel>
+        <translation><!-- Contact Us --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Get Started</masterLabel>
+        <translation><!-- Get Started --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

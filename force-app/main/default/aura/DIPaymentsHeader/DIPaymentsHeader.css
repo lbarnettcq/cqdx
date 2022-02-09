@@ -1,0 +1,26 @@
+.THIS {
+    background-color: #ffffff;
+}
+
+.THIS button svg {
+    margin-right: 0;
+    fill: #706e6b;
+}
+
+.THIS .slds-button_brand {
+    background-color: #0070d2;
+}
+  
+.THIS .slds-button_brand svg {
+    fill: #ffffff;
+    margin-top: -3px;
+    margin-right: 8px;
+}
+
+.THIS .invisible {
+    display: none;
+}
+
+.THIS .payment-icon {
+    background-color:orange !important;
+}

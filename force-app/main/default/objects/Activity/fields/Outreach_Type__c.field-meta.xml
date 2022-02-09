@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outreach_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Outreach Call</fullName>
+                <default>false</default>
+                <label>Outreach Call</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>LinkedIn</fullName>
+                <default>false</default>
+                <label>LinkedIn</label>
+            </value>
+            <value>
+                <fullName>Company Overview</fullName>
+                <default>false</default>
+                <label>Company Overview</label>
+            </value>
+            <value>
+                <fullName>Discovery Call</fullName>
+                <default>false</default>
+                <label>Discovery Call</label>
+            </value>
+            <value>
+                <fullName>Presentation</fullName>
+                <default>false</default>
+                <label>Presentation</label>
+            </value>
+            <value>
+                <fullName>AE Outreach</fullName>
+                <default>false</default>
+                <label>AE Outreach</label>
+            </value>
+            <value>
+                <fullName>Reference Call</fullName>
+                <default>false</default>
+                <label>Reference Call</label>
+            </value>
+            <value>
+                <fullName>Calendar Call</fullName>
+                <default>false</default>
+                <label>Calendar Call</label>
+            </value>
+            <value>
+                <fullName>Client Visit</fullName>
+                <default>false</default>
+                <label>Client Visit</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

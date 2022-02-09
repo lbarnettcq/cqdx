@@ -1,0 +1,234 @@
+.THIS {
+  background: #ffffff;
+}
+
+.THIS .di-date-container {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.THIS .slds-form-element {
+  position: relative;
+}
+
+.THIS .netce-table th  {
+  padding: .3rem;
+}
+
+.THIS .netce-table td {
+  padding: .3rem;
+}
+.THIS.netce-display-table {
+  display: table;
+}
+.THIS.netce-display-table.slds-hide {
+  display: none;
+}
+
+.THIS.slds-transition-hide {
+  transition: opacity .5s;
+}
+
+.THIS a.no-focus:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.THIS .slds-datepicker .spear-datepicker-small th {
+  padding: .3rem!important;
+}
+
+.THIS .slds-scope .slds-datepicker .spear-datepicker-small  td>.slds-day {
+  width: 1.2rem!important;
+  height: 1.2rem!important;
+  min-width: none!important;
+  line-height: 1.5rem!important;
+}
+
+.THIS.clear-user-agent-styles table,
+.THIS.clear-user-agent-styles thead,
+.THIS.clear-user-agent-styles tbody,
+.THIS.clear-user-agent-styles tfoot,
+.THIS.clear-user-agent-styles tr,
+.THIS.clear-user-agent-styles th,
+.THIS.clear-user-agent-styles td {
+  font-weight: inherit;
+}
+
+.THIS .datepicker-table {
+  border-color: rgb(128,128,128);
+  border-collapse: collapse;
+  box-sizing: border-box;
+  font-family: "Salesforce Sans",Arial,sans-serif;
+  height: auto;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.THIS .datepicker-table table {
+  color: rgb(22,50,92);
+  display: table;
+  line-height: 18px;
+  width: 100%;
+}
+
+.THIS .datepicker-table thead tr {
+  border-bottom-color: rgb(240, 241, 242);
+  display: table-row;
+  font-size: 12px;
+  line-height: 18px;
+  vertical-align: middle;
+  width: auto;
+}
+
+.THIS .datepicker-table tbody {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  color: rgb(22, 50, 92);
+  display: table-row-group;
+  line-height: 18px;
+  vertical-align: middle;
+  width: auto;
+}
+
+.THIS .datepicker-table tbody tr {
+  display: table-row;
+}
+
+.THIS .datepicker-table tbody tr td {
+  display: table-cell;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+  border: none;
+}
+
+.THIS .slds-icon_small {
+  width: .875rem;
+  height: .875rem;
+}
+
+.THIS .slds-datepicker td {
+  padding: 0 !important;
+}
+
+.THIS .slds-has-multi-selection .is-selected-multi:last-child>.slds-day:after {
+  left: auto;
+  right: 0;
+  transform: translateX(0.25rem)
+}
+
+.THIS .slds-has-multi-row-selection .is-selected-multi:first-child>.slds-day:before,
+.THIS .slds-has-multi-row-selection .is-selected-multi:last-child>.slds-day:after {
+  content: '';
+  position: absolute;
+  background: rgba(27, 82, 151, 1);
+  top: 0;
+  left: -50%;
+  height: 100%;
+  width: 2.5rem;
+  transform: translateX(0.5rem * -1);
+  z-index: -1
+}
+
+.THIS .slds-has-multi-row-selection .is-selected-multi:first-child>.slds-day:before {
+  left: 0;
+  transform: translateX(0.25rem * -1)
+}
+
+.THIS .slds-has-multi-row-selection .is-selected-multi:last-child>.slds-day:after {
+  left: auto;
+  right: 0;
+  transform: translateX(0.25rem)
+}
+
+.THIS td.is-selected-multi>.slds-day {
+  overflow: visible
+}
+
+.THIS td.is-selected-multi.slds-is-today>.slds-day {
+  box-shadow: rgb(255, 255, 255) 0 0 0 1px inset
+}
+
+.THIS td.is-selected-multi+.is-selected-multi>.slds-day:before {
+  content: '';
+  position: absolute;
+  background: rgba(27, 82, 151, 1);
+  top: 0;
+  left: -70%;
+  height: 100%;
+  width: 2.5rem;
+  transform: translateX(0.5rem * -1);
+  z-index: -1
+}
+
+.THIS .date-range {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #080707;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.THIS .date-range_text{
+  font-size: 14px;
+}
+
+.THIS .flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+
+}
+
+.THIS .flex-container_padding {
+  padding: 5px;
+}
+
+.THIS .calendar-icon {
+  border-radius: 3px;
+  border: 1px solid #dddbda;
+  padding: 9px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.THIS calendar-icon_modify{
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
+
+.THIS .calendar-icon:hover {
+  cursor: pointer;
+}
+
+.THIS .slds-dropdown-c {
+    position: absolute;
+    z-index: 7000;
+    margin-left: 4px;
+    min-width: 6rem;
+    max-width: 20rem;
+    margin-top: .125rem;
+    margin-bottom: .125rem;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    padding: .25rem 0;
+    font-size: .75rem;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);
+}
+
+.THIS .di-margin-left {
+  margin-left: 16px;
+}

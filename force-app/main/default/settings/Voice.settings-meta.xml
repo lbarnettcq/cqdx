@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VoiceSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableCallDisposition>true</enableCallDisposition>
+    <enableConsentReminder>true</enableConsentReminder>
+    <enableVoiceCallList>true</enableVoiceCallList>
+    <enableVoiceCallRecording>true</enableVoiceCallRecording>
+    <enableVoiceCoaching>true</enableVoiceCoaching>
+    <enableVoiceLocalPresence>true</enableVoiceLocalPresence>
+    <enableVoiceMail>true</enableVoiceMail>
+    <enableVoiceMailDrop>true</enableVoiceMailDrop>
+</VoiceSettings>

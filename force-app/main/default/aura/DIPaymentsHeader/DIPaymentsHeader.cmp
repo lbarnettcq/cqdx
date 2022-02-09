@@ -1,0 +1,103 @@
+<aura:component controller="PaymentsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+
+    <aura:attribute name="options" type="Map"/>
+    
+    <aura:attribute name="title" type="String" default="Payments"/>
+    <aura:attribute name="details" type="String"/>
+
+    <aura:attribute name="status" type="String"/>
+
+    <aura:attribute name="totalNumberRows" type="String"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="lastModified" type="String"/>
+    <aura:attribute name="panelInformation" type="String"/>
+
+    <aura:attribute name="paymentId" type="String"/>
+    <aura:attribute name="loadedPaymentInformation" type="Boolean" default="false"/>
+
+    <aura:attribute name="openedModalDialogConfirm" type="Boolean" default="false"/>
+    <aura:attribute name="openedModalDialog" type="Boolean" default="false"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+    
+    <aura:method name="update" action="{!c.update}" access="public"> 
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="slds-grid slds-p-around_large slds-border_bottom">
+            <div>
+                <div class="slds-grid slds-grid_vertical-align-center">
+                        <div>
+                            <lightning:icon iconName="standard:quotes" alternativeText="User" class="payment-icon"/>
+                        </div>
+                        <div class="slds-m-left_medium">
+                            <div>{!v.title}</div>
+                            <div class="slds-text-heading_medium">
+                                <b>{!v.details}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-text-title">
+                        <div>
+                            {!v.panelInformation}               
+                        </div>
+                    </div>
+            </div>
+            <div class="slds-col_bump-left">
+                <aura:if isTrue="{!v.paymentId}">
+                    <div>
+                        <aura:if isTrue="{!v.status == 'new'}">
+                            <lightning:button 
+                                aura:id="markPaidPayment"
+                                name="markPaidPayment"
+                                variant="brand"
+                                label="Mark Paid"
+                                title="Mark Paid"
+                                iconPosition="left"
+                                disabled="{!!v.paymentId}"
+                                onclick="{!c.handleMarkPaidPayment}"/>                
+                        </aura:if>
+                    </div>
+    
+                    <aura:if isTrue="{!and(v.loadedPaymentInformation, v.status == 'new')}">
+                        <div class="slds-text-align_right slds-m-top_small">
+                            <lightning:buttonIcon
+                                iconName="utility:edit"
+                                variant="border-filled"
+                                onclick="{!c.handleEditPayment}"
+                                disabled="{!!v.paymentId}"
+                                alternativeText="Edit Payment">
+                            </lightning:buttonIcon>
+                            <lightning:buttonIcon
+                                iconName="utility:delete"
+                                variant="border-filled"
+                                onclick="{!c.handleRemovePayment}"
+                                disabled="{!!v.paymentId}"
+                                alternativeText="Remove Payment">
+                            </lightning:buttonIcon>
+                        </div>
+                    </aura:if>               
+                <aura:set attribute="else">
+                    <lightning:button 
+                        name="newPayment"
+                        iconName="utility:add"
+                        variant="brand"
+                        label="New Payment"
+                        title="New Payment"
+                        iconPosition="left"
+                        onclick="{!c.handleCreatePayment}"/>
+                </aura:set>
+                </aura:if>
+            </div>     
+        </div>
+    
+    <c:DIModalDialogConfirm aura:id="diModalDialogConfirm" opened="{!v.openedModalDialogConfirm}" changeEvent="{!c.handleChangeModalDialogConfirm}"></c:DIModalDialogConfirm>
+    <c:DIModalDialogPayment aura:id="diModalDialogPayment" opened="{!v.openedModalDialog}"></c:DIModalDialogPayment>
+</aura:component>

@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="DiFilter" ref="DiFilter" label="Label">
+		Filter
+	</aura:example>
+</aura:documentation>

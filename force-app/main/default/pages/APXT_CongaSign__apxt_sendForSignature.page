@@ -1,0 +1,18 @@
+<apex:page showHeader="false" sidebar="false" controller="APXT_CongaSign.apxt_sendForSignature" title="{!$Label.apxt_congasign__apxt_send_for_signature_title}">
+    <html xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1" />
+            <apex:slds />
+            <apex:stylesheet value="{!URLFOR($Resource.APXT_CongaSign__apxt_frontend, 'css/vendor.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.APXT_CongaSign__apxt_frontend, 'css/signature.css')}"/>
+        </head>
+        <body>
+            <div id="app" data-session-id="{!$Api.Session_ID}"></div>
+
+            <script src="{!URLFOR($Resource.apxt_frontend, 'js/runtime.js')}"></script>
+            <script src="{!URLFOR($Resource.apxt_frontend, 'js/vendor.js')}"></script>
+            <script src="{!URLFOR($Resource.apxt_frontend, 'js/signature.js')}"></script>
+        </body>
+    </html>
+</apex:page>

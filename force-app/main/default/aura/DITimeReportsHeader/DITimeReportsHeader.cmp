@@ -1,0 +1,88 @@
+<aura:component controller="TimeReportsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+    
+    <aura:attribute name="role" type="String" default="employee"/>
+
+    <aura:attribute name="showFilter" type="Boolean" default="false"/>
+
+    <aura:attribute name="stateTable" type="String"/>
+
+    <aura:attribute name="title" type="String" default="Time Reports"/>
+
+    <aura:attribute name="details" type="String" default="Time Reports"/>
+
+    <aura:attribute name="totalNumberRows" type="String"/>
+
+    <aura:attribute name="sortedBy" type="String"/>
+
+    <aura:attribute name="lastModified" type="String"/>
+
+    <aura:attribute name="panelInformation" type="String"/>
+
+    <aura:attribute name="startDate" type="String"/>
+    <aura:attribute name="endDate" type="String"/>
+    <aura:attribute name="employeeId" type="String"/>
+
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+    
+    <aura:method name="update" action="{!c.update}" access="public"> 
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="slds-p-around_large slds-border_bottom">
+        <div class="slds-grid slds-grid_vertical-align-center">
+            <div>
+                <lightning:icon iconName="standard:user" alternativeText="User" />
+            </div>
+            <div class="slds-m-left_medium">
+                <div>{!v.title}</div>
+                <div class="slds-text-heading_medium"><b>{!v.details}</b></div>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-col slds-align-bottom">
+                <div class="slds-text-title">
+                    {!v.panelInformation}
+                </div>
+            </div>
+            <!--
+            <div class="slds-col slds-no-flex slds-grid slds-align-bottom slds-shrink">
+                <lightning:buttonIconStateful iconName="utility:filterList" selected="{!v.showFilter}" onclick="{!c.handleFilterButtonClick}" alternativeText="Show filters"/>
+            </div>
+            -->
+            <aura:if isTrue="{!v.role == 'manager'}">
+                <div class="slds-col_bump-left">
+                <aura:if isTrue="{!or(v.stateTable == 'approved', v.stateTable == 'in_progress')}">
+                    <lightning:button 
+                        name="unlock"
+                        iconName="utility:unlock"
+                        variant="brand"
+                        label="Unlock"
+                        title="Unlock"
+                        iconPosition="left"
+                        onclick="{!c.handleUnlock}"/>
+                </aura:if>
+                <aura:if isTrue="{!or(v.stateTable == 'for_approval', v.stateTable == 'in_progress')}">
+                    <lightning:button 
+                        name="approve"
+                        variant="brand"                    
+                        label="Mark Approved"
+                        title="Mark Approved"
+                        iconPosition="left"
+                        onclick="{!c.handleApprove}"/>
+                </aura:if>
+                </div>
+            </aura:if>   
+        </div>    
+    </div>
+
+    <c:DIModalDialog aura:id="diModalDialog" opened="{!v.isModalOpen}"></c:DIModalDialog>
+</aura:component>

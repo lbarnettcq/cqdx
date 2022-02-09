@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Work_Expecations__c</fullName>
+    <externalId>false</externalId>
+    <label>Work Expecations</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Onsite</fullName>
+                <default>false</default>
+                <label>Onsite</label>
+            </value>
+            <value>
+                <fullName>Remote</fullName>
+                <default>false</default>
+                <label>Remote</label>
+            </value>
+            <value>
+                <fullName>Will Travel</fullName>
+                <default>false</default>
+                <label>Will Travel</label>
+            </value>
+            <value>
+                <fullName>Will Relocate</fullName>
+                <default>false</default>
+                <label>Will Relocate</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

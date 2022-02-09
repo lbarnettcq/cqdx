@@ -1,0 +1,87 @@
+.THIS.hide {
+    display: none;
+}
+
+.THIS .date-container {
+    width: 284px;
+}
+
+.THIS label.uiLabel {
+   padding-right: 12px;
+}
+
+.THIS .di-header-container {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex; 
+    justify-content: space-between;
+    margin-top: 34px;
+    margin-bottom: 24px;
+}
+
+.THIS .di-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .di-margin-left {
+    margin-left: 16px;
+}
+
+.THIS .di-body-container {
+    clear: both;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.THIS .slds-icon-utility-default svg{
+    fill: #706e6b;
+}
+
+.THIS .slds-icon-utility-new svg{
+    fill: #706e6b;
+}
+
+.THIS .slds-icon-utility-pending svg {
+    fill: #fbb018;
+}
+
+.THIS .slds-icon-utility-approved svg {
+    fill: #0070d2;
+}
+
+.THIS .slds-icon-utility-payment svg {
+    fill: orange;
+}
+
+.THIS .slds-icon-utility-paid svg {
+    fill: #4BCA81;
+}
+
+.THIS .paymentsTable thead th span {   
+    text-transform: none !important;
+    font-weight: 700 !important;
+    color: #080707 !important;
+ }
+
+ .THIS .time-period /*.lightning-formatted-text*/ {
+    color: #514f4d;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    font-weight: 400;
+ }
+
+ .THIS .slds-icon-utility-default lightning-formatted-text,
+ .THIS .slds-icon-utility-new lightning-formatted-text,
+ .THIS .slds-icon-utility-pending lightning-formatted-text,
+ .THIS .slds-icon-utility-approved lightning-formatted-text,  
+ .THIS .slds-icon-utility-payment lightning-formatted-text,  
+ .THIS .slds-icon-utility-paid lightning-formatted-text {
+     display: none;
+ }
+
+ .THIS .payment_align-left .slds-grid_align-end {
+    justify-content: flex-start !important;
+  }

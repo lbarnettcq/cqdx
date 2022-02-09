@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_with_Org_ID</fullName>
+    <columns>Name</columns>
+    <columns>Edition</columns>
+    <columns>OrgName</columns>
+    <columns>ScratchOrg</columns>
+    <columns>CreatedDate</columns>
+    <columns>ExpirationDate</columns>
+    <filterScope>Mine</filterScope>
+    <label>Active with Org ID</label>
+</ListView>

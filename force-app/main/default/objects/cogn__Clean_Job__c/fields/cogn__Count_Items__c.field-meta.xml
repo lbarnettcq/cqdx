@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cogn__Count_Items__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Count Items</label>
+    <summaryForeignKey>cogn__Clean_Job_Item__c.cogn__Clean_Job__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

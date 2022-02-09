@@ -1,0 +1,53 @@
+<apex:page showHeader="true" sidebar="true">
+     <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.7.1/jsforce.min.js"></script> -->
+    <apex:includeScript value="{!URLFOR($Resource.cogn__JsForce, '/jsforce.min.js')}"/>
+    <apex:includeScript value="/soap/ajax/36.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/36.0/apex.js"/>
+    <div align="center">
+        Please don't close or refresh this page!
+        <apex:outputPanel >
+            <img src="/img/loading32.gif" width="25" height="25" />
+            <apex:outputLabel value="Loading..."/>
+        </apex:outputPanel>
+    </div>      
+    <script>
+    var lstFlags = [false, false, false];
+    var conn = new jsforce.Connection({ accessToken: '{!$Api.Session_Id}', version: '39.0' });
+
+    conn.tooling.query('SELECT Id, Name FROM Layout WHERE TableEnumOrId = \'Lead\'',function(err, res) {
+        if (err) { 
+            return console.error(err);
+        }
+        var lstNames = []
+        for (var i=0; i < res.records.length; i++) {
+            var record = res.records[i];
+            lstNames.push(record.Name);
+        }
+        sforce.connection.sessionId = '{!$Api.Session_Id}';
+        try {
+            sforce.apex.execute("cogn.AddButtonsToLayouts","addButtonsToLead", {"lstNamesFromJs" : lstNames});
+        } catch(e) {
+          alert('Exception'+e)
+        }
+        lstFlags[0] = true;
+    });
+    conn.tooling.query('SELECT Id, Name FROM Layout WHERE TableEnumOrId = \'Contact\'',function(err, res) {
+        if (err) { 
+            return console.error(err);
+        }
+        var lstNames = []
+        for (var i=0; i < res.records.length; i++) {
+            var record = res.records[i];
+            lstNames.push(record.Name);
+        }
+        sforce.connection.sessionId = '{!$Api.Session_Id}';
+        try {
+            sforce.apex.execute("cogn.AddButtonsToLayouts","addButtonsContact", {"lstNamesFromJs" : lstNames});
+        } catch(e) {
+          alert('Exception'+e)
+        }
+        lstFlags[1] = true;
+        window.close();
+    });
+    </script>
+</apex:page>

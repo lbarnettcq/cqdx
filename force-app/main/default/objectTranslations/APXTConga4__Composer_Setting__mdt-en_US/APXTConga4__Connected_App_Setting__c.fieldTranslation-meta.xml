@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Connected App Setting --></label>
+    <name>APXTConga4__Connected_App_Setting__c</name>
+    <relationshipLabel><!-- Composer Settings --></relationshipLabel>
+</CustomFieldTranslation>

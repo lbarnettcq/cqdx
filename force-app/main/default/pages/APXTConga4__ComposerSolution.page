@@ -1,0 +1,255 @@
+<apex:page standardController="APXTConga4__Conga_Solution__c" extensions="APXTConga4.ComposerSolutionExtension">
+    <table>
+        <tr>
+            <td> 
+            </td>
+            <td>
+                <span style="font-size: .9em;font-weight: bold;color: #4a4a56;padding-left: 1px;">Conga Solution<br/></span>
+                <span style="font-size: 1.8em;font-weight: normal;line-height: 1.1em;">{!APXTConga4__Conga_Solution__c.Name}</span>
+            </td>
+        </tr>
+    </table>
+    <apex:pageMessages />
+    <apex:form >
+        <!-- PROFESSIONAL EDITION SECTION -->    
+        <apex:pageBlock id="PEFields" title="Conga Solution Details" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'true', 'false')}" mode="inlineedit">
+            <apex:pageBlockButtons location="top" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'true', 'false')}">
+                <apex:commandButton action="/apex/APXTConga4__SolutionStep?sid={!Id}&theme={!$User.UIThemeDisplayed}" id="editGuidedButton" value="Edit (Guided)" />
+                <apex:commandButton action="{!saveCustom}" id="customSaveButton" value="Save" />
+                <apex:commandButton action="{!delete}" id="deleteButton" value="Delete" rendered="{!IF(OR(ReadyForCreate = false, CanDeleteRecord = false), 'false', 'true')}" onclick="return confirmDelete();" />
+                <apex:commandButton action="{!createFullButtonString}" value="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Button_body_field__c = '', 'Create Solution', 'Update Solution')}" rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'false', 'true')}" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" />
+                <apex:commandButton action="{!createFullButtonString}" value="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Button_body_field__c = '', 'Create Conga Global Merge', 'Update Conga Global Merge')}" rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'true', 'false')}" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" />
+                <apex:commandButton action="{!ExportSolution}" value="Export Solution" onclick="showSpinner()" rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', false, true)}"  />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Conga Solution Name" />
+                    <apex:outputField value="{!APXTConga4__Conga_Solution__c.Name}" />
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLabel value="Owner Name" />
+                    <apex:outputLink value="/{!APXTConga4__Conga_Solution__c.Owner.Id}" target="_blank">
+                        <apex:outputText value="{!APXTConga4__Conga_Solution__c.Owner.FirstName} {!APXTConga4__Conga_Solution__c.Owner.LastName}" />
+                    </apex:outputLink>
+                </apex:PageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Description" />
+                    <apex:outputField value="{!APXTConga4__Conga_Solution__c.APXTConga4__Solution_Description__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Master Object Type" />
+                    <apex:outputText value="{!APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem helpText="The 15-character ID of the Conga Global Merge Record. Set by clicking Create Conga Global Merge." rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'true', 'false')}">
+                    <apex:outputLabel value="Conga Global Merge Record ID" id="sampleRecordId" />
+                    <apex:outputLink value="/{!APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Id__c}" target="_blank">{!APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Id__c}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <!-- END OF PROFESSIONAL EDITION SECTION -->
+        <!-- ENTERPRISE/UNLIMITED EDITION SECTION -->    
+        <apex:pageBlock id="fields" mode="inlineedit" title="Conga Solution Details" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'false', 'true')}">
+            <apex:pageBlockButtons location="top" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'false', 'true')}">
+                <apex:commandButton action="{!saveCustom}" id="customSaveButton" value="Save" rendered="{!IF(AND(ReadyForCreate = false, CanDeleteRecord = true), 'true', 'false')}" />
+                <apex:commandButton action="/apex/APXTConga4__SolutionStep?sid={!Id}&theme={!$User.UIThemeDisplayed}" id="editGuidedButton" value="Edit (Guided)" />
+                <apex:commandButton action="{!delete}" id="deleteButton" value="Delete" rendered="{!IF(OR(ReadyForCreate = false, CanDeleteRecord = false), 'false', 'true')}" onclick="return confirmDelete();" title="Click to delete this record. Only available until the button is created." />
+                <apex:commandButton action="{!createFullButtonString}" value="{!IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = ''), 'Create Conga Global Merge', IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Update Conga Global Merge', IF(AND(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = ''), 'Create Link', IF(AND(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Update Link', IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c != 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c != 'Home Page' , APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Update Button', 'Create Button')))))}" disabled="{!IF(ReadyForCreate = true, false, true)}" title="{!IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = ''), 'Click to create a Conga Global Merge.', IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Click to update the Conga Global Merge.', IF(AND(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = ''), 'Click to create a Link.', IF(AND(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Click to update the Link.', IF(AND(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c != 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c != 'Home Page' , APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'Click to update the Button.', 'Click to create a Button.')))))}" />
+                <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Button_Adder, Id)}" value="Manage Page Layouts" disabled="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', ButtonChangedToLink = true), 'true', 'false')}" rendered="{!IF(OR(JSENCODE(OrgType) = 'Professional Edition', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c == 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c'), 'false', 'true')}" title="{!IF(ButtonChangedToLink = true, 'This functionality is only available for Detail Page Buttons.' , IF(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', 'Click here to add or remove this button from ' + APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c + ' page layouts. Available after a Button has been created.', 'Click here to add or remove this button from ' + APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c + ' page layouts.'))}" />
+                <apex:commandButton action="{!ExportSolution}" value="Export Solution" onclick="showSpinner()" rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', false, true)}"  />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem rendered="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != '', JSENCODE(OrgType) = 'Professional Edition'), 'false', 'true')}" helpText="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'This value can be edited until the Conga Global Merge is created.', 'This value can be edited until a Button/Link is created.')}">
+                    <apex:outputLabel value="Conga Solution Name" />
+                    <apex:outputField value="{!APXTConga4__Conga_Solution__c.Name}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(OR(JSENCODE(OrgType) = 'Professional Edition', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c != ''), 'true', 'false')}" >
+                    <apex:outputLabel value="Conga Solution Name" />
+                    <apex:outputText value="{!APXTConga4__Conga_Solution__c.Name}" />
+                </apex:pageBlockSectionItem>
+                <apex:PageBlockSectionItem >
+                    <apex:outputLabel value="Owner Name" />
+                    <apex:outputLink value="/{!APXTConga4__Conga_Solution__c.Owner.Id}" target="_blank">
+                        <apex:outputText value="{!APXTConga4__Conga_Solution__c.Owner.FirstName} {!APXTConga4__Conga_Solution__c.Owner.LastName}" />
+                    </apex:outputLink>
+                </apex:PageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Solution Description" />
+                    <apex:outputField value="{!APXTConga4__Conga_Solution__c.APXTConga4__Solution_Description__c}" />
+                </apex:PageBlockSectionItem>
+                <apex:pageBlockSectionItem helptext="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c == 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c'), 'The object on which the Button/Link exists after it is created.', 'The object on which the Button/Link exists after it is created. Use the Manage Page Layout button to add your Button/Link to existing layouts.')}" >
+                    <apex:outputLabel value="Master Object Type" />
+                    <apex:outputText value="{!APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem helpText="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'The 15-character ID of the Conga Global Merge record. Populated when Create Conga Global Merge is clicked.', 'A 15-character Salesforce record ID. Choose via the Access Template Builder button below. Available after creating your Button/Link.')}" rendered="{!IF(OR(JSENCODE(OrgType) = 'Professional Edition', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), 'false', 'true')}">
+                    <apex:outputLabel value="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'Conga Global Merge Record ID',  'Sample Record ID')}" id="sampleRecordId" />
+                    <apex:panelGrid columns="2">
+                        <apex:panelGrid columns="1">
+                            <apex:outputLink value="/{!APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Id__c}" target="_blank">{!APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Id__c}</apex:outputLink>
+                            <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Selector,Id)}" value="Access Template Builder" disabled="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', JSENCODE(OrgType) = 'Professional Edition', APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = ''), true, false)}" rendered="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', JSENCODE(OrgType) = 'Professional Edition'), false, true)}" title="Click to select a sample record and access the Template Builder. Available after creating the Button/Link." />
+                        </apex:panelGrid>
+                    </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', true, false)}">
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem helptext="Automatically populated." rendered="{!IF(JSENCODE(OrgType)= 'Professional Edition', 'false', 'true')}">
+                    <apex:outputLabel value="Button/Link API Name" />
+                    <apex:outputLink value="/{!APXTConga4__Conga_Solution__c.APXTConga4__Weblink_Id__c}" target="_blank" >{!APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c}
+                    </apex:outputLink>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <!-- END OF ENTERPRISE/UNLIMITED EDITION SECTION -->                       
+        <apex:pageBlock >
+            <apex:pageBlockSection collapsible="true" title="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'Button URL', 'Button URLs')}" columns="{!IF(JSENCODE(OrgType) = 'Professional Edition', '1', '2')}">
+                <apex:pageBlockSection columns="1" rendered="{!IF(JSENCODE(OrgType) != 'Professional Edition', true, false)}">
+                    <apex:panelGrid columns="5">
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Reports, Id)}" value="Add Report Data" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add Report Data to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Queries, Id)}" value="Add Query Data" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add Query Data to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Templates, Id)}" value="Add Templates" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add File Templates to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Conga_Email_Template, Id)}" value="Add Conga Email Template" disabled="{!IF(OR(ReadyForCreate = false, APXTConga4__Conga_Solution__c.APXTConga4__CongaEmailTemplateCount__c != 0), 'true', 'false')}" title="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__CongaEmailTemplateCount__c !=0, 'A Conga Email Template is included with this solution. Delete or Edit the existing record below.', 'Click to add a Conga Email Template to this solution.')}" />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Parameters, Id)}" value="Customize with Parameters" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to customize this solution with Composer parameters." />
+                    </apex:panelGrid>
+                    <apex:pageBlockSectionItem helptext="This is the button URL as defined by the Conga Solution record. Click Create Button or Update Button to create/update the button on the Master Object. A backup of the existing Master Object button will be added to the Button Archive at the bottom of the page." rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'false', 'true')}">
+                        <apex:outputLabel value="Button URL in Progress" />
+                        <apex:outputField value="{!APXTConga4__Conga_Solution__c.APXTConga4__Solution_Weblink_Syntax__c}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1">
+                    <apex:panelGrid columns="5" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', true, false)}">
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Reports, Id)}" value="Add Report Data" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add Report Data to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Queries, Id)}" value="Add Query Data" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add Query Data to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Templates, Id)}" value="Add Templates" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to add File Templates to this solution." />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Conga_Email_Template, Id)}" value="Add Conga Email Template" disabled="{!IF(OR(ReadyForCreate = false, APXTConga4__Conga_Solution__c.APXTConga4__CongaEmailTemplateCount__c != 0), 'true', 'false')}" title="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__CongaEmailTemplateCount__c !=0, 'A Conga Email Template is included with this solution. Delete or Edit the existing record below.', 'Click to add a Conga Email Template to this solution.')}" />
+                        <apex:commandButton action="{!URLFOR($Action.APXTConga4__Conga_Solution__c.APXTConga4__Add_Parameters, Id)}" value="Customize with Parameters" disabled="{!IF(ReadyForCreate = false, 'true', 'false')}" title="Click to customize this solution with Composer parameters." />
+                    </apex:panelGrid>
+                    <apex:pageBlockSectionItem helptext="{!IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'APXTConga4__Composer_QuickMerge__c', 'Test this Conga Global Merge Solution. The Conga Global Merge must be created.', 'Test this Conga Solution. The Button/Link must be created, and a Sample Record ID is required. Use the Access Template Builder button to select a Sample Record ID.' )}" rendered="{!IF(JSENCODE(OrgType) != 'Professional Edition', 'true', 'false')}">
+                        <apex:outputText />
+                        <apex:commandButton onClick="openCMLaunchVFPage()" value="Launch Composer" title="Click to test this solution. The Button/Link must be created, and Sample Record or Conga Global Merge Record ID is required." disabled="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', APXTConga4__Conga_Solution__c.APXTConga4__Sample_Record_Id__c = ''), true, false)}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'Click Create Solution or Update Solution, then copy/paste this into the button or link URL on your master object.', IF(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c != 'APXTConga4__Composer_QuickMerge__c', 'This is the current button on the Master Object. The Launch Composer button will launch Composer according to these specifications and the selected sample record.', 'This is the current Conga Global Merge as defined by the button on the Conga Global Merge Object.'))}" >
+                        <apex:outputLabel value="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'Button URL', 'Current Button URL')}" />
+                        <apex:outputField value="{!APXTConga4__Conga_Solution__c.APXTConga4__Button_body_field__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Button_Link_API_Name__c = '', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page', JSENCODE(OrgType) = 'Professional Edition'), 'false', 'true')}">                
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="Solution Components" id="componentTable">
+            <apex:pageBlockButtons location="top" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'false', 'true')}">               
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!CMParameterList}" var="cmp" id="parameterTable" >
+                <apex:column width="80">
+                    <apex:panelGrid columns="4">
+                        <apex:commandLink action="{!editComponent}" value="Edit" title="Click to edit this record." >
+                            <apex:param name="SMrecordId" value="{!cmp.SMrecordId}" />
+                            <apex:param name="SMComponentType" value="{!cmp.SMComponentType}" />
+                            <apex:param name="CMFriendlyName" value="{!cmp.sfFriendlyName}" />
+                            <apex:param name="CMRecordId" value="{!cmp.SForCMRecordId}" />
+                            <apex:param name="parameterName" value="{!cmp.parameterName}" />
+                            <apex:param name="parameterValue" value="{!SUBSTITUTE(cmp.parameterValue, ',', '_COMMA_')}" />
+                            <apex:param name="comments" value="{!SUBSTITUTE(cmp.SMRecordComments, ',', '_COMMA_')}" />
+                            <apex:param name="sortOrder" value="{!cmp.FTSortOrder}" />
+                            <apex:param name="alias" value="{!cmp.Alias}" />
+                            <apex:param name="pv0" value="{!SUBSTITUTE(cmp.pv0, ',', '_COMMA_')}" />
+                            <apex:param name="pv1" value="{!SUBSTITUTE(cmp.pv1, ',', '_COMMA_')}" />
+                            <apex:param name="pv2" value="{!SUBSTITUTE(cmp.pv2, ',', '_COMMA_')}" />
+                        </apex:commandLink>
+                        <apex:outputText value="|" />
+                        <apex:commandLink action="{!deleteComponent}" value="Del" onclick="if(!confirm('Are you sure?')){return false};" title="Click to delete this record." >
+                            <apex:param name="SMrecordId" value="{!cmp.SMrecordId}" />
+                            <apex:param name="SMComponentType" value="{!cmp.SMComponentType}" />
+                        </apex:commandLink>
+                    </apex:panelGrid>
+                </apex:column>
+                <apex:column headerValue="Name" width="125">
+                    <apex:commandLink action="{!editComponent}" value="{!cmp.sfRecordName}" >
+                        <apex:param name="SMrecordId" value="{!cmp.SMrecordId}" />
+                        <apex:param name="SMComponentType" value="{!cmp.SMComponentType}" />
+                        <apex:param name="CMFriendlyName" value="{!cmp.sfFriendlyName}" />
+                        <apex:param name="CMRecordId" value="{!cmp.SForCMRecordId}" />
+                        <apex:param name="parameterName" value="{!cmp.parameterName}" />
+                        <apex:param name="parameterValue" value="{!SUBSTITUTE(cmp.parameterValue, ',', '_COMMA_')}" />
+                        <apex:param name="comments" value="{!SUBSTITUTE(cmp.SMRecordComments, ',', '_COMMA_')}" />
+                        <apex:param name="sortOrder" value="{!cmp.FTSortOrder}" />
+                        <apex:param name="alias" value="{!cmp.Alias}" />
+                        <apex:param name="pv0" value="{!SUBSTITUTE(cmp.pv0, ',', '_COMMA_')}" />
+                        <apex:param name="pv1" value="{!SUBSTITUTE(cmp.pv1, ',', '_COMMA_')}" />
+                        <apex:param name="pv2" value="{!SUBSTITUTE(cmp.pv2, ',', '_COMMA_')}" />
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column value="{!cmp.SMComponentType}" headerValue="Component Type" width="150" />
+                <apex:column headerValue="Salesforce Record" width="200">
+                    <apex:outputLink value="/{!cmp.SForCMRecordId}" target="_blank">{!cmp.sfFriendlyName}</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!cmp.parameterName}" headerValue="Parameter Name" width="200" />
+                <apex:column value="{!cmp.parameterValue}" headerValue="Parameter Value" />
+                <apex:column value="{!cmp.Alias}" headerValue="Report/Query Alias" width="175" />
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        
+    <style>
+        #spinner{
+            display: none;
+            width:200px;
+            height: 50px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            text-align:center;
+            padding:10px;
+            font:normal 16px Tahoma, Geneva, sans-serif;
+            margin-left: -100px;
+            margin-top: -100px;
+            z-index:2;
+            overflow: none;
+            border:1px solid #CCC;
+            background-color:white;
+            z-index:100;
+            padding:5px;
+            line-height:20px;
+         }
+         #opaque {
+             position: fixed;
+             top: 0px;
+             left: 0px;
+             width: 100%;
+             height: 100%;
+             z-index: 1;
+             display: none;
+             background-color: gray;
+             filter: alpha(opacity=30);
+             opacity: 0.3;
+             -moz-opacity:0.3;
+             -khtml-opacity:0.3
+         }
+         * html #opaque {
+             position: absolute;
+         }
+     </style>
+  
+    <div id="opaque"/>
+    <div id="spinner">
+        <p align="center" style='{font-family:"Arial", Helvetica, sans-serif; font-size:20px;}'><apex:image value="/img/loading.gif"/>&nbsp;Please wait</p>
+    </div>
+   
+    <script>
+        function showSpinner()
+        {
+           document.getElementById('opaque').style.display='block';
+           var popUp = document.getElementById('spinner');
+           popUp.style.display = 'block';
+        } 
+    </script>
+    
+    </apex:form>
+    <apex:relatedList subject="{!APXTConga4__Conga_Solution__c}" list="CombinedAttachments" title="{!IF(OR(APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'User', APXTConga4__Conga_Solution__c.APXTConga4__Master_Object_Type__c = 'Home Page'), 'Link Archive', 'Button Archive')}" pageSize="5" rendered="{!IF(JSENCODE(OrgType) = 'Professional Edition', 'false', 'true')}" />
+    <!-- JS function to open a vf page -->
+    <script Language="JavaScript">
+        function openCMLaunchVFPage() { window.open('{!VFPageLaunchString}', '','scrollbars=yes, menubar=no, height=600, width=800, resizable=yes, toolbar=no, location=no, status=yes'); }
+    </script>  
+    <script>
+        placeholder() {};
+    </script>
+</apex:page>

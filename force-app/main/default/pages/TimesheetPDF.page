@@ -1,0 +1,13 @@
+<apex:page controller="TimesheetPDFController">
+    <style>
+        body{ 
+            margin:0 auto; 
+            padding: 20px;
+        }
+    </style>
+    <c:dipdfheader ></c:dipdfheader>
+    <c:dipdfpanelinfo ></c:dipdfpanelinfo>
+    <c:dipdftimesheettable records="{!timeList}"/>
+    <c:dipdfexpensestable ></c:dipdfexpensestable>
+    <c:dipdffooter ></c:dipdffooter>
+</apex:page>

@@ -1,0 +1,7 @@
+<aura:component>
+    <aura:attribute name="errors" type="List" default="[]"/>
+
+    <aura:iteration items="{!v.errors}" var="error">
+        <div class="slds-text-color_error">{!error.message}</div>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,15 @@
+<apex:page standardController="Lead" lightningStylesheets="true">
+    <script src="/support/console/42.0/integration.js" type="text/javascript" />
+	
+	<apex:includeLightning />
+
+	<div id="lightning"></div>
+
+	<script>
+		var recordId = '{!$CurrentPage.parameters.Id}';
+		$Lightning.use("cogn:WidgetOnPersonApp", function() {
+				$Lightning.createComponent("cogn:CognismWidgetOnPerson", {'recordId': recordId}, "lightning", function(cmp) {
+				});
+		});
+	</script>
+</apex:page>

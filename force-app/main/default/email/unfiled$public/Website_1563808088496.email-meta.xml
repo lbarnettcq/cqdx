@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Website follow-up</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Website</name>
+    <relatedEntityType>Lead</relatedEntityType>
+    <style>none</style>
+    <subject>Optimize your Salesforce</subject>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

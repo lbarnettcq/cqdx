@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Enter the API field name, an equals sign, and the value to set (with spaces replaced with plus signs). 
+
+Examples: 
+Status__c=Completed 
+Status_Date__c=Today 
+Stage__c=In Progress --></help>
+    <label><!-- Master Field to Set 1 --></label>
+    <name>APXTConga4__Master_Field_to_Set_1__c</name>
+</CustomFieldTranslation>

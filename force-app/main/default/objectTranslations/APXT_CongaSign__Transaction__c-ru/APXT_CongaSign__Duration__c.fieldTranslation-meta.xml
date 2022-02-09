@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help>Дата завершения транзакции Conga Sign минус дата создания транзакции Conga Sign  Результат должен быть целым числом не менее 1.</help>
+    <label><!-- Duration Days --></label>
+    <name>APXT_CongaSign__Duration__c</name>
+</CustomFieldTranslation>

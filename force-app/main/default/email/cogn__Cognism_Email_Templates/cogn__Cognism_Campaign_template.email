@@ -1,0 +1,2 @@
+Hello {!cogn__Cognism_Campaign__c.OwnerFullName}. Your campaign  <b>{!cogn__Cognism_Campaign__c.Name}</b>, has finished generating.
+Please follow this <a href='{!cogn__Cognism_Campaign__c.Link}'>link</a> to see the results

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Deployment Automation --></label>
+    <lookupFilter>
+        <errorMessage><!-- Only active automation templates are allowed --></errorMessage>
+    </lookupFilter>
+    <name>copado__Deployment_Automation__c</name>
+    <relationshipLabel><!-- Pipelines (Deployment Automation) --></relationshipLabel>
+</CustomFieldTranslation>

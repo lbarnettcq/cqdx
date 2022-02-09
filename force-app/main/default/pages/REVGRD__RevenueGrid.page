@@ -1,0 +1,35 @@
+<!--
+-Author:         serhiivolynets
+-Date:           13.01.2020
+-Description:   
+-->
+<apex:page id="RevenueGrid" controller="REVGRD.VFC002_Canvas">
+    <head>
+        <title>RevenueGrid</title>
+    </head>
+    <style>
+        html {
+            overflow: hidden !important;
+        }
+        html body.sfdcBody {
+            padding: 0;
+            overflow: hidden !important;
+        }
+        body.sfdcBody iframe {
+            height: 100vh;
+        }
+    </style>
+<!--    ,'RevenueGridTenantUrl':'{!RevenueGridTenantUrl}'-->
+    <apex:canvasApp developerName="{!CanvasApp}"
+                    namespacePrefix="{!CanvasAppNameSpace}"
+                    parameters="{'serverSyncTenantUrl':'{!ServerSyncTenantUrl}','redirectUrl':'{!RevenueGridTenantUrl}?singleUseToken={singleUseToken}','errorRedirectUrl':'{!ServerSyncTenantUrl}/ui/error.html?errorCode={errorCode}'}"
+                    width="100%" height="100%"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script  type="text/javascript">
+        var jq = $.noConflict();
+        jq(document).ready(function(){
+            SfdcApp.projectOneNavigator.sendTitleToParent('Revenue Grid');
+        });// End of DOM LOAD
+    </script>
+</apex:page>

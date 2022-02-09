@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_MSA</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://cloudqnect--apxtconga4.na53.visual.force.com/a0Jf200000PXR3tEAH
+25-Jun-2019 06:28:20 AM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>MSA</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Opportunity.Id}
+
+&amp;QueryId=[MSAQuery]a0Df200000igf3r
+
+&amp;TemplateId=a0Lf200000CRDqU
+
+&amp;DS7=1141
+&amp;UF0=1
+&amp;MFTS0=CSign_Temp_Doc_Type__c
+&amp;MFTSValue0=MSA
+&amp;csVisible=1
+&amp;CSRecipient1={!Opportunity.MSA_SignatoryId__c}
+&amp;CSRecipient2={!Opportunity.CloudQnect_MSA_SignatoryId__c}
+&amp;CSEmailMessage=This+is+the+MSA+from+CloudQnect+for+your+signature.
+&amp;CSEmailSubject=CloudQnect+MSA+for+Esignature
+&amp;csRequestReminder=10
+&amp;CSExpiration={!Opportunity.Now_Plus_30__c}
+&amp;CSExpirationReminder={!Opportunity.Now_Plus_20__c}</url>
+    <width>900</width>
+</WebLink>

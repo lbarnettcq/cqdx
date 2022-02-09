@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Attachment Actions --></label>
+    <name>copado__Attachment_Options__c</name>
+    <picklistValues>
+        <masterLabel>Insert Attachments</masterLabel>
+        <translation><!-- Insert Attachments --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>No Attachments</masterLabel>
+        <translation><!-- No Attachments --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Remove Attachments</masterLabel>
+        <translation><!-- Remove Attachments --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Replace Attachments</masterLabel>
+        <translation><!-- Replace Attachments --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>b_ExternalID__c</fullName>
+    <displayFormat>CPD-{00000000}</displayFormat>
+    <externalId>false</externalId>
+    <label>b_ExternalID</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

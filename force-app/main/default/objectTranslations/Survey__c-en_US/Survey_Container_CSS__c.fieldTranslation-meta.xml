@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Example: #survey_container{ margin: 0 auto; width: 600px; box-shadow: 0 0 14px #CCCCCC; -moz-box-shadow: 0 0 14px #CCCCCC; -webkit-box-shadow: 0 0 14px #CCCCCC; } --></help>
+    <label><!-- Survey Container CSS --></label>
+    <name>Survey_Container_CSS__c</name>
+</CustomFieldTranslation>

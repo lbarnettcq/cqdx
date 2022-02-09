@@ -1,0 +1,6 @@
+A new opportunity was created from a partner user. Below are the opportunity details.
+
+Opportunity Name: {!Opportunity.Name}
+Opportunity Owner: {!Opportunity.OwnerFullName}
+Opportunity Account: {!Opportunity.Account}
+Opportunity Link: {!Opportunity.Link}

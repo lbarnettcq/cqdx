@@ -1,0 +1,119 @@
+<apex:page controller="APXTConga4.EmailPreviewController" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" standardStyleSheets="false">
+    <apex:slds />
+    <html lang="en">
+        <head>
+            <meta charset="utf-8"></meta>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+            <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+            <meta name="description" content="CKEditor Page"></meta>
+            <meta name="author" content="Conga"></meta>
+            <title>CKEditor Page</title>
+            <link rel="stylesheet" href="{!URLFOR($Resource.CKEditor, 'ckeditor_init.css')}" />
+        </head>
+        <body class="slds-brand-band">
+            <div id="conga-spinner" class="conga-spinner_container">
+                <svg id="congaSpinner" aria-hidden="true" class="slds-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#spinner"></use>
+                </svg>
+            </div>
+            <div id="errorMessageContainer" class="slds-notify_container slds-is-absolute conga-hidden">
+                <div class="slds-notify slds-notify_toast slds-theme_error slds-is-relative" role="status">
+                    <div class="slds-notify__content">
+                        <svg aria-hidden="true" class="slds-icon conga-svg-icon-error" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                        </svg>
+                        <h2 id="errorMessageContent" class="slds-text-heading_small"></h2>
+                    </div>
+                    <svg id="congaBtnCloseModal" aria-hidden="true" class="slds-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="slds-scope">
+                <div class="slds-page-header branding-setup onesetupSetupHeader">
+                    <svg aria-hidden="true" class="slds-icon conga-svg-icon-email" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/apexpages/slds/latest/assets/icons/standard-sprite/svg/symbols.svg#email"></use>
+                    </svg>
+                    <span class="breadcrumbDetail uiOutputText slds-m-left_x-small" data-aura-class="uiOutputText">Conga Email</span>
+                </div>
+                <div class="conga-form-element__section slds-m-vertical_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col conga-border__less slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-right_medium">
+                                <label class="slds-form-element__label" for="inputEmailTo">To</label>
+                                <div class="slds-form-element__control slds-is-relative">
+                                    <input id="inputEmailTo" class="slds-input" placeholder="To" type="text" value="" autofocus="true" />
+                                    <span id="pillEmailTo" class="slds-pill slds-pill_link">
+                                        <a href="javascript:void(0);" class="slds-pill__action" title="Full pill label verbiage mirrored here">
+                                            <span id="pillEmailLabel" class="slds-pill__label"></span>
+                                        </a>
+                                        <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" title="Remove">
+                                            <svg id="congaBtnClosePill" aria-hidden="true" class="slds-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                            </svg>
+                                        </button>
+                                    </span>
+                                    <ul id="inputEmailToContainer" class="slds-lookup__list conga-hidden" role="listbox"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col conga-border__less slds-size_6-of-12">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="inputEmailAdditionalTo">Additional To</label>
+                                <div class="slds-form-element__control">
+                                    <input id="inputEmailAdditionalTo" class="slds-input" placeholder="Additional To" type="text" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col conga-border__less slds-size_6-of-12">
+                            <div class="slds-form-element slds-m-vertical_medium slds-p-right_medium">
+                                <label class="slds-form-element__label" for="inputEmailCC">CC</label>
+                                <div class="slds-form-element__control">
+                                    <input id="inputEmailCC" class="slds-input" placeholder="CC" type="text" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col conga-border__less slds-size_6-of-12">
+                            <div class="slds-form-element slds-m-vertical_medium">
+                                <label class="slds-form-element__label" for="inputEmailCC">BCC</label>
+                                <div class="slds-form-element__control">
+                                    <input id="inputEmailBCC" class="slds-input" placeholder="BCC" type="text" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col conga-border__less slds-size_12-of-12">
+                            <div class="slds-form-element slds-m-bottom_medium">
+                                <label class="slds-form-element__label" for="inputEmailSubject">Subject</label>
+                                <div class="slds-form-element__control">
+                                    <input id="inputEmailSubject" class="slds-input" placeholder="Subject" type="text" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col conga-border__less slds-size_12-of-12">
+                            <div class="slds-form-element slds-m-vertical_medium">
+                                <form>
+                                    <textarea name="textAreaCKEditor" id="textAreaCKEditor" rows="10" cols="80"></textarea>
+                                </form>
+                                <div class="slds-form-element slds-p-vertical_medium slds-text-align_right">
+                                    <button id="sendEmail" class="slds-button slds-button_brand">Send Email</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="attachmentsContainer" class="slds-form-element conga-form-element__section slds-m-vertical_medium"></div>
+            </div>
+            <script>
+                // global namespace and assign URL parameters
+                window.APP_CONGA_CKEDITOR = {
+                    congaEmailData: {},
+                    operationId:'{!$CurrentPage.parameters.opid}',
+                    searchResults: {}
+                };                
+            </script>
+            <script src="{!URLFOR($Resource.jQuery, 'jquery.min.js')}"></script>
+            <script src="{!URLFOR($Resource.CKEditor, 'ckeditor.js')}"></script>
+            <script src="{!URLFOR($Resource.CKEditor, 'ckeditor_init.js')}"></script>
+        </body>
+    </html>
+</apex:page>

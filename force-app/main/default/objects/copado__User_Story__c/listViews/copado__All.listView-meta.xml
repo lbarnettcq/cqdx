@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>copado__All</fullName>
+    <columns>NAME</columns>
+    <columns>copado__User_Story_Title__c</columns>
+    <columns>copado__Environment__c</columns>
+    <columns>copado__Status__c</columns>
+    <columns>copado__Project__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>copado__Environment__c</field>
+        <operation>startsWith</operation>
+        <value>CQ</value>
+    </filters>
+    <filters>
+        <field>copado__Project__c</field>
+        <operation>notContain</operation>
+        <value>Com</value>
+    </filters>
+    <label>All</label>
+</ListView>

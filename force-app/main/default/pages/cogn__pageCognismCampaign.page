@@ -1,0 +1,49 @@
+<apex:page standardController="cogn__Cognism_Campaign__c" lightningStylesheets="true">
+    <script src="/support/console/42.0/integration.js" type="text/javascript" />
+	
+	<apex:includeLightning />
+
+	<div id="lightning"></div>
+
+	<script>
+
+		var recordId = '{!$CurrentPage.parameters.Id}';
+			
+		$Lightning.use("cogn:CognismCampaignLeadsApp", function() {
+				$Lightning.createComponent("cogn:CognismCampaingnLeads", {'recordId': recordId}, "lightning", function(cmp) {
+					RefreshCmp = cmp;
+					var postEventToOneApp = function(name, params, fallbackAction) {
+					  if (SfdcApp && SfdcApp.projectOneNavigator && SfdcApp.projectOneNavigator.fireContainerEvent) {
+					    // Not officially supported by Salesforce
+					    SfdcApp.projectOneNavigator.fireContainerEvent(name, params);
+					  } else if (fallbackAction) {
+					    // Fallback if no Salesforce support of fireContainerEvent
+					    fallbackAction();
+					  }
+					};
+
+				$A.eventService.addHandler({
+				  	event: 'force:showToast',
+				  	handler: function(event) {
+				   		postEventToOneApp('force:showToast', event.getParams(), function() {
+					      	alert(event.getParam('message'));
+					    });
+					}
+				});
+				$A.eventService.addHandler({
+				  	event: 'force:navigateToObjectHome',
+				  	handler: function(event) {
+				   		postEventToOneApp('force:navigateToObjectHome', event.getParams(), function() {
+					      	if (event.getParam('scope') == 'Lead') {
+					      		window.top.location.replace("/00Q/o");
+					      	}
+					      	if (event.getParam('scope') == 'Contact') {
+					      		window.top.location.replace("/003/o");
+					      	}
+					    });
+					}
+				});
+			});
+		});
+	</script>
+</apex:page>

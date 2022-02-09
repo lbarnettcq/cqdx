@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Now_Plus_20__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(TODAY()+20) &amp; &quot;T&quot; &amp; TEXT(TIMEVALUE(NOW()+0.04167)) &amp; &quot;Z&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Now Plus 20</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

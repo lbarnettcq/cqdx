@@ -1,0 +1,167 @@
+<!--https://plugins.krajee.com/popover-x#options-->
+<aura:component controller="FilterController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+
+    <aura:attribute name="table" type="String" default="timeReports" />
+
+    <aura:attribute name="fields" type="Map"/>
+
+    <aura:attribute name="listViewScope" type="List" default="[]"/>
+
+    <aura:attribute name="selectedValueViewScope" type="String"/>
+
+    <aura:attribute name="listViewFieldCriteria" type="List" default="[]"/>
+
+    <aura:attribute name="filterLogic" type="Map"/>
+
+    <aura:attribute name="showPanelButtons" type="Boolean" description="Show filter logic" default="false"/>
+    <aura:attribute name="showFilterLogic" type="Boolean" description="Show filter logic" default="false"/>
+    <aura:attribute name="showFilterLogicText" type="Boolean" description="Show filter logic" default="false"/>
+    
+    <ltng:require 
+    styles="{!join(',', $Resource.bootstrapmincss, $Resource.bootstrappopoverxcss)}" 
+    scripts="{!join(',', $Resource.distdlib, $Resource.jquery341min, $Resource.bootstrapmin, $Resource.bootstrappopoverx)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-grid">
+        <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right filter-panel slds-is-open" aria-hidden="false">
+            <div class="slds-panel__header">
+                <aura:if isTrue="{!v.showPanelButtons}">
+                    <div>
+                        <lightning:button label="Cancel" title="Cancel" onclick="{! c.handleCancel}"/>
+                    </div>
+                    <div class="slds-grid slds-col slds-grid_align-end">
+                        <lightning:button label="Save" title="Save" variant="brand" onclick="{!c.handleSave}"/>
+                    </div>
+                <aura:set attribute="else">
+                    <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Filter">Filter</h2>
+                    <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" title="Close Filters" onclick="{!c.handleClose}">
+                        <lightning:icon iconName="utility:close" size="x-small"/>
+                    </button>
+                    <!--<button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" title="Collapse Filter">
+                    <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Collapse Filter</span>
+                    </button>-->
+                </aura:set>
+                </aura:if>
+            </div>
+            <div class="slds-panel__body slds-scrollable--y">
+                <div class="slds-filters">
+                    <ol class="slds-list_vertical slds-list_vertical-space">                    
+                        <li class="slds-item slds-hint-parent mypopover" data-toggle="popover-x" data-target="#defaultPopover" data-placement="left">                      
+                            <div class="slds-filters__item slds-grid slds-grid_vertical-align-center">
+                                <!--<lightning:input class="mypopover" value="mypopover" onfocus="{!c.handleShowPopover1}" label="Name" placeholder="Enter name" name="This is Full Name" ></lightning:input>-->
+                                <button class="slds-button_reset slds-grow slds-has-blur-focus" data-popover-id="defaultPopover" onclick="{!c.handleShowPopover}">
+                                    <span class="slds-assistive-text">Edit filter:</span>
+                                    <span class="slds-show slds-text-body_small">Filter by Employees</span>
+                                    <span class="slds-show">All Employees</span>
+                                </button>
+                                <section id="defaultPopover" aria-label="Dialog title" aria-describedby="popover-body-id" class="popover popover-default slds-popover slds-nubbin_right slds-popover__body_scrollable" style="display:none;" role="dialog">
+                                    <div class="slds-popover__body">                                    
+                                        <lightning:radioGroup name="radioGroup"
+                                            label="Filter by Employees"
+                                            options="{!v.listViewScope}"
+                                            value="{!v.selectedValueViewScope}"
+                                            type="radio"/>
+                                        <lightning:button label="Done" title="Neutral action" class="doneButton slds-float--right"/>
+                                    </div>
+                                </section>
+                            </div>
+                        </li>
+                    </ol>
+                    <aura:if isTrue="{!v.listViewFieldCriteria.length > 0}">
+                            <h3 class="slds-text-body_small slds-m-vertical_x-small">Matching all of these filters</h3>
+                            <ol class="slds-list_vertical slds-list_vertical-space showNumbers">
+                                <aura:iteration items="{!v.listViewFieldCriteria}" var="fieldCriteria">
+                                    <aura:if isTrue="{!fieldCriteria.removed == false}">
+                                        <li class="slds-item slds-hint-parent" data-toggle="popover-x" data-target="{!'#' + fieldCriteria.prefix + fieldCriteria.id}" data-placement="left">
+                                            <div class="{!(fieldCriteria.hasBeenEdited) ? 'slds-filters__item slds-grid slds-grid_vertical-align-center hasBeenEdited' : 'slds-filters__item slds-grid slds-grid_vertical-align-center'}">
+                                                <button class="slds-button_reset slds-grow slds-has-blur-focus" button-popover-id="{!fieldCriteria.prefix + fieldCriteria.id}" data-popover-id="{!fieldCriteria.prefix + fieldCriteria.id}" onclick="{!c.handleShowPopover}">
+                                                    <span class="slds-assistive-text">Edit filter:</span>
+                                                    <span class="slds-show slds-text-body_small">{!fieldCriteria.current.label}</span>
+                                                    <span class="slds-show">{!fieldCriteria.current.operator}&nbsp;{!fieldCriteria.current.value}</span>
+                                                </button>
+                                                <a class="closeX" data-row-id="{!fieldCriteria.id}" onclick="{!c.handleRemoveFilter}">
+                                                    <lightning:icon iconName="utility:close" size="xx-small"/>
+                                                </a>
+                                            </div>
+                                            <section id="{!'' + fieldCriteria.prefix + fieldCriteria.id}" aria-label="Dialog title" class="popover slds-popover_large popover-default slds-popover slds-nubbin_right slds-popover__body_scrollable" style="display:none;" role="dialog">
+                                                <div class="slds-popover__body">
+                                                         
+                                                    <div class="slds-p-around_x-small">  
+
+                                                        <div class="slds-m-bottom_x-large">
+                                                            <lightning:combobox 
+                                                                aura:id="{!'selectedField_' + fieldCriteria.prefix + fieldCriteria.id}"
+                                                                name="{!'selectedField_' + fieldCriteria.prefix + fieldCriteria.id}"
+                                                                value="{!fieldCriteria.next.column}"  
+                                                                label="Field"
+                                                                placeholder="" 
+                                                                class="fieldSelection"
+                                                                options="{!fieldCriteria.picklistValues}" />
+                                                            </div>
+                                                        <div class="slds-m-bottom_x-large">    
+                                                            <lightning:combobox 
+                                                                aura:id="{!'selectedOperator_' + fieldCriteria.prefix + fieldCriteria.id}"
+                                                                name="{!'selectedOperator_' + fieldCriteria.prefix + fieldCriteria.id}"
+                                                                value="{!fieldCriteria.next.operator}"  
+                                                                label="Operator"
+                                                                placeholder="" 
+                                                                class="fieldSelection"
+                                                                options="{!fieldCriteria.supportedOperators}" />                                              
+                                                        </div>
+                                                        <lightning:input type="text" name="{!'value_' + fieldCriteria.prefix + fieldCriteria.id}" label="Value" value="{!fieldCriteria.next.value}"/>
+                                                    
+                                                        <div class="slds-text-align_right">
+                                                            <button label="Done" title="Done" class="slds-button--neutral doneButton slds-m-top_x-large slds-m-bottom_x-medium" data-target-id="{!fieldCriteria.id}" onclick="{!c.handleSaveChangesField}">Done</button>
+                                                        </div>
+                                                        
+                                                    </div> 
+
+                                                </div>
+                                            </section>
+                                        </li>
+                                    </aura:if>
+                                </aura:iteration>
+                            </ol>
+                    </aura:if>
+    
+                    <div class="slds-filters__footer slds-grid slds-shrink-none">
+                        <button class="slds-button_reset slds-text-link" onclick="{!c.handleAddFilter}">Add Filter</button>
+                        <button class="slds-button_reset slds-text-link slds-col_bump-left" onclick="{!c.handleRemoveAll}">Remove All</button>
+                    </div>
+                </div>
+            </div>
+            <aura:if isTrue="{!v.showFilterLogic}">
+                <div class="slds-panel__footer">
+                    <aura:if isTrue="{!v.showFilterLogicText}">
+                        <div class="slds-filters__footer slds-shrink-none">
+                            <div class="slds-grid">
+                                <span class="bodyTitle">
+                                    <label class="slds-m-right--xx-small uiLabel">Filter Logic</label>
+                                </span>
+                                <lightning:helptext
+                                    content="Filter logic governs how and when filters apply to your list view. Use AND and OR operators to fine-tune your results."
+                                />       
+                                <button class="slds-button_reset slds-text-link slds-col_bump-left" onclick="{!c.handleRemoveFilterLogic}">Remove</button>  
+                            </div>     
+                            <div>
+                                <lightning:textarea name="filterLogicText" onchange="{!c.handleChangeFilterLogic}" value="{!v.filterLogic.current.text}" />
+                            </div>
+                        </div>            
+                    <aura:set attribute="else">
+                        <div class="slds-filters__footer slds-grid slds-shrink-none">
+                            <button class="slds-button_reset slds-text-link" onclick="{!c.handleAddFilterLogic}">Add Filter Logic</button>
+                        </div>
+                    </aura:set>
+                    </aura:if>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

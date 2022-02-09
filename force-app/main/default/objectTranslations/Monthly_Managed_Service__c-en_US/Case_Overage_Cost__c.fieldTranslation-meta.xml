@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Charged by the Case. --></help>
+    <label><!-- Case Overage Cost --></label>
+    <name>Case_Overage_Cost__c</name>
+</CustomFieldTranslation>

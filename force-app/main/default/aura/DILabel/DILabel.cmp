@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:attribute name="type" type="String" description="Status type" default="default"/>
+
+    <aura:attribute name="colorText" type="String" description="Text color" default=""/>
+    <aura:attribute name="colorBackground" type="String" description="Background color" default=""/>
+    <aura:attribute name="label" type="String" description="Status label" default=""/>
+
+    <aura:handler name="change" value="{!v.type}" action="{!c.onTypeAttributeChange}"/>
+
+    <span aura:id="diStatusLabel" class="slds-badge">
+     {!v.label}
+    </span>
+</aura:component>

@@ -1,0 +1,2 @@
+Hello {!User.Name}. Your refresh job has finished.
+Please follow this <a href='{!cogn__Clean_Job__c.Link}'>link</a> to see the result.

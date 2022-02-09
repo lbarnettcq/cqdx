@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Conga Sign 交易</value>
+    </caseValues>
+    <nameFieldLabel>交易名称</nameFieldLabel>
+    <webLinks>
+        <label><!-- Cancel --></label>
+        <name>APXT_CongaSign__Cancel</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Download_FinalVersion --></label>
+        <name>APXT_CongaSign__Download_FinalVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Download_OriginalVersion --></label>
+        <name>APXT_CongaSign__Download_OriginalVersion</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Edit_Draft --></label>
+        <name>APXT_CongaSign__Edit_Draft</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Resend --></label>
+        <name>APXT_CongaSign__Resend</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- View_Audit_btn --></label>
+        <name>APXT_CongaSign__View_Audit_btn</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- View_ContentDocument --></label>
+        <name>APXT_CongaSign__View_ContentDocument</name>
+    </webLinks>
+</CustomObjectTranslation>

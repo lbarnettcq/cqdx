@@ -1,0 +1,30 @@
+.THIS .doneButton {
+    width: 100px!important;
+    margin-top: var(--lwc-spacingLarge, 1.5rem);
+    margin-bottom: var(--lwc-spacingSmall, 0.75rem);
+}
+
+.THIS.filter-panel {
+    max-width: 321px;
+    background-color: var(--lwc-colorBackground,rgb(243, 242, 242));
+}
+
+.THIS.filter-panel .slds-panel__header {
+    background-color: var(--lwc-colorBackgroundAlt,rgb(255, 255, 255));
+}
+
+.THIS.filter-panel .slds-panel__body {
+    background-color: var(--lwc-colorBackgroundAlt,rgb(255, 255, 255));
+}
+
+.THIS ol.showNumbers {
+    padding-left: 18px;
+}
+
+.THIS ol.showNumbers li {
+    list-style-type: decimal;
+}
+
+.THIS .hasBeenEdited {
+    background-color: var(--lwc-colorBackgroundHighlight,rgb(250, 255, 189));
+}

@@ -1,0 +1,31 @@
+<apex:page showHeader="true" sidebar="true" docType="html-5.0" standardStylesheets="true">
+	<script src="/support/console/42.0/integration.js" type="text/javascript" />
+	
+	<apex:includeLightning />
+
+	<div id="lightning"></div>
+	<script>
+		$Lightning.use("cogn:SettingsAPP", function() {
+				$Lightning.createComponent("cogn:CustomSettings", {}, "lightning", function(cmp) {
+					var postEventToOneApp = function(name, params, fallbackAction) {
+					  if (SfdcApp && SfdcApp.projectOneNavigator && SfdcApp.projectOneNavigator.fireContainerEvent) {
+					    // Not officially supported by Salesforce
+					    SfdcApp.projectOneNavigator.fireContainerEvent(name, params);
+					  } else if (fallbackAction) {
+					    // Fallback if no Salesforce support of fireContainerEvent
+					    fallbackAction();
+					  }
+					};
+
+				$A.eventService.addHandler({
+				  	event: 'force:showToast',
+				  	handler: function(event) {
+				   		postEventToOneApp('force:showToast', event.getParams(), function() {
+					      	alert(event.getParam('message'));
+					    });
+					}
+				});
+			});
+		});
+	</script>
+</apex:page>

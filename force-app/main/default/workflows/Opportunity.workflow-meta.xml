@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>New_Partner_Opportunity_Created</fullName>
+        <description>New Partner Opportunity Created</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>aolah@cloudqnect.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>kbalog@cloudqnect.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>lbarnett@cloudqnect.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>team@cloudqnect.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/INTERNAL_New_Partner_Opportunity_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Opportunity_Closed_Won_Notification</fullName>
+        <description>Opportunity Closed Won Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Office_Staff</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>info@cloudqnect.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Closed_Opportunity</template>
+    </alerts>
+    <rules>
+        <fullName>Closed Won Opp Notigication</fullName>
+        <actions>
+            <name>Opportunity_Closed_Won_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

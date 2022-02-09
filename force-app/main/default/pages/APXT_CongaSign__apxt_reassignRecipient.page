@@ -1,0 +1,16 @@
+<apex:page showHeader="false" sidebar="false" standardcontroller="APXT_CongaSign__Recipient__c" extensions="APXT_CongaSign.apxt_serviceRedirect">
+    <html xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <script type="text/javascript">
+                var redirectUrl = '{!JSENCODE(senderReassignSignerUrl)}';
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    console.log("Invalid URL");
+                }
+            </script>
+        </head>
+        <body>
+        </body>
+    </html>
+</apex:page>

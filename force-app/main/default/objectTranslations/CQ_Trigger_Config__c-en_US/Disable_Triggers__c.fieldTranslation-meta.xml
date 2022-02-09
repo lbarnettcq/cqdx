@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- CHECKING THIS BOX DISABLES ALL TRIGGER PROCESSING --></help>
+    <label><!-- Disable Triggers --></label>
+    <name>Disable_Triggers__c</name>
+</CustomFieldTranslation>

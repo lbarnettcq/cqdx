@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_Managed_Service__c</fullName>
+    <externalId>false</externalId>
+    <label>Monthly Managed Service</label>
+    <referenceTo>Monthly_Managed_Service__c</referenceTo>
+    <relationshipLabel>Monthly Managed Service Activity</relationshipLabel>
+    <relationshipName>Monthly_Managed_Service_Activity</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

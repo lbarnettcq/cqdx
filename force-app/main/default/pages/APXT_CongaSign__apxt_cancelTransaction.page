@@ -1,0 +1,217 @@
+<apex:page standardcontroller="APXT_CongaSign__Transaction__c" extensions="APXT_CongaSign.apxt_cancelTransaction" showHeader="false" sidebar="false" title="{!$Label.apxt_congasign__apxt_cancel_transaction_title} ">
+    <html xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <apex:stylesheet value="{!URLFOR($Resource.APXT_CongaSign__apxt_mainCss, 'vf.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.APXT_CongaSign__apxt_mainCss, 'apxt_fonts.css')}"/>
+            <apex:slds />
+            <script src="{!URLFOR($Resource.apxt_jQuery)}"></script>
+            <script src="{!URLFOR($Resource.apxt_svg4everybody)}"></script>
+        </head>
+
+        <body>
+            <apex:outputPanel layout="none" rendered="{! isblank($CurrentPage.parameters.oAuthCompleted) }">
+
+                <div id="cancel-overlay">
+                   <div class="slds-grid slds-m-top_small">
+                        <div class="slds-col slds-medium-hide slds-show_large">
+                            <img src="{!$Resource.apxt_images + '/1440-sign-header.svg'}" class="slds-align_absolute-center"/>
+                        </div>
+                        <div class="slds-col slds-medium-show slds-hide--large">
+                            <img src="{!$Resource.apxt_images + '/1024-sign-header.svg'}" class="slds-align_absolute-center"/>
+                        </div>
+                        <div class="slds-col slds-hide_medium slds-small-show slds-hide--x-small">
+                            <img src="{!$Resource.apxt_images + '/768-sign-header.svg'}" class="slds-align_absolute-center"/>
+                        </div>
+                        <div class="slds-col slds-show--x-small slds-small-hide slds-hide--medium slds-align--absolute-center">
+                            <img Id="sign-header-logo_mobile" src="{!$Resource.apxt_images + '/320-mobile.svg'}" />
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-text-align_center slds-wrap slds-p-top_medium">
+                        <div class="slds-col slds-size_10-of-12 slds-medium-size_8-of-12">
+                            <p class="sign-branding-page_text">
+                                <b>{!SUBSTITUTE($Label.apxt_cancel_transaction, '{0}', HTMLENCODE(parentObj['Name']))}</b>
+                            </p>
+                            <p class="sign-branding-page_text slds-p-around_small">
+                                <b>{!$Label.apxt_cancel_transaction_verify}</b>
+                            </p>
+                        </div>
+                        <div class="slds-col lds-grid_align-center slds-size_8-of-12 slds-m-top--medium">
+                            <div class="slds-grid slds-wrap slds-grid_align-center slds-gutters">
+                                <div class="slds-col sign-branding-button_div slds-p-bottom--small slds-m-right_x-small">
+                                    <button class="slds-button slds-button_neutral cancel-button sign-branding-page_button">{!$Label.apxt_cancel_cancel_button}</button>
+                                </div>
+                                <div class="slds-col sign-branding-button_div">
+                                    <button class="slds-button slds-button_destructive cancel-transaction-button sign-branding-page_button">{!$Label.apxt_cancel_transaction_button}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="spinner-overlay" class="slds-spinner_container slds-hide">
+                  <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">{!$Label.apxt_cancel_transaction_loading}</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                  </div>
+                </div>
+
+                <div id="modal-overlay" class="slds-backdrop slds-backdrop--open slds-hide"/>
+
+                <div class="slds-notify_container">
+                    <div id="pageToast" class="slds-notify slds-notify_toast slds-hide" role="alert">
+                        <span id="pageToast-assistive" class="slds-assistive-text">{!$Label.apxt_cancel_transaction_notification}</span>
+                        <span id="pageToast-icon-info" class="slds-icon_container slds-icon-utility-info slds-m-right_small slds-no-flex slds-align-top slds-hide">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                      xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg')}#info"/>
+                            </svg>
+                        </span>
+                        <span id="pageToast-icon-success" class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top slds-hide">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                      xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg')}#success"/>
+                            </svg>
+                        </span>
+                        <span id="pageToast-icon-warning" class="slds-icon_container slds-icon-utility-warning slds-m-right_small slds-no-flex slds-align-top slds-hide">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                      xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg')}#warning"/>
+                            </svg>
+                        </span>
+                        <span id="pageToast-icon-error" class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top slds-hide">
+                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                      xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg')}#error"/>
+                            </svg>
+                        </span>
+                        <div class="slds-notify__content">
+                            <h2 id="pageToast-label" class="slds-text-heading_small slds-hide"/>
+                            <p id="pageToast-detail" class="slds-hide"/>
+                            <div id="pageToast-objId" class="slds-hide"/>
+                            <div id="pageToast-debug" class="slds-hide"/>
+                        </div>
+                        <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="{!$Label.apxt_cancel_transaction_close}">
+                            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                       xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg')}#close">
+                                </use>
+                            </svg>
+                            <span class="slds-assistive-text">{!$Label.apxt_congasign__apxt_cancel_transaction_close}</span>
+                        </button>
+                    </div>
+                </div>
+
+            </apex:outputPanel>
+
+            <script type="text/javascript">
+                svg4everybody();
+
+                // Apex Remote Action call handler.
+                var callRemoteAction = function(controllerName, methodName, params, callback, options) {
+                    var args = params;
+                    // Prepend namespace and apex controller name to method name
+                    var ns = "{!JSENCODE(NAMESPACE)}";
+                    if (ns && ns.length > 0) ns += ".";
+                    methodName = ns + controllerName + "." + methodName;
+                    // Method name is first argument
+                    params.unshift(methodName);
+                    // Callback comes after arguments
+                    params.push(callback);
+                    // If options are specified they are the last argument
+                    if (options) params.push(options);
+                    Visualforce.remoting.Manager.invokeAction.apply(Visualforce.remoting.Manager, params);
+                };
+
+                // Function to display toast notifications.
+                function displayNotification(type, label, detail, id, debug){
+                    var hideClass = 'slds-hide';
+                    $('#pageToast-label').text(escapeHtml(label));
+                    if (label)
+                        $('#pageToast-label').removeClass(hideClass);
+                    else
+                        $('#pageToast-label').addClass(hideClass);
+                    $('#pageToast-detail').text(escapeHtml(detail));
+                    if (detail)
+                        $('#pageToast-detail').removeClass(hideClass);
+                    else
+                        $('#pageToast-detail').addClass(hideClass);
+                    $('#pageToast-objId').text(escapeHtml(id));
+                    $('#pageToast-debug').text(escapeHtml(debug));
+                    $('#pageToast').removeClass('slds-theme_success slds-theme_warning slds-theme_error slds-theme_info');
+                    $('#pageToast .slds-icon_container').addClass(hideClass);
+
+                    var toastClass = 'slds-theme_info';
+                    var iconContainer = $('#pageToast-icon-info');
+                    if (type==='success'){
+                        toastClass = 'slds-theme_success';
+                        iconContainer = $('#pageToast-icon-success');
+                    }
+                    else if (type==='warning'){
+                        toastClass = 'slds-theme_warning';
+                        iconContainer = $('#pageToast-icon-warning');
+                    }
+                    else if (type==='error'){
+                        toastClass = 'slds-theme_error';
+                        iconContainer = $('#pageToast-icon-error');
+                    }
+
+                    iconContainer.removeClass(hideClass);
+                    $('#pageToast').addClass(toastClass).removeClass(hideClass).show();
+                }
+
+                // Onready JS behavior.
+                $(document).ready(function() {
+                    // Add return function all toast notifications.
+                    $('.slds-notify__close').each( function(){
+                        $(this).on('click', returnRedirect);
+                    });
+
+                    $('.cancel-button').each( function(){
+                        $(this).on('click', returnRedirect);
+                    });
+                   
+                    $('.cancel-transaction-button').each( function(){
+                        $(this).on('click', returnRedirectAfterCancelTransaction);
+                    });
+                });
+
+                function returnRedirect(){
+                    if ({!isLightningUI}){
+                        sforce.one.navigateToSObject('{!JSENCODE(parentObj.Id)}');
+                    } else {
+                        window.location.href = '/{!JSENCODE(parentObj.Id)}';
+                    }
+                }
+               
+                function returnRedirectAfterCancelTransaction(){
+                    var hideClass = 'slds-hide';
+                   
+                    // hide the cancel overlay.
+                    $('#cancel-overlay').addClass(hideClass);
+                       
+                    // display the spinner then make callout.
+                    $('#spinner-overlay').removeClass(hideClass);
+                    callRemoteAction("apxt_cancelTransaction", "cancelVisualforce", ["{!JSENCODE(parentObj.Id)}"], function (response) {
+                        $('#spinner-overlay').addClass(hideClass);
+                        if (response && response.success){
+                            displayNotification('success', (response.message) ? response.message : '{!JSINHTMLENCODE($Label.apxt_cancel_transaction_canceled)}',
+                                null, null, null);
+                            window.setTimeout(returnRedirect, 5000);
+                        } else{
+                            displayNotification('error', (response && response.message) ? response.message : '{!JSINHTMLENCODE($Label.apxt_cancel_transaction_not_canceled)}',
+                                (response && response.reason) ? response.reason : null, null, response);
+                        }
+                    }, {escape:false});
+                }
+
+                function escapeHtml(txt){
+                    return $('#js-escape-html').text(txt).html();
+                }
+            </script>
+
+            <div id="js-escape-html" class="slds-hide" ></div>
+        </body>
+    </html>
+</apex:page>

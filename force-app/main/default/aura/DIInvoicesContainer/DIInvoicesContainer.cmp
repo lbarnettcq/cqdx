@@ -1,0 +1,69 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="InvoicesController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="invoiceId" type="String"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="details" type="String"/>
+
+    <aura:attribute name="canAddExpense" type="Boolean" default="false"/>
+    <aura:attribute name="invoicesUrl" type="String" default="/lightning/n/Invoices"/>
+    <aura:attribute name="timesheetsUrl" type="String" default="/lightning/n/Timesheets"/>
+    
+    <aura:attribute name="showLoadIndicator" type="Boolean" default="true"/>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorType" type="String"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="di-invoices">
+        <aura:if isTrue="{!v.showLoadIndicator}">
+            <div class="di-invoices__load-indicator">Proccessing...</div>
+        <aura:set attribute="else">          
+                <aura:if isTrue="{!v.showError}">
+                    <c:DIErrorNotFound errorMessage="{!v.errorMessage}"/>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.invoiceId}">
+                        <c:DIInvoicesHeader 
+                            aura:id="diInvoicesHeader" 
+                            invoiceId="{!v.invoiceId}"
+                            title="{!v.title}"
+                            changeEvent="{!c.handleChange}"
+                            options="{invoicesUrl: '/lightning/n/Invoices'}"
+                            >
+                        </c:DIInvoicesHeader>
+            
+                        <c:DIInvoicesPanelInfo invoiceId="{!v.invoiceId}"></c:DIInvoicesPanelInfo>
+            
+                        <c:DIInvoicesTimesheetsTable 
+                            aura:id="diTimesheetsTable" 
+                            changeEvent="{!c.handleChange}" 
+                            invoiceId="{!v.invoiceId}" 
+                            options="{timesheetsUrl: '/lightning/n/Timesheets/'}">
+                        </c:DIInvoicesTimesheetsTable>
+                        
+                        <div style="margin-top:49px;">
+                            <c:DIExpensesContainer aura:id="diExpensesContainer" invoiceId="{!v.invoiceId}" enableAddExpense="{!v.canAddExpense}" options="{columns: [{fieldName: 'sowEmployee', enable: true}]}"></c:DIExpensesContainer>
+                        </div>           
+                    <aura:set attribute="else">
+                        <c:DIInvoicesHeader 
+                            aura:id="diInvoicesHeader"
+                            title="{!v.title}"
+                            details="{!v.details}"
+                            changeEvent="{!c.handleChange}"
+                            dependencies="['diInvoicesTable']"/>
+                        <div style="height: 700px">  
+                            <c:DIInvoicesTable aura:id="diInvoicesTable" changeEvent="{!c.handleChange}" options="{invoiceUrl: '/lightning/n/Invoices'}"></c:DIInvoicesTable>   
+                        </div>
+                    </aura:set>
+                    </aura:if>
+                </aura:set>
+                </aura:if>         
+        </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

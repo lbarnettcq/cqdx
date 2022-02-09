@@ -1,0 +1,31 @@
+.THIS.di-invoices * {
+    font-family: "Salesforce Sans";
+}
+
+.THIS .di-invoices__load-indicator {
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(221, 219, 218);
+    border-radius: 5px;
+}
+
+.THIS .di-invoices__error {
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(221, 219, 218);
+    border-radius: 5px;
+}
+
+.THIS .di-invoices-text_bold {
+    font-size: .8125rem;
+    font-weight: 700;
+    color: rgb(8, 7, 7);
+}
+
+.THIS .di-invoices-text_padding {
+    padding-bottom: 7px;
+}

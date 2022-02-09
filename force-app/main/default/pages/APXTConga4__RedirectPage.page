@@ -1,0 +1,1 @@
+<apex:page controller="APXTConga4.RedirectPageController" action="{!redirect}"></apex:page>

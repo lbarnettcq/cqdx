@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Leadfeeder Visit --></label>
+    <name>leadfeederapp__WebsiteVisit__c</name>
+    <relationshipLabel><!-- Pageviews --></relationshipLabel>
+</CustomFieldTranslation>

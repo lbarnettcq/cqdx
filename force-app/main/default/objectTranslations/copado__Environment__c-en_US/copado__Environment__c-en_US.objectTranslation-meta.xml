@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <validationRules>
+        <errorMessage><!-- An environment cannot have the same automation template for both Promote and Deploy --></errorMessage>
+        <name>copado__Unique_Template_for_promote_and_deploy</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Find_Replace_Rule_Editor --></label>
+        <name>copado__Find_Replace_Rule_Editor</name>
+    </webLinks>
+</CustomObjectTranslation>

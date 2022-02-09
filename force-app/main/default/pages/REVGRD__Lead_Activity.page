@@ -1,0 +1,28 @@
+<!--
+-Author:         serhiivolynets
+-Date:           14.05.2020
+-Description:   
+-->
+<apex:page id="Lead_Activity"  standardController="Lead" extensions="REVGRD.VFC001_CanvasExt">
+    <head>
+        <title>RevenueGrid Lead Activities</title>
+    </head>
+    <style>
+        html {
+            overflow: hidden !important;
+        }
+        html body.sfdcBody {
+            padding: 0;
+            overflow: hidden !important;
+        }
+        body.sfdcBody iframe {
+            height: 100vh;
+        }
+    </style>
+    <!--    ,'RevenueGridTenantUrl':'{!RevenueGridTenantUrl}'-->
+    <apex:canvasApp developerName="{!CanvasApp}"
+                    namespacePrefix="{!CanvasAppNameSpace}"
+                    parameters="{'serverSyncTenantUrl':'{!ServerSyncTenantUrl}','redirectUrl':'{!RevenueGridTenantUrl}/widgets/person/{!recordId}/activity?singleUseToken={singleUseToken}','errorRedirectUrl':'{!ServerSyncTenantUrl}/ui/error.html?errorCode={errorCode}'}"
+                    width="100%" height="100%"
+    />
+</apex:page>

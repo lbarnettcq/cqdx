@@ -1,0 +1,15 @@
+<aura:component>
+    <aura:attribute name="errorsFields" type="String"/>
+    <div class="pageLevelErrors" tabindex="-1">
+        <div class="forcePageError slds-text-align_left" aria-live="assertive" data-aura-class="forcePageError">
+            <div class="genericNotification">
+                <span class="genericError">
+                   Review the errors on this page.
+                </span>
+            </div>
+            <ul class="errorsList">
+                <li>{!v.errorsFields}</li>
+            </ul>
+        </div>
+    </div>
+</aura:component>

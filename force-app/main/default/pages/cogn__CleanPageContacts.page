@@ -1,0 +1,27 @@
+<apex:page standardController="Contact" extensions="cogn.CleanController" recordSetVar="contacts" action="{!CreateCleanObject}" lightningStylesheets="true">
+	<apex:includeLightning />
+    <apex:form >
+		<apex:sectionheader title="Cognism Refresh"/>
+		{!message}
+		<apex:pageMessages ></apex:pageMessages>
+  	</apex:form>
+		<script>
+			setTimeout(function(){
+				if ('{!$User.UIThemeDisplayed}' == 'Theme4d') {
+					if (document.referrer.includes('sfdcIFrameOrigin')) {
+						var url = new URL(document.referrer);
+						var sfdcIFrameOrigin = url.searchParams.get("sfdcIFrameOrigin");
+						window.location.replace(sfdcIFrameOrigin + '/lightning/o/Contact/list');
+					} else {
+						window.history.go(-1);
+					}
+				} else {
+					if (document.referrer.includes('recsession')) {
+						window.location.replace(document.referrer.substring(0, document.referrer.length - 22) + '003');
+					} else {
+						window.history.go(-1);
+					}
+				}
+			}, 5000);
+		</script>
+</apex:page>

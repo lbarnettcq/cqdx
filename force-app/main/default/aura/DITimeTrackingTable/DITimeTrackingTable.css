@@ -1,0 +1,190 @@
+.THIS#diTimeTrackingTable {
+  clear: both;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.THIS .di-table-container-message {
+  margin: 0 auto;
+  color: #1589ee;
+  font-family: "Salesforce Sans";
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.THIS .di-table-container-message td{
+  text-align: center;
+}
+
+.THIS.slds-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.THIS table:host {
+    display: table-row;
+}
+
+.THIS .slds-table_cell-buffer tr > .THIS th:first-child {
+  padding-left: 16px;
+}
+
+.THIS .slds-table_cell-buffer tr > .THIS td:last-child {
+  padding-right: 8px;
+}
+
+.THIS .time-tracking {
+  text-align: center;
+}
+
+.THIS .time-tracking__th {
+  width: 11% !important;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Salesforce Sans;
+  color: #1589ee;
+  text-align: center;
+  padding: 10px 29px;
+  line-height: 18px;
+}
+
+.THIS .time-tracking__th:nth-child(1) {
+  width: 19% !important;
+}
+
+.THIS .time-tracking__th:nth-child(10) {
+  width: 4% !important;
+}
+
+.THIS.slds-table td {
+  width: 11% !important;
+}
+
+.THIS .time-tracking_background {
+  background-color: #f3f2f2;
+}
+
+.THIS .time-tracking__title {
+  text-transform: uppercase;
+}
+
+.THIS .time-tracking__entry-title {
+  padding: 22px 0px 19px 16px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.THIS .time-tracking__cell_padding {
+  text-align: center;
+  padding: 12px 9px;
+}
+
+.THIS .time-tracking__cell-time {
+  text-align: center;
+}
+
+.THIS .time-tracking__cell-time_sum {
+  color: #1589ee;
+  font-family: 'Salesforce Sans';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.THIS .time-tracking__cell-icon {
+  text-align: center;
+  padding-right: 0 !important;
+}
+
+.THIS .time-tracking__footer {
+  height: 56px;
+}
+
+.THIS .time-tracking__button {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: Salesforce Sans;
+  line-height: 30px;
+}
+
+.THIS .time-tracking__button_color-cancel {
+  color: #0070d2;
+}
+
+.THIS .shell {
+  position: relative;
+  line-height: 1;
+}
+
+.THIS .shell span {
+  position: relative;
+  line-height: 1;
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  color: red;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.THIS .shell span i { 
+    position: relative;
+    line-height: 1;
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    color: red;
+    pointer-events: none;
+    z-index: -1;
+    color: transparent;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.THIS input.masked,
+.THIS .shell span {
+  font-size: 16px;
+  font-family: monospace;
+  padding-right: 10px;
+  background-color: transparent;
+  text-transform: uppercase;
+}
+
+.THIS li {
+  line-height: 2;
+  font-family: helvetica;
+  list-style-type: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.THIS label { 
+  display: inline-block;
+  width: 14em;
+}
+
+.THIS  input {
+  border: none;
+}
+
+.THIS .slds-button_neutral {
+  color: #0070d2 !important;
+  font-family: "Salesforce Sans" !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 30px !important;
+}
+
+.THIS .di-table-container__body{
+  color: #706e6b;
+  font-family: 'Salesforce Sans';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.THIS .time-tracking__head_line{
+  color: #706e6b;font-weight: 400;
+}

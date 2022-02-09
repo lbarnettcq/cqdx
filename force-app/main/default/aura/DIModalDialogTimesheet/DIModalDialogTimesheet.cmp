@@ -1,0 +1,146 @@
+<aura:component controller="TimesheetsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>     
+
+    <aura:attribute name="opened" type="Boolean" default="false"/>
+
+    <aura:attribute name="view" type="String" default="none"/>
+
+    <aura:attribute name="timesheetId" type="String"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="description" type="List"/>
+    
+    <aura:attribute name="message" type="Object"/>
+
+    <aura:attribute name="submitLabel" type="String" default="Create"/>
+    <aura:attribute name="disableSubmit" type="Boolean" default="false"/>
+    
+    <aura:attribute name="clients" type="List" default="[]"/>
+    <aura:attribute name="selectedClient" type="String"/>
+
+    <aura:attribute name="employees" type="List" default="[]"/>
+    <aura:attribute name="selectedEmployee" type="String"/>
+
+    <aura:attribute name="startDate" type="String"/>
+    <aura:attribute name="endDate" type="String"/>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorsFields" type="String" default=""/>
+    <aura:attribute name="errorBlankField" type="String" description="Message for empty field" default="Complete this field"/>
+    
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <aura:if isTrue="{!v.opened}">
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon 
+                            iconName="utility:close"
+                            onclick="{! c.closeModel }"
+                            alternativeText="close"
+                            variant="bare-inverse"
+                            size="large"
+                            class="slds-modal__close"/>
+                        <div class="slds-text-heading_medium slds-text-color_weak">
+                            <b>{!v.title}</b>
+                        </div>
+                        <aura:if isTrue="{!v.showError}">
+                            <c:DIErrorsModal errorsFields="{!v.errorsFields}"/>
+                        </aura:if>
+                    </header>                  
+                    <div class="slds-modal__content slds-p-horizontal_medium slds-p-top_medium slds-p-bottom_xx-large" id="modal-content-id-1">
+                        <aura:if isTrue="false">
+                        <div class="slds-text-align_center">
+                            <aura:iteration items="{!v.description}" var="descr">
+                                <div>{!descr}</div>
+                            </aura:iteration>
+                        </div> 
+                        </aura:if>
+                        <div class="slds-grid slds-grid_align-center">
+                            <div class="slds-col slds-size_7-of-12">
+                            <aura:if isTrue="{!v.message.show}">
+                                {!v.message.description}
+                            <aura:set attribute="else">
+                                <div class="slds-grid slds-m-top_large">
+                                    <div class="slds-col slds-size_1-of-1">
+                                    <lightning:combobox 
+                                        aura:id="selectedClient" 
+                                        name="general" 
+                                        value="{!v.selectedClient}" 
+                                        label="Client Name" 
+                                        required="true"
+                                        messageWhenValueMissing="{!v.errorBlankField}"
+                                        messageWhenBadInput="Incorrect Client Name"
+                                        placeholder="" 
+                                        options="{!v.clients}" 
+                                        onchange="{!c.handleSelectClient}"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-m-top_large">
+                                    <div class="slds-col slds-size_1-of-1">
+                                    <lightning:combobox 
+                                        aura:id="selectedEmployee"
+                                        name="general" 
+                                        value="{!v.selectedEmployee}"  
+                                        label="Employee/SOW" 
+                                        required="true"
+                                        messageWhenValueMissing="{!v.errorBlankField}"
+                                        messageWhenBadInput="Employee/SOW"
+                                        placeholder="" 
+                                        options="{!v.employees}" 
+                                        onchange="{!c.handleSelectEmployee}"/>
+                                    </div>
+                                </div>      
+                                <div class="slds-grid slds-gutters slds-m-top_large">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <ui:inputDate 
+                                            aura:id="startDate" 
+                                            label="Start Date" 
+                                            labelClass="di-label"
+                                            value="{!v.startDate}" 
+                                            requiredIndicatorClass="start-date-error"
+                                            required="true"
+                                            displayDatePicker="true"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <ui:inputDate 
+                                            aura:id="endDate" 
+                                            label="End Date" 
+                                            labelClass="di-label"
+                                            value="{!v.endDate}" 
+                                            requiredIndicatorClass="start-date-error"
+                                            required="true"
+                                            displayDatePicker="true"/>
+                                    </div>                                                                                
+                                </div>                         
+                            </aura:set>
+                            </aura:if>
+                            </div>
+                        </div>                       
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button 
+                            variant="neutral"
+                            label="Cancel"
+                            title="Cancel"
+                            onclick="{!c.closeModel}"/>
+                        <lightning:button 
+                            variant="brand"
+                            disabled="{!v.disableSubmit}"
+                            label="{!v.submitLabel}"
+                            title="{!v.submitLabel}"
+                            onclick="{!c.submit}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

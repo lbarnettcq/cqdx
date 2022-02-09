@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Account Type --></label>
+    <name>Account_Type__c</name>
+    <picklistValues>
+        <masterLabel>Direct</masterLabel>
+        <translation><!-- Direct --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prime (Co Branding)</masterLabel>
+        <translation><!-- Prime (Co Branding) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prime (White Label)</masterLabel>
+        <translation><!-- Prime (White Label) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Referring Partner</masterLabel>
+        <translation><!-- Referring Partner --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,175 @@
+<aura:component>
+  <aura:attribute name="stateProcess" type="String" description="State processs" />
+  
+  <aura:attribute name="dependencies" type="List" default="[]"/>
+  
+  <aura:attribute name="value" type="String" description="Date displayed if exists already" />
+  <aura:attribute name="dates" type="Object" description="Dates range" />
+  <aura:attribute name="label" type="String" description="Label for the component" />
+  <aura:attribute name="placeholder" type="String" description="" />
+  <aura:attribute name="class" type="String" description="A CSS style to be attached to the component." />
+  <aura:attribute name="formatSpecifier" type="String" description="Java style format specifier for the date" />
+  <aura:attribute name="compact" type="Boolean" default="false" />
+  <aura:attribute name="showTodayHyperlink" type="Boolean" default="true" />
+
+  <aura:attribute name="date" type="Integer" description="The currently highlighted date." />
+  <aura:attribute name="minDate" type="Integer" description="Min." />
+  <aura:attribute name="min" type="Integer" description="Min date." />
+  <aura:attribute name="month" type="Integer" description="The currently rendered month." />
+  <aura:attribute name="monthName" type="String" description="The currently rendered month name." />
+  <aura:attribute name="year" type="Integer" description="The currently rendered year." />
+  <aura:attribute name="selectedDate" type="Date" description="The selected date." />
+  <aura:attribute name="setFocus" type="Boolean" default="true" description="Control if we should focus any date when we render the month." />
+
+  <aura:attribute name="extendedYearRange" type="Boolean" default="false" description="If true, you must set start and stop year values (1900 and 2100 for eg)" />
+  <aura:attribute name="startYear" type="Integer" description="if extendedYearRange is true, this will determine the first year in the list" />
+  <aura:attribute name="finishYear" type="Integer" description="if extendedYearRange is true, this will determine the last year in the list" />
+  <aura:attribute name="options" type="SelectOption[]" />
+
+  <aura:attribute name="_errorMessage" type="String" description="Error for the component" />
+
+  <aura:attribute name="_error" type="Boolean" default="false" description="The error." />
+
+  <!-- private attributes -->
+  <aura:attribute name="_setFocus" type="Boolean" default="true" description="The internal state of setFocus." />
+  <aura:attribute name="_namesOfWeekdays" type="List" description="The names of the week days based on locale." />
+  <aura:attribute name="_today" type="String" description="The date string (yyyy-MM-dd) of today based on the Aura time zone." />
+  <aura:attribute name="_windowTimeout" type="Object" />
+  <aura:attribute name="_gridOver" type="Boolean" default="false" />
+  
+  <aura:attribute name="view" type="String" default="arrows" />
+
+  <!-- events -->
+  <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="The event fired when change" />
+  
+  <aura:method name="reInit" action="{!c.doInit}" description="Runs the init method again if an external value has been changed and we need to update the ui">
+  </aura:method> 
+
+  <aura:method name="update" action="{!c.update}" access="public"> 
+      <aura:attribute name="data" type="Object"/>
+  </aura:method>
+
+  <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+  <div id="DeepDateGrid" class="di-date-container">
+    <div class="slds-form-element" aura:id="dateInputFormElement">
+      <div class="slds-form-element__control" aura:id="dateInputControl">
+          <aura:if isTrue="{!v.view == 'arrows'}">
+          <div class="flex-container">          
+            <a onclick="{!c.goToPreviousWeek}" href="javascript:void(0);" class="slds-button slds-button-icon-container no-focus">
+                <lightning:icon iconName="utility:left" size="small" class="slds-button__icon slds-button__icon_small slds-m-top_xx-small no-focus" />
+            </a>
+            <span class="date-range">{!v.dates.ranges.weekdays.sunday.label} - {!v.dates.ranges.weekdays.saturday.label}</span>
+            <a onclick="{!c.goToNextWeek}" href="javascript:void(0);" class="slds-button slds-button-icon-container no-focus">
+                <lightning:icon iconName="utility:right" size="small" class="slds-button__icon slds-button__icon_small slds-m-top_xx-small no-focus" />
+            </a>
+            <div class="calendar-icon di-margin-left" onclick="{!c.handleClickIconCalendar}">
+                <lightning:icon iconName="utility:event" size="x-small" class="slds-button__icon" />
+            </div>
+          </div>
+        <aura:set attribute="else">             
+          <div class="calendar-icon calendar-icon_modify" onclick="{!c.handleClickIconCalendar}">
+            <span class="date-range dante-range_text" >{!v.dates.ranges.weekdays.sunday.label} - {!v.dates.ranges.weekdays.saturday.label}</span>
+            <lightning:icon iconName="utility:event" size="x-small" class="slds-button__icon" />
+          </div>
+        </aura:set>
+        </aura:if>
+      </div>
+    </div>
+  
+    <div aura:id="grid" id="datepicker-dropdown" class="slds-datepicker slds-dropdown-c slds-hide slds-transition-hide">
+      <div class="slds-datepicker__filter slds-grid ">
+        <div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+          <div class="slds-align-middle">
+            <a onclick="{!c.goToPreviousMonth}" href="javascript:void(0);" class="slds-button slds-button-icon-container no-focus">
+              <lightning:icon iconName="utility:left" size="small" class="slds-button__icon slds-button__icon_small slds-m-top_xx-small no-focus" />
+            </a>
+          </div>
+          <h2 id="month" class="slds-align-middle" aria-live="assertive" aria-atomic="true">{!v.monthName}</h2>
+          <div class="slds-align-middle">
+            <a onclick="{!c.goToNextMonth}" href="javascript:void(0);" class="slds-button slds-button-icon-container no-focus">
+              <lightning:icon iconName="utility:right" size="small" class="slds-button__icon slds-button__icon_small slds-m-top_xx-small no-focus" />
+            </a>
+          </div>
+        </div>
+        <div class="slds-shrink-none">
+            <c:DISelect aura:id="yearSelect" value="{!v.year}" options="{!v.options}" selectChange="{!c.handleYearChange}" />
+        </div>
+      </div>
+      <table aura:id="maintable" class="slds-datepicker__month" role="grid" aria-labelledby="month" aria-multiselectable="true">
+        <thead>
+          <tr id="weekdays">
+            <aura:iteration items="{!v._namesOfWeekdays}" var="day">
+              <th scope="col" class="dayOfWeek" >
+                <abbr title="{!day.shortName}">{!day.shortName}</abbr>
+              </th>
+            </aura:iteration>
+          </tr>
+        </thead>
+        <tbody>
+            <tr aura:id="week1"  class="{!v.dates.ranges.weeks[1].class}" >
+            <c:DIDatePickerCell aura:id="0" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="1" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="2" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="3" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="4" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="5" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="6" compact="{#v.compact}" />
+          </tr>
+          <tr aura:id="week2" class="{!v.dates.ranges.weeks[2].class}">
+            <c:DIDatePickerCell aura:id="7" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="8" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="9" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="10" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="11" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="12" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="13" compact="{#v.compact}" />
+          </tr>
+          <tr aura:id="week3" class="{!v.dates.ranges.weeks[3].class}">
+            <c:DIDatePickerCell aura:id="14" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="15" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="16" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="17" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="18" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="19" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="20" compact="{#v.compact}" />
+          </tr>
+          <tr aura:id="week4" class="{!v.dates.ranges.weeks[4].class}">
+            <c:DIDatePickerCell aura:id="21" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="22" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="23" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="24" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="25" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="26" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="27" compact="{#v.compact}" />
+          </tr>
+          <tr aura:id="week5" class="{!v.dates.ranges.weeks[5].class}">
+            <c:DIDatePickerCell aura:id="28" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="29" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="30" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="31" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="32" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="33" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="34" compact="{#v.compact}" />
+          </tr>
+          <tr aura:id="week6" class="{!v.dates.ranges.weeks[6].class}">
+            <c:DIDatePickerCell aura:id="35" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="36" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="37" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="38" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="39" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="40" compact="{#v.compact}" />
+            <c:DIDatePickerCell aura:id="41" compact="{#v.compact}" />
+          </tr>
+          <aura:if isTrue="{!v.showTodayHyperlink}">
+            <tr>
+              <td colspan="7" role="gridcell"><a onclick="{!c.goToThisWeek}" href="javascript:void(0);" class="slds-show_inline-block slds-p-bottom_x-small">This Week</a></td>
+            </tr>
+          </aura:if>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</aura:component>

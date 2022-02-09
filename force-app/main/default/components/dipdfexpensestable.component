@@ -1,0 +1,51 @@
+<apex:component >
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(50px, 1fr));
+            background-color: #fff;
+            color: #444;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            text-align: center;
+        }
+    
+        .row {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(6, minmax(50px, 1fr));
+        }
+    
+        div:nth-child(4) { grid-row-start: 2; }
+        div:nth-child(5) { grid-row-start: 3; }
+    
+        .box {
+            padding: 20px;
+            font-size: 150%;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+    </style>
+
+    <h1>Expenses details</h1>
+
+    <div class="wrapper">
+        <div class="box box-title">Submittal Date</div>
+        <div class="box box-title">Expense Date</div>
+        <div class="box box-title">Type</div>
+        <div class="box box-title">Expense Amount</div>
+        <div class="box box-title">Invoiced Amount</div>
+        <div class="box box-title">Receipt</div>
+        
+        <!-- Table Row -->
+        <div class="row">
+            <div class="box">02-05-2019</div>
+            <div class="box">02-01-2019</div>
+            <div class="box">Rental Car</div>
+            <div class="box">$60</div>
+            <div class="box">$70</div>
+            <div class="box">Yes</div>
+        </div>
+    </div>
+</apex:component>

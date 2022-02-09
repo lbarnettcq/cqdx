@@ -1,0 +1,106 @@
+<aura:component controller="FileUploadController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+    
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false"/>
+    <aura:attribute name="showMessage" type="boolean" default="true"/>
+    <aura:attribute name="messageEmptySelectedFiles" type="String" default="" />
+
+    <aura:attribute name="recordId" type="String"/>
+
+    <aura:attribute name="files" type="List"/>
+    <aura:attribute name="accept" type="List" default="['.jpg', '.jpeg','.pdf','.csv','.xlsx', '.pdf', '.png', '.txt']"/>  
+    <aura:attribute name="multiple" type="Boolean" default="true"/>      
+
+    <aura:attribute name="selectedDocumentId" type="string"/>
+    <aura:attribute name="hasModalOpen" type="boolean" default="false"/>
+
+    <aura:attribute name="disable" type="boolean" default="false"/>
+    
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="The event fired when change" />
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+    <aura:if isTrue="{!v.disable == false}">
+        <lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="files" label="Upload Attachment" multiple="true"/>
+    </aura:if>
+
+    <aura:if isTrue="{!v.showLoadingSpinner}">
+        <div class="slds-is-relative slds-p-top_x-large slds-p-bottom_small">
+            <div class="slds-spinner_container">
+                <lightning:spinner alternativeText="Loading" size="small"/>
+            </div>
+        </div>
+    <aura:set attribute="else">
+        <aura:if isTrue="{!v.showMessage}">
+            <div class="slds-text-body_small slds-text-color_error">{!v.messageEmptySelectedFiles}</div>
+        <aura:set attribute="else">
+            <div class="slds-scrollable_y" style="height: 140px; width: calc(100% + 15px);">
+            <table class="slds-table slds-table--bordered" style="margin-top:5px;">  
+                <thead>  
+                    <tr>  
+                        <th>Title</th>
+                        <th>FileType</th>
+                        <th></th>
+                    </tr>  
+                </thead>  
+                <tbody>  
+                    <aura:iteration items="{!v.files}" var="file" indexVar="index">  
+                        <tr>
+                            <td>
+                                <aura:if isTrue="{!file.id}">
+                                        <div class="slds-truncate" style="width: 200px;">
+                                    <a onclick="{!c.viewFile}" data-row-id="{!index}">{!file.name}</a>
+                                </div>
+                                <aura:set attribute="else">
+                                    <div class="slds-truncate" style="width: 200px;" title="{!file.name}">{!file.name}</div>
+                                </aura:set>
+                                </aura:if>
+                            </td>
+                            <td>{!file.typeLabel}</td>
+                            <td>
+                                <aura:if isTrue="{!v.disable == false}">
+                                    <aura:if isTrue="{!file.state == 'delete'}">
+                                        <div class="di-spinner-container di-container_size_18">
+                                            <lightning:spinner alternativeText="Loading" size="small"/>
+                                        </div>
+                                    <aura:set attribute="else">
+                                        <a onclick="{!c.deleteFile}" data-row-id="{!index}">
+                                            <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small di-icon__size_20" size="small" alternativeText="icon"/>
+                                            <span class="slds-assistive-text">Delete Icon</span>
+                                        </a>
+                                    </aura:set>
+                                    </aura:if>
+                                </aura:if>
+                            </td>
+                        </tr>  
+                    </aura:iteration>
+                </tbody>  
+            </table>
+            </div>
+            <aura:if isTrue="{!v.hasModalOpen}">
+                <section onclick="{!c.closeModel}"
+                        role="dialog"
+                        aria-modal="true"
+                        class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <div class="slds-modal__content slds-p-around_medium slds-text-align_center"
+                            style="background: transparent;">
+                            <div style="width: 50%; margin: 0 auto; text-align: left">
+                                <lightning:fileCard fileId="{!v.selectedDocumentId}"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--<div class="slds-backdrop slds-backdrop_open"></div>-->
+            </aura:if>
+        </aura:set>                  
+        </aura:if>
+    </aura:set>                  
+    </aura:if>
+</aura:component>

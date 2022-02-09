@@ -1,0 +1,10 @@
+<apex:page controller="APXT_CongaSign.apxt_contentInfo" showHeader="false" sidebar="false" >
+    <html>
+        <body>
+            <apex:form >
+                <apex:inputHidden id="contentVersion" value="{!content.Id}" />
+                <apex:inputHidden id="contentDocument" value="{!content.ContentDocumentId}" />
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value>Conga Sign-ის მიღები</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value>Conga Sign-ის მიმღებები</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Conga Sign-ის მიღები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Conga Sign-ის მიმღებები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Conga Sign-ის მიღები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Conga Sign-ის მიმღებები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Instrumental</caseType>
+        <plural>false</plural>
+        <value><!-- Conga Sign-ის მიღები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Instrumental</caseType>
+        <plural>true</plural>
+        <value><!-- Conga Sign-ის მიმღებები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Ergative</caseType>
+        <plural>false</plural>
+        <value><!-- Conga Sign-ის მიღები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Ergative</caseType>
+        <plural>true</plural>
+        <value><!-- Conga Sign-ის მიმღებები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Adverbial</caseType>
+        <plural>false</plural>
+        <value><!-- Conga Sign-ის მიღები --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Adverbial</caseType>
+        <plural>true</plural>
+        <value><!-- Conga Sign-ის მიმღებები --></value>
+    </caseValues>
+    <nameFieldLabel>მიმღების სახელი</nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- You cannot Reparent this record. --></errorMessage>
+        <name>APXT_CongaSign__Prevent_Reparent</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Reassign --></label>
+        <name>APXT_CongaSign__Reassign</name>
+    </webLinks>
+</CustomObjectTranslation>

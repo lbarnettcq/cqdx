@@ -1,0 +1,67 @@
+.THIS#diExpensesContainer {
+    background-color: #f3f2f2;
+    font-family: 'Salesforce Sans';
+    display: flex; flex-direction: column;
+}
+.THIS .di-icon-expenses svg {
+    background-color: #ffb75d;
+}
+
+.THIS lightning-primitive-header-actions {
+    display: none;
+}
+
+.THIS .di-expenses-table thead th span {
+    color: #080707 !important;
+    font-family: "Salesforce Sans" !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 20px !important;
+    text-transform: none;
+}
+
+
+.THIS .di-expenses-table th,
+.THIS .di-expenses-table td {
+    color: #514f4d !important;
+    font-family: "Salesforce Sans" !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+
+.THIS .di-expenses-table td.di-amount .slds-grid_align-end, 
+.THIS .di-expenses-table td.di-amount .slds-grid--align-end {
+    justify-content: flex-start !important; 
+}
+
+
+.THIS .di-expenses-header {
+    margin-top:14px; 
+    padding:0 24px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.THIS .di-expenses-header__logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.THIS .di-expenses-header__logo-title {
+    margin-left:12px;
+}
+
+.THIS .di-expenses-header__logo-title-top {
+    color: #2b2826;                                                     
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.THIS .di-expenses-header__logo-title-bottom {
+    color: #080707;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+}

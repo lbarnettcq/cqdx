@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Seven_Day_Followup</name>
+        <label>Seven Day Followup</label>
+        <locationX>701</locationX>
+        <locationY>325</locationY>
+        <actionName>Follow_Up</actionName>
+        <actionType>quickAction</actionType>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>getTask.OwnerId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ActivityDate</name>
+            <value>
+                <elementReference>SevenDay</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>contextId</name>
+            <value>
+                <elementReference>getTask.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>Subject</name>
+            <value>
+                <stringValue>{!getTask.Subject} + &apos; Follow-up&apos;</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <name>Check_Subject</name>
+        <label>Check Subject</label>
+        <locationX>454</locationX>
+        <locationY>339</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_LinkedIn</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getTask.Subject</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>LinkedIn</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Seven_Day_Followup</targetReference>
+            </connector>
+            <label>Is LinkedIn</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>SevenDay</name>
+        <dataType>Date</dataType>
+        <expression>{!getTask.ActivityDate} + 7</expression>
+    </formulas>
+    <interviewLabel>Auto-Gen LinkedIn Follow-up {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Auto-Gen LinkedIn Follow-up</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>getTask</name>
+        <label>getTask</label>
+        <locationX>319</locationX>
+        <locationY>336</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Subject</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>getTask</targetReference>
+        </connector>
+        <object>Task</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

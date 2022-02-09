@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Deprecated --></help>
+    <label><!-- Tool - Deprecated --></label>
+    <name>copado__Integration__c</name>
+    <relationshipLabel><!-- Tests - Deprecated --></relationshipLabel>
+</CustomFieldTranslation>

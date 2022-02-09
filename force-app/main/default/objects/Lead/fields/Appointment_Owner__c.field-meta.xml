@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appointment_Owner__c</fullName>
+    <externalId>false</externalId>
+    <label>Appointment Owner</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Appointment_Set__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Alexa Olah</fullName>
+                <default>false</default>
+                <label>Alexa Olah</label>
+            </value>
+            <value>
+                <fullName>Becky Coppa</fullName>
+                <default>false</default>
+                <label>Becky Coppa</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Alexa Olah</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>checked</controllingFieldValue>
+            <valueName>Becky Coppa</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,237 @@
+<aura:component controller="TimeTrackingController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+    
+    <aura:attribute name="options" type="Map"/>
+    
+    <aura:attribute name="role" type="String" description="view" default="employee" />
+    <aura:attribute name="startDate" type="String" description="Start date"/>
+    <aura:attribute name="endDate" type="String" description="End date"/>
+    <aura:attribute name="selectedDate" type="String" description="End date"/>
+    <aura:attribute name="userIds" type="List" description="User identifiers"/>
+    <aura:attribute name="contractIds" type="Object" description="Contract identifiers"/>
+
+    <aura:attribute name="stateTable" type="String" description="State for table"/>
+
+    <aura:attribute name="columns" type="Object" description="Colums list"/>
+    <aura:attribute name="rows" type="Object" description="Rows list"/>
+    <aura:attribute name="total" type="Object" description="Rows list"/>
+
+    <aura:attribute name="message" type="Object"/>
+    <aura:attribute name="buttons" type="Object"/>
+
+    <aura:attribute name="date" type="Object" description="Date range"/>
+
+    <aura:attribute name="childAttribute" type="string" description="Child attribute"/>
+    <aura:handler name="change" value="{!v.childAttribute}" action="{!c.onChildAttributeChange}"/>
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+
+    <!-- events -->
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.moment,  $Resource.distdlib, $Resource.jquery341min, $Resource.jquerymaskmin)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+    
+    <div id="diTimeTrackingTable">
+        <aura:if isTrue="{!v.role == 'manager'}">
+            <aura:if isTrue="{!v.stateTable == 'approved'}">
+                <div style="float: left; margin: 30px 0 30px 24px;">
+                    <c:DILabel type="approved"></c:DILabel>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.stateTable == 'for_approval'}">
+                <div style="float: left; margin: 30px 0 30px 24px;">
+                    <c:DILabel type="for_approval"></c:DILabel>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.stateTable == 'in_progress'}">
+                <div style="float: left; margin: 30px 0 30px 24px;">
+                    <c:DILabel type="in_progress"></c:DILabel>
+                </div>
+            </aura:if>
+            <div style="float: right; margin: 30px 24px 30px 0px;display: none;">
+                <lightning:button label="Contact employee" title="Contact employee" iconName="utility:email" iconPosition="left"/>
+            </div>
+        </aura:if>   
+
+        <table class="di-table-container slds-table slds-table_cell-buffer slds-table_bordered time-tracking">
+            <thead class="time-tracking__head_background">
+                <tr class="slds-line-height_reset">
+                    <aura:iteration items="{!v.columns}" var="column">
+                        <td aura-id="{!column.id}" class="time-tracking__th time-tracking_background" scope="col">
+                            <aura:if isTrue="{!column.state.type == 'lock'}">
+                                <aura:if isTrue="{!column.state.useIcon}">
+                                    <div style="display:flex;">
+                                        <div style="align-self: center;">
+                                            <lightning:icon iconName="utility:lock" alternative-text="lock" size="x-small"></lightning:icon>
+                                        </div>
+                                        <div style="
+                                                margin-left:10px;
+                                                text-align: left;
+                                                color: #706e6b;
+                                                font-family: 'Salesforce Sans'; 
+                                                font-size: 12px;
+                                                font-weight: 700;
+                                                line-height: 18px;">
+                                            <div class="slds-truncate time-tracking__title">{!column.label}</div>
+                                            <aura:if isTrue="{!column.addDate}">
+                                                <div class="slds-truncate">{!column.date}</div>
+                                            </aura:if>
+                                        </div>
+                                    </div>
+                                <aura:set attribute="else">
+                                    <div style="
+                                    color: #706e6b;
+                                    font-family: 'Salesforce Sans'; 
+                                    font-size: 12px;
+                                    font-weight: 700;
+                                    line-height: 18px;">
+                                        <div class="slds-truncate time-tracking__title">{!column.label}</div>
+                                        <aura:if isTrue="{!column.addDate}">
+                                            <div class="slds-truncate">{!column.date}</div>
+                                        </aura:if>
+                                    </div>
+                                </aura:set>
+                                </aura:if>
+                            <aura:set attribute="else">
+                                <div class="slds-truncate time-tracking__title">{!column.label}</div>
+                                <aura:if isTrue="{!column.addDate}">
+                                    <div class="slds-truncate">{!column.date}</div>
+                                </aura:if>
+                            </aura:set>
+                            </aura:if>
+                        </td>
+                    </aura:iteration>
+                </tr>
+                <tr class="time-tracking__head_line">
+                    <td class="slds-truncate time-tracking__entry-title">{!v.total.name}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.sunday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.monday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.tuesday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.wednesday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.thursday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.friday}</td>
+                    <td class="slds-truncate time-tracking__cell-time">{!v.total.saturday}</td>
+                    <td class="slds-truncate time-tracking__cell-time time-tracking__cell-time_sum">{!v.total.sum}</td>
+                </tr>
+            </thead>
+            <tbody class="di-table-container__body">
+                <aura:if isTrue="{!v.message.show}">
+                <aura:set attribute="else">
+                    <aura:iteration items="{!v.rows}" var="row">
+                        <tr aura-id="{!row.id}" class="slds-hint-parent">
+                            <td class="slds-truncate time-tracking__entry-title" scope="row">
+                                {!row.fields.name.value}
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell 
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.sunday.id}"
+                                    cellRowId="{!row.fields.sunday.rowId}"
+                                    cellColumnId="{!row.fields.sunday.columnId}"
+                                    cellValue="{!row.fields.sunday.value}"
+                                    cellState="{!row.fields.sunday.state}"
+                                >
+                                </c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell 
+                                    timeCellChange="{!c.handleTimeCellChange}"
+                                    cellId="{!row.fields.monday.id}"
+                                    cellRowId="{!row.fields.monday.rowId}"
+                                    cellColumnId="{!row.fields.monday.columnId}"
+                                    cellValue="{!row.fields.monday.value}"
+                                    cellState="{!row.fields.monday.state}"
+                                >
+                                </c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.tuesday.id}"
+                                    cellRowId="{!row.fields.tuesday.rowId}"
+                                    cellColumnId="{!row.fields.tuesday.columnId}"
+                                    cellValue="{!row.fields.tuesday.value}" 
+                                    cellState="{!row.fields.tuesday.state}"
+                                ></c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.wednesday.id}"
+                                    cellRowId="{!row.fields.wednesday.rowId}"
+                                    cellColumnId="{!row.fields.wednesday.columnId}"
+                                    cellValue="{!row.fields.wednesday.value}" 
+                                    cellState="{!row.fields.wednesday.state}"
+                                ></c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.thursday.id}"
+                                    cellRowId="{!row.fields.thursday.rowId}"
+                                    cellColumnId="{!row.fields.thursday.columnId}"
+                                    cellValue="{!row.fields.thursday.value}" 
+                                    cellState="{!row.fields.thursday.state}"
+                                ></c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.friday.id}"
+                                    cellRowId="{!row.fields.friday.rowId}"
+                                    cellColumnId="{!row.fields.friday.columnId}"
+                                    cellValue="{!row.fields.friday.value}" 
+                                    cellState="{!row.fields.friday.state}"
+                                ></c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="time-tracking__cell_padding">
+                                <c:DITimeTrackingTableCell
+                                    timeCellChange="{!c.handleTimeCellChange}" 
+                                    cellId="{!row.fields.saturday.id}"
+                                    cellRowId="{!row.fields.saturday.rowId}"
+                                    cellColumnId="{!row.fields.saturday.columnId}"
+                                    cellValue="{!row.fields.saturday.value}" 
+                                    cellState="{!row.fields.saturday.state}"
+                                ></c:DITimeTrackingTableCell>
+                            </td>
+                            <td class="slds-truncate time-tracking__cell-time" style="font-weight: 400;">
+                                {!row.fields.sumTime.value}
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </aura:set>
+                </aura:if>
+            </tbody>
+            <tfoot>
+                <aura:if isTrue="{!v.message.show}">
+                    <tr class="time-tracking__footer di-table-container-message">
+                        <td colspan="9"><span>{!v.message.description}</span></td>
+                    </tr>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!or(v.buttons.cancel.state == 'enabled', v.buttons.save.state == 'enabled')}">
+                            <tr class="time-tracking__footer time-tracking_background">
+                                <td colspan="9">
+                                    <div style="display: flex;align-items: center;align-content: center;justify-content: center;">
+                                        <button
+                                            class="slds-button slds-button_neutral time-tracking__button time-tracking__button_color-cancel"
+                                            disabled="{!v.buttons.cancel.state == 'disabled'}"
+                                            onclick="{!c.handleButtonCancelClick}">Cancel</button>
+                                        <button class="slds-button slds-button_brand time-tracking__button"
+                                            disabled="{!v.buttons.save.state == 'disabled'}"
+                                            onclick="{!c.handleButtonSaveClick}">Save</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>
+            </tfoot>
+        </table>
+    </div>
+</aura:component>

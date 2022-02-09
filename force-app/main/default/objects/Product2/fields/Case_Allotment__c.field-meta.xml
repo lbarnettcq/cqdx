@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Allotment__c</fullName>
+    <description>Case Allotment per Month for Managed Services</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Case Allotment per Month for Managed Services</inlineHelpText>
+    <label>Case Allotment</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,212 @@
+({
+    id: 'diPaymentsPanelInfo',
+    delimiter: ' • ',
+    data: [],
+    processingProcess: function(component, currentState) {
+        let process = {
+            'scriptsLoaded': 'init',
+            'init': 'scriptsLoaded'
+        };
+
+        let previousState = this.getView(component, 'stateProcess');
+
+        console.log('DEBUG:PaymentsPanelInfo:Helper:processingProcess:', currentState, previousState, process[currentState]);
+
+        if(process[currentState] == previousState) {
+            this.setView(component, 'stateProcess', 'ready');
+            this.init(component); 
+        } else {
+            this.setView(component, 'stateProcess', currentState);
+        }
+    },
+    init: function(component) {
+        console.log('DEBUG:PaymentsPanelInfo:Helper:init');
+        this.updatePanelInformation(component);
+        this.notify(component, 'init');         
+    },
+    updatePanelInformation : function(component) {
+        console.log('DEBUG:PaymentsPanelInfo:Helper:updatePanelInformation:');
+
+        let paymentId = this.getView(component, 'paymentId');
+
+        if(paymentId) {
+            let params = {
+                paymentId: paymentId
+            };
+
+            this.sendRequest(component, 'c.getInformation', params)
+            .then((result) => {
+                console.log('DEBUG:PaymentsPanelInfo: Load:Success: ', result.data.item);  
+                if(result.status == 'success') {
+                    if(distdlib.isObject(result.data) && distdlib.isObject(result.data.item)) {
+                        let item = result.data.item;
+
+                        if(item.status) {
+                            this.setView(component, 'status', item.status);
+                        } 
+    
+                        if(item.receiverName) {
+                            this.setView(component, 'receiverName', item.receiverName);
+                        }
+
+                        if(item.receiverUrl) {
+                            this.setView(component, 'receiverUrl', item.receiverUrl);
+                        }
+
+                        if(item.paymentType) {
+                            this.setView(component, 'paymentType', item.paymentType);
+                        }
+
+                        let timePeriod = '';
+                        let startDate = item.startDate;
+    
+                        if(startDate) {
+                            startDate =  this.createDate(startDate);
+                            timePeriod = (startDate.getDate() + ' ' + distdlib.date.months[startDate.getMonth()].label + ' ' + startDate.getFullYear());
+                        } else {
+                            timePeriod = 'undefined';
+                        }
+    
+                        let endDate = item.endDate;
+                        if(endDate) {
+                            endDate =  this.createDate(endDate);
+                            timePeriod += ' - ' + (endDate.getDate() + ' ' + distdlib.date.months[endDate.getMonth()].label)  + ' ' + startDate.getFullYear();
+                        }
+    
+                        this.setView(component, 'timePeriod', timePeriod);
+    
+                        if(result.data.item.totalMinutes >= 0) {
+                            this.setView(component, 'totalHours', distdlib.time.convert(item.totalMinutes, 'mm', '*:*'));
+                        }
+    
+                        if(item.totalAmount >= 0) {
+                            let totalAmount = +item.totalAmount;
+    
+                            if(distdlib.isNumeric(totalAmount)) {
+                                totalAmount = totalAmount.toFixed(2);
+                            }
+                            
+                            this.setView(component, 'totalAmount', distdlib.currency.format(totalAmount));                        
+                        }                    
+                    }
+                } else {
+                    this.proccessServerErrors(component, result);
+                }                                
+            })
+            .catch((errors) => {
+                console.error('DEBUG:PaymentsPanelInfo: Load:Error: ', errors);
+            });
+        }
+    },
+    notify: function(component, state, data) {
+        let params = {id: this.id, dependencies: this.getArrayDependencies(component)};
+    
+        if(!state) {
+          state = 'init'
+        }
+    
+        params['state'] = state;
+    
+        if(distdlib.isObject(data)) {
+          params['data'] = data;
+        }
+    
+        let changeEvent = component.getEvent('changeEvent');    
+        changeEvent.setParams({data: params});
+        changeEvent.fire();
+    },
+    getArrayDependencies: function(component) {        
+        let dependencies = this.getView(component, 'dependencies');
+
+        console.log('DEBUG:DIPaymentsPanelInfo:Helper:init:dependencies:', dependencies);
+
+        if(dependencies && Array.isArray(dependencies)) {
+            console.log('DEBUG:DIPaymentsPanelInfo:Helper:init:dependencies:array:', dependencies);
+            return dependencies;
+        }
+
+        return [];
+    },
+    sendRequest: function(component, methodName, params, category) {
+        return new Promise($A.getCallback(function(resolve, reject) {
+            let action = component.get(methodName);
+
+            action.setParams(params);
+
+            action.setCallback(self, function(res) {
+              let state = res.getState();
+
+              if(state === 'SUCCESS') {
+                let result = {};
+
+                if(typeof category == 'undefined') {
+                    result = res.getReturnValue();
+                } else {
+                    result[category] = res.getReturnValue();
+                }        
+
+                resolve(result);
+              } else if(state === 'ERROR') {
+                reject(action.getError())
+              } else {
+                reject(action.getError())
+              }
+            });
+            $A.enqueueAction(action);
+        }));
+    },
+    update: function(component, data) {
+        this.data.push(data);
+        
+        if(this.isReady(component)) {
+            this.data.forEach(item => {                
+                if(distdlib.isObject(data) && distdlib.isObject(data.data)) {
+                    Object.keys(data.data).forEach(fieldName => {
+                        this.setView(component, fieldName, data.data[fieldName]);
+                    });
+        
+                    this.updatePanelInformation(component);
+                }
+            });
+
+            this.data.length = 0;
+        }
+    },
+    isReady: function(component) {
+        return this.getView(component, 'stateProcess') === 'ready';
+    },
+    getView: function(component, view) {
+        return component.get('v.' + view);
+    },
+    setView: function(component, view, value) {
+        return component.set('v.' + view, value);
+    },
+    createDate: function(value) {
+        return moment(value).toDate();
+    },
+    proccessServerErrors: function(component, result) {
+        let message = '';
+
+        if(result.errors) {
+            if(Array.isArray(result.errors.list) && result.errors.list.length > 0) {
+                
+                let list = result.errors.list;
+
+                list.forEach((error) => {
+                    if(distdlib.isObject(error)) {
+                        message += ' ' + error.message;
+                    } else {
+                        message += ' ' + error;
+                    }
+                });
+                
+            } else {
+                message = result.errors.message;
+            }
+        } else {
+            message = 'Something wrong. Please, contact with support';
+        }
+
+        console.error(message);
+    }
+})

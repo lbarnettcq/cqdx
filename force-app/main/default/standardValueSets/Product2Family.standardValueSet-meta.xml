@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Quick Start</fullName>
+        <default>false</default>
+        <label>Quick Start</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Managed Services</fullName>
+        <default>false</default>
+        <label>Managed Services</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Health Check</fullName>
+        <default>false</default>
+        <label>Health Check</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Staff Augmentation</fullName>
+        <default>false</default>
+        <label>Staff Augmentation</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Project</fullName>
+        <default>false</default>
+        <label>Project</label>
+    </standardValue>
+    <standardValue>
+        <fullName>InControl</fullName>
+        <default>false</default>
+        <label>InControl</label>
+    </standardValue>
+</StandardValueSet>

@@ -1,0 +1,59 @@
+/* BEGIN MODAL DIALOG */
+.THIS {
+    font-family: "Salesforce Sans";
+}
+
+.THIS .di-label {
+    font-size: 12px;
+}
+
+.THIS .input{
+    min-height: auto;
+}
+
+/* END MODAL DIALOG */
+
+.THIS .slds-modal__close svg {
+    fill: #ffffff;
+}
+
+.THIS .slds-button_brand {
+    background-color: #0070d2;
+}
+
+.THIS .slds-button_brand[disabled] {
+    background: rgb(201, 199, 197);
+    border-color: rgb(201, 199, 197);
+    color: rgb(255, 255, 255);
+}
+
+
+/* Errors */
+.THIS  .forcePageError {
+    border-bottom: none !important;
+    margin-bottom: 0rem !important;
+    padding-bottom: 0rem !important;
+    text-align: left;
+}
+
+.THIS  .forcePageError .genericNotification {
+    background: rgb(194, 57, 52);
+    padding: 1rem;
+    color: rgb(255, 255, 255);
+    line-height: 1.25;
+}
+
+.THIS .forcePageError .errorsList {
+    list-style: none;
+    color: rgb(194, 57, 52);
+    line-height: 1.5;
+    margin: 0;
+    padding: .5rem 1rem .25rem 1rem;
+}
+
+.THIS .validationCss{
+    font-size: .75rem;
+    margin-top: .125rem;
+    display: block;
+    color: rgb(194, 57, 52);
+}

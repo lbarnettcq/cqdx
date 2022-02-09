@@ -1,0 +1,50 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="role" type="String" default="employee"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="details" type="String"/>
+    
+    <aura:attribute name="startDate" type="String"/>
+    <aura:attribute name="endDate" type="String"/>
+    <aura:attribute name="userId" type="String"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+    <div class="slds-grid slds-grid--vertical forceListViewManager">
+        <c:DITimeReportsHeader 
+            aura:id="diTimeReportsHeader" 
+            role="{!v.role}"
+            title="{!v.title}"
+            details="{!v.details}"
+            changeEvent="{!c.handleChange}"
+            dependencies="['diTimeTrackingTable', 'diTimeReportsTable']">
+        </c:DITimeReportsHeader>
+
+        <aura:if isTrue="{!and(v.role == 'manager', v.userId, v.startDate, v.endDate)}">
+            <div class="di-body-container">
+                <c:DITimeTrackingTable
+                    aura:id="diTimeTrackingTable" 
+                    role="{!v.role}" 
+                    startDate="{!v.startDate}" 
+                    endDate="{!v.endDate}" 
+                    userIds="{[v.userId]}" 
+                    changeEvent="{!c.handleChange}"
+                    options="{hideEmptyRows: true}"
+                    >
+                </c:DITimeTrackingTable>
+                <div style="margin-top: 13px;">
+                    <c:DIExpensesContainer aura:id="diExpensesContainer" employeeId="{!v.userId}" title="Time Reports" changeEvent="{!c.handleChange}" dependencies="['diTimeTrackingTable']"></c:DIExpensesContainer>
+                </div>
+            </div>            
+        <aura:set attribute="else">
+            <div class="slds-grid listDisplays safari-workaround-anchor slds-border_right slds-border_left">
+                <c:DITimeReportsTable aura:id="diTimeReportsTable" changeEvent="{!c.handleChange}" options="{userUrl: '/lightning/r/User/'}"></c:DITimeReportsTable>
+            </div>
+        </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,28 @@
+<!--
+-Author:         serhiivolynets
+-Date:           13.01.2020
+-Description:   
+-->
+<apex:page id="Opty_RG_Signals"  standardController="Opportunity" extensions="REVGRD.VFC001_CanvasExt">
+<!--    <head>-->
+<!--        <title>RevenueGrid Opportunity Signals</title>-->
+<!--    </head>-->
+    <style>
+        html {
+            overflow: hidden !important;
+        }
+        html body.sfdcBody {
+            padding: 0;
+            overflow: hidden !important;
+        }
+        body.sfdcBody iframe {
+            height: 100vh;
+        }
+    </style>
+<!--    ,'RevenueGridTenantUrl':'{!RevenueGridTenantUrl}'-->
+    <apex:canvasApp developerName="{!CanvasApp}"
+                    namespacePrefix="{!CanvasAppNameSpace}"
+                    parameters="{'serverSyncTenantUrl':'{!ServerSyncTenantUrl}','redirectUrl':'{!RevenueGridTenantUrl}/widgets/opportunity/{!recordId}/signals?singleUseToken={singleUseToken}','errorRedirectUrl':'{!ServerSyncTenantUrl}/ui/error.html?errorCode={errorCode}'}"
+                    width="100%" height="100%"
+    />
+</apex:page>

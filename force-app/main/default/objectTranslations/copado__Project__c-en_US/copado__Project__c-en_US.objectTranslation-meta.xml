@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <label><!-- Sync_External_User_Stories --></label>
+        <name>copadoccmint__Sync_External_User_Stories</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Sync_External_User_Stories_With_Sprint --></label>
+        <name>copadoccmint__Sync_External_User_Stories_With_Sprint</name>
+    </webLinks>
+</CustomObjectTranslation>

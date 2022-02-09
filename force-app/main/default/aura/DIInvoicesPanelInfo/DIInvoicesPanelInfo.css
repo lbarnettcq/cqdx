@@ -1,0 +1,19 @@
+.THIS {
+    background-color: #ffffff;
+}
+
+.THIS button svg {
+    margin-right: 0;
+    fill: #706e6b;
+}
+  
+.THIS .slds-button_brand svg {
+    fill: #ffffff;
+    margin-top: -3px;
+    margin-right: 8px;
+}
+
+.THIS .di-label {
+    font-size: 0.91rem;
+    color: gray;
+}

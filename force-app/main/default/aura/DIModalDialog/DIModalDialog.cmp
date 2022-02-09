@@ -1,0 +1,130 @@
+<aura:component controller="TimeReportsController">
+    <aura:attribute name="stateProcess" type="String" description="State processs" />
+
+    <aura:attribute name="opened" type="Boolean" default="false"/>
+
+    <aura:attribute name="type" type="String" default="none"/>
+    <aura:attribute name="status" type="String" default="none"/>
+    <aura:attribute name="timesheetId" type="String"/>
+    
+    <aura:attribute name="title" type="String" default=""/>
+
+    <aura:attribute name="description" type="String" default=""/>
+
+    <aura:attribute name="submitLabel" type="String" default="Submit"/>
+    
+    <aura:attribute name="message" type="Object" />
+    <aura:attribute name="columns" type="Object" />
+    <aura:attribute name="rows" type="Object" />
+
+    <aura:attribute name="disableSubmit" type="Boolean" default="true"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <aura:if isTrue="{!v.opened}">
+        <div class="di-modal-dialog slds-m-around_xx-large">
+            <!--Use aura:if tag to display/hide popup based on isModalOpen value-->        
+                <!-- Modal/Popup Box starts here-->
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box Header Starts here-->
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModal }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  size="large"
+                                                  class="slds-modal__close"/>
+                            <div class="di-modal-dialog-title">
+                                {!v.title}
+                            </div>
+                        </header>
+                        <!--Modal/Popup Box Body Starts here-->
+                        <div class="slds-modal__content slds-p-around_medium slds-modal__content_padding" id="modal-content-id-1">
+                            <div class="di-modal-dialog-description">
+                                {!v.description}
+                            </div>                        
+                            <div class="di-modal-dialog-content">
+                                <aura:if isTrue="{!v.message.show}">
+                                    {!v.message.description}
+                                <aura:set attribute="else">
+                                    <table class="di-table-container slds-table slds-table_cell-buffer slds-table_bordered">
+                                            <thead>
+                                                <tr class="slds-line-height_reset">
+                                                    <aura:iteration items="{!v.columns}" var="column">
+                                                        <th aura-id="{!column.id}" class="di-modal-dialog__header" scope="col">
+                                                            <div class="slds-truncate">{!column.label}</div>
+                                                        </th>
+                                                    </aura:iteration>
+                                                </tr>
+                                            </thead>    
+                                            <tbody>        
+                                                <aura:if isTrue="{!v.message.show}">
+                                                <aura:set attribute="else">                                            
+                                                    <aura:iteration items="{!v.rows}" var="row">
+                                                        <tr aura-id="{!row.id}" class="{!'slds-hint-parent ' + row.class}">
+                                                            <td class="di-modal-dialog__cell di-modal-dialog__cell_padding">
+                                                                    <lightning:input
+                                                                    disabled="{!row.fields.check.disabled}"
+                                                                    checked="{!row.fields.check.value}"
+                                                                    type="checkbox" 
+                                                                    label="{!row.fields.check.label}" 
+                                                                    name="{!'checkbox-' + row.id}" 
+                                                                    value="{!row.fields.check.value}" 
+                                                                    onchange="{!c.handleChange}"></lightning:input>
+                                                                <!--<div class="slds-checkbox">
+                                                                    <input type="checkbox" name="options" id="{!'checkbox-' + row.id}" value="{!row.fields.check.value}" checked="{!row.fields.check.value}" change="{!c.onCheck}" aria-labelledby="check-button-label-01 column-group-header" />
+                                                                    <label class="slds-checkbox__label" for="{!'checkbox-' + row.id}" id="{!'check-button-label-' + row.id}">
+                                                                        <span class="slds-checkbox_faux"></span>
+                                                                        <span class="slds-form-element__label slds-assistive-text">Select item 1</span>
+                                                                    </label>
+                                                                </div>-->
+                                                            </td>
+                                                            <td class="di-modal-dialog__cell di-modal-dialog__cell_padding">                                                                
+                                                                <lightning:formattedDateTime value="{!row.fields.date.value}" year="numeric" month="2-digit" day="2-digit"/>
+                                                            </td>
+                                                            <td class="di-modal-dialog__cell di-modal-dialog__cell_padding">
+                                                                {!row.fields.totalTime.label}
+                                                            </td>
+                                                            <td class="di-modal-dialog__cell di-modal-dialog__cell_padding">
+                                                                <lightning:formattedNumber value="{!row.fields.totalExpenses.value}" style="currency" currencyCode="USD"/>
+                                                            </td>
+                                                        </tr>
+                                                    </aura:iteration>                  
+                                                </aura:set>      
+                                                </aura:if>
+                                            </tbody>
+                                    </table>
+                                </aura:set>
+                                </aura:if>
+                            </div>                       
+                        </div>
+                        <!--Modal/Popup Box Footer Starts here-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral"
+                                              label="Cancel"
+                                              title="Cancel"
+                                              onclick="{!c.closeModal}"
+                                              />
+                            <lightning:button 
+                                              variant="brand"
+                                              label="{!v.submitLabel}"
+                                              title="{!v.submitLabel}"
+                                              onclick="{!c.submit}"
+                                              disabled="{!v.disableSubmit}" 
+                                              />
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

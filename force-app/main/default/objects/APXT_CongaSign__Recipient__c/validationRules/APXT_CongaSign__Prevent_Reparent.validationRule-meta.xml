@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>APXT_CongaSign__Prevent_Reparent</fullName>
+    <active>true</active>
+    <description>Prevent actual reparenting of records despite allowing for API upsert.</description>
+    <errorConditionFormula>ISCHANGED(APXT_CongaSign__Transaction__c)</errorConditionFormula>
+    <errorMessage>You cannot Reparent this record.</errorMessage>
+</ValidationRule>

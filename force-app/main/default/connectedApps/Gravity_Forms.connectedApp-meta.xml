@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>support@obtaincode.com</contactEmail>
+    <description>Gravity Forms integration with Salesforce- easy form creation rather than code snippets</description>
+    <infoUrl>https://codecanyon.net/item/gravity-forms-salesforce-crm-integration/20174431</infoUrl>
+    <label>Gravity Forms</label>
+    <oauthConfig>
+        <callbackUrl>https://login.salesforce.com/services/oauth2/callback</callbackUrl>
+        <consumerKey>3MVG9oNqAtcJCF.Go_FZBrTeYWUTdquOJa96Y1V83mcxT3O7fJ5UdVxb44HHfmsgtP6LzGPT0FWgbnn4ztl9d</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>true</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

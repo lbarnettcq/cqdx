@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Needs to be Synced with Cognism --></label>
+    <name>cogn__needs_to_be_Synced_with_Cognism__c</name>
+</CustomFieldTranslation>

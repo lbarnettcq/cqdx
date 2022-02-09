@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- If you are fetching more then 500 records from the third party platform, we recommend you to disable this checkbox to be able to prevent heap size too large issue. --></help>
+    <label><!-- Enable Logs --></label>
+    <name>copadoccmint__Enable_Logs__c</name>
+</CustomFieldTranslation>

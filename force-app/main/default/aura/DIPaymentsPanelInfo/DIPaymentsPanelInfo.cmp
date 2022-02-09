@@ -1,0 +1,70 @@
+<aura:component controller="PaymentsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+
+    <aura:attribute name="paymentId" type="String"/>
+
+    <aura:attribute name="status" type="String"/>
+    <aura:attribute name="receiverName" type="String"/>
+    <aura:attribute name="receiverUrl" type="String"/>
+    <aura:attribute name="paymentType" type="String"/>
+    <aura:attribute name="timePeriod" type="String"/>
+    <aura:attribute name="totalHours" type="String"/>
+    <aura:attribute name="totalAmount" type="String"/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+    
+    <aura:method name="update" action="{!c.update}" access="public"> 
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="slds-grid slds-p-around_large slds-grid_vertical-align-center">
+
+                <aura:if isTrue="{!v.status}">
+                    <div>
+                        <c:DILabel type="{!v.status}"></c:DILabel>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.receiverName}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Account Name</div>
+                        <div class="slds-text-heading_small slds-m-top_small">
+                            <a href="{!v.receiverUrl}" target="_blank">{!v.receiverName}</a>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.timePeriod}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Time Period</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.timePeriod}</div>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.paymentType}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Payment Type</div>
+                        <div class="slds-text-heading_small slds-m-top_small">{!v.paymentType}</div>
+                    </div>
+                </aura:if>                  
+                <aura:if isTrue="{!and(v.totalHours, v.paymentType != 'Expenses Reimbursement')}">
+                    <div class="slds-m-left_xx-large">
+                        <div class="di-label">Hours Total</div>
+                        <div class="slds-text-heading_small slds-m-top_small">
+                            {!v.totalHours}
+                        </div>
+                    </div>
+                </aura:if>                                
+                <aura:if isTrue="{!v.totalAmount}">
+                    <div class="slds-col_bump-left">
+                        <div class="di-label">Final Total</div>
+                        <div class="slds-text-heading_small slds-m-top_small">
+                            <b>{!v.totalAmount}</b>
+                        </div>
+                    </div>
+                </aura:if>
+        </div>
+</aura:component>

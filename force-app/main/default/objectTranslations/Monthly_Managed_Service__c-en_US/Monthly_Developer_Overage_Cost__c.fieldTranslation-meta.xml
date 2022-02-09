@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- This equals the number developer hours over, times the developer overage cost. --></help>
+    <label><!-- Monthly Developer Overage Cost --></label>
+    <name>Monthly_Developer_Overage_Cost__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cogn__Compliance__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>CASE( cogn__gdpr__c,
+&quot;green&quot;, IMAGE(&quot;/resource/cogn__compliance_images/green.png&quot;, &quot;green&quot;, 30, 30) + &quot; Safe to use for Outreach&quot;, 
+&quot;amber&quot;, IMAGE(&quot;/resource/cogn__compliance_images/amber.png&quot;, &quot;amber&quot;, 30, 30) + &quot; Investigate&quot;, 
+&quot;red&quot;, IMAGE(&quot;/resource/cogn__compliance_images/red.png&quot;, &quot;red&quot;, 30, 30) + &quot; Not Matched&quot;, 
+&quot;&quot; )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Compliance</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,65 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+        <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+        <aura:attribute name="stateLabel" type="String" description="State for label" default=""/>        
+
+        <aura:attribute name="parentAttribute" type="String" description=""/>
+
+        <aura:attribute name="errors" type="List" description="" default="[]"/>  
+        
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+        <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+        <div>
+            <div class="slds-grid slds-p-around_large slds-border_bottom slds-theme_shade">
+                    <div class="slds-grid slds-grid_vertical-align-center">
+                        <div>
+                            <lightning:icon iconName="standard:user" alternativeText="User"/>
+                        </div>
+                        <div class="slds-m-left_medium">
+                            <div>Time Tracking</div>
+                            <div class="slds-text-heading_medium">
+                                <b>My Time Tracking</b>
+                            </div>
+                        </div>
+                    </div>  
+            </div>
+
+            <div class="slds-grid slds-p-around_large slds-theme_default">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center">
+                        <c:DIMenu aura:id="diMenu" changeEvent="{!c.handleChange}"  dependencies="['diDatePicker']"></c:DIMenu>
+                        <div class="slds-m-left_medium">
+                            <aura:if isTrue="{!v.stateLabel == 'for_approval'}">
+                                <c:DILabel type="for_approval"></c:DILabel>
+                            </aura:if>
+                            <aura:if isTrue="{!v.stateLabel == 'approved'}">
+                                <c:DILabel type="approved"></c:DILabel>
+                            </aura:if>
+                            <aura:if isTrue="{!v.stateLabel == 'in_progress'}">
+                                <c:DILabel type="in_progress"></c:DILabel>
+                            </aura:if>
+                        </div>  
+                    </div>   
+                    <div class="slds-col slds-text-align_center">
+                        <c:DIError errors="{!v.errors}"/>
+                    </div>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center slds-col_bump-left">
+                        <c:DIDatePicker aura:id="diDatePicker" changeEvent="{!c.handleChange}" value="{!v.today}" label="Enter a Date" placeholder="Enter a Date" formatSpecifier="MM/dd/yyyy" />
+                    </div>                       
+            </div>            
+              
+            <div>
+                <c:DITimeTrackingTable 
+                    aura:id="diTimeTrackingTable"  
+                    changeEvent="{!c.handleChange}" 
+                    childAttribute="{!v.parentAttribute}"
+                    dependencies="['diMenu']"
+                    options="{previousWeek: true}"
+                ></c:DITimeTrackingTable>
+            </div>
+            <div class="slds-m-top_large">
+                <c:DIExpensesContainer aura:id="diExpensesContainer" title="Expenses" changeEvent="{!c.handleChange}" dependencies="['diMenu']"></c:DIExpensesContainer>
+            </div>
+        </div>
+</aura:component>

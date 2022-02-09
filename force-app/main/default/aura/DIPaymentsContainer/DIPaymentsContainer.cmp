@@ -1,0 +1,71 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="PaymentsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="paymentId" type="String"/>
+    <aura:attribute name="paymentType" type="String"/>    
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="details" type="String"/>
+
+    <aura:attribute name="canAddExpense" type="Boolean" default="false"/>
+    <aura:attribute name="paymentsUrl" type="String" default="/lightning/n/Payments"/>
+    <aura:attribute name="timesheetsUrl" type="String" default="/lightning/n/Timesheets"/>
+    
+    <aura:attribute name="showLoadIndicator" type="Boolean" default="true"/>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorType" type="String"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="di-payments">
+        <aura:if isTrue="{!v.showLoadIndicator}">
+            <div class="di-payments__load-indicator">Proccessing...</div>
+        <aura:set attribute="else">       
+                <aura:if isTrue="{!v.showError}">
+                    <c:DIErrorNotFound errorMessage="{!v.errorMessage}"/>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.paymentId}">
+                        <c:DIPaymentsHeader 
+                            aura:id="diPaymentsHeader" 
+                            paymentId="{!v.paymentId}"
+                            title="{!v.title}"
+                            changeEvent="{!c.handleChange}"
+                            options="{paymentsUrl: '/lightning/n/Payments'}"
+                            >
+                        </c:DIPaymentsHeader>
+            
+                        <c:DIPaymentsPanelInfo paymentId="{!v.paymentId}"></c:DIPaymentsPanelInfo>
+            
+                        <aura:if isTrue="{!v.paymentType == 'Expenses Reimbursement'}">
+                            <c:DIExpensesContainer aura:id="diExpensesContainer" paymentId="{!v.paymentId}" enableAddExpense="false"></c:DIExpensesContainer>
+                        <aura:set attribute="else">
+                            <c:DIPaymentsLineItemsTable
+                                aura:id="diTimesheetsTable" 
+                                changeEvent="{!c.handleChange}" 
+                                paymentId="{!v.paymentId}" 
+                                options="{timesheetsUrl: '/lightning/n/Timesheets/'}">
+                            </c:DIPaymentsLineItemsTable>
+                        </aura:set>
+                        </aura:if>   
+                    <aura:set attribute="else">
+                        <c:DIPaymentsHeader 
+                            aura:id="diPaymentsHeader"
+                            title="{!v.title}"
+                            details="{!v.details}"
+                            changeEvent="{!c.handleChange}"
+                            dependencies="['diPaymentsTable']"/>
+                        <div style="height: 700px">  
+                            <c:DIPaymentsTable aura:id="diPaymentsTable" changeEvent="{!c.handleChange}" options="{paymentUrl: '/lightning/n/Payments'}"></c:DIPaymentsTable>   
+                        </div>
+                    </aura:set>
+                    </aura:if>
+                </aura:set>
+                </aura:if>         
+        </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

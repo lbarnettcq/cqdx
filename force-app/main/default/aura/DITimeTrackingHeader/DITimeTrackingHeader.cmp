@@ -1,0 +1,21 @@
+<aura:component>
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+    
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When child component change value" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <ltng:require scripts="{!join(',', $Resource.moment)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    
+    <div class="di-header-container">
+        <div class="di-middle">
+            <c:DIMenu aura:id="diMenu" changeEvent="{!c.handleChange}"></c:DIMenu>
+            <span class="slds-badge di-margin-left">New</span>
+        </div>                
+        <div class="di-date-container">
+            <c:DIDatePicker aura:id="diDatePicker" value="{!v.today}" changeEvent="{!c.handleChange}" label="Enter a Date" placeholder="Enter a Date" formatSpecifier="MM/dd/yyyy" />
+        </div>
+    </div>
+</aura:component>

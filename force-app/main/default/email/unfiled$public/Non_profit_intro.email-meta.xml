@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Intro email for non-profits</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>CloudQnect_Letterhead</letterhead>
+    <name>Non-profit intro</name>
+    <style>freeForm</style>
+    <subject>How Non-Profits are Using Data to Improve Services</subject>
+    <textOnly>{!Lead.FirstName},
+
+Effectively using one&apos;s data is a key to success for any organization. Here is a link to a recent article about the 4 Ways to Manage Your Non-Profit Better with Data which I think you and your team would enjoy.
+
+
+
+My name is Ken Balog with CloudQnect. We specialize in implementing, customizing, and optimizing the use of Salesfore.com within the non/not-for-profit arenas. I’m wondering if you might be open to an initial conversation to gauge a fit with {!Lead.Company}?
+
+
+
+Let me highlight some of the results we&apos;ve helped a few of our clients achieve:
+
+
+Art for the Journey and ISC2, came to us via referrals from our clients, and were struggling to get Salesforce set-up to track donations, volunteers, activities, and memberships. In both cases, we were able to help them when their current staff and prior consultants had failed. Some of the results were:
+
+
+
+
+Centralized all of their data into Salesforce enabling them to share constituents across departments creating new value and better service for their members, donors, and interested parties.
+Set up and customized Salesforce’s Non-Profit Cloud and Volunteer Starter Packs enabling them to create and automate customized messages, based on each member/donor’s data
+Created customized website landing pages which captured website data and delivered automated messages to help engage those parties in furthering their interest in the association.
+Translated all of this data into customized dashboards and automated reports for the association’s executive staff and board which improved communication and oversight
+Created a customized Volunteer Self Service instance saving them time and increasing the accuracy of each volunteer’s data
+Created customized continuing education tools where all data is captured in Salesforce, results are automatically tallied, and certificates sent to those who passed
+Implementing Salesforce Surveys in place of SurveyMonkey which added additional details and transparency to their dashboards and reports
+
+
+
+
+
+
+
+
+If you have a minute or two to learn more about us, you can visit us at www.cloudqnect.com. If I don’t hear from you, I will reach out to you via phone within the next week.
+
+
+Best Regards,
+
+Ken
+
+Ken Balog
+
+EVP Sales &amp; Marketing
+
++1 (804) 714-8458
+
+CloudQnect
+
+www.cloudqnect.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

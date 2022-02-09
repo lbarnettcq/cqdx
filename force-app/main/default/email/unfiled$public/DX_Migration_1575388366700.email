@@ -1,0 +1,34 @@
+<html>
+ <head> 
+  <title></title> 
+ </head> 
+ <body style="height: auto; min-height: auto;">
+   {{{Recipient.FirstName}}}, 
+  <br /> 
+  <br /> Organizations that have moved from classic Salesforce development to DX are seeing a 59% reduction in the release time of new features and a 32% reduction in their overall Salesforce cost of ownership. Is {{{Recipient.Company}}} currently moving to or planning to migrate its Salesforce code base to Salesforce DX? Either way, you might be interested in our white paper:&nbsp; 
+  <i>The&nbsp;</i> 
+  <i>4 Phases of a Successful Salesforce DX Migration</i>. 
+  <br /> 
+  <br /> CloudQnect is a Salesforce Consulting Partner with an Agile DevOps methodology at our core. We specialize in Salesforce DX, DevOps, tech-stack integrations, and custom development. We currently work with companies such as Capital One, CarMax, Agean Bioscience, Dynatrace, and ISC2, to name a few.&nbsp; 
+  <br /> 
+  <br /> If you would like to receive a copy of the white paper, please let me know. I will follow up with you within the week.&nbsp; 
+  <br /> 
+  <br /> Thanks and Make it a Great Day, 
+  <br /> Ken 
+  <br /> 
+  <br /> Ken Balog 
+  <br /> EVP Sales &amp; Marketing 
+  <br /> (o) 804-480-1129&nbsp;(c) 804-714-8458 
+  <br /> 
+  <img alt="CloudQnect - new" src="{[devName:CloudQnect_new]}" style="max-width: 673.744px; width: 176.989px; height: 40px;" title="CloudQnect - new" /> 
+  <br /> 2400 Old Brick Road, #139 
+  <br /> Glen Allen, VA. 23060 
+  <br /> 
+  <a href="https://cloudqnect.com/">www.cloudqnect.com </a> 
+  <br /> 
+  <a href="https://calendly.com/kbalog-cloudqnect">Click to schedule a meeting with me</a> 
+  <br /> 
+  <img alt="2015_sfdc_dev_user_official_badge_Registered_Consulting_Partner_light_RGB_1.0" src="{[devName:X2015_sfdc_dev_user_official_badge_R]}" style="max-width: 673.744px; width: 148.977px; height: 42.9972px;" title="2015_sfdc_dev_user_official_badge_Registered_Consulting_Partner_light_RGB_1.0" /> 
+  <br /> &nbsp; 
+ </body>
+</html>

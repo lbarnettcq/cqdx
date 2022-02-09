@@ -1,0 +1,257 @@
+<apex:page standardController="Monthly_Managed_Service__c" extensions="controller_ManagedServiceInvoice" showHeader="true" sidebar="true" standardStylesheets="false" renderAs="pdf">
+	<apex:stylesheet value="{!$Resource.CQ_MMS_INV_CSS}"/>
+
+	<apex:outputPanel layout="block" styleClass="outer">
+		<apex:outputPanel layout="block" styleClass="inner">
+			<center>
+			<apex:outputText value="Monthly Managed Service Invoice" styleClass="header1"/>
+			</center>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<br/>
+				<br/>
+				<apex:outputPanel layout="block" styleClass="pull-left large">
+					<apex:outputText value="{!mms.Account__r.Name}" styleClass="header4"/>
+				</apex:outputPanel>
+				<apex:outputPanel layout="block" styleClass="pull-left large">
+					<apex:outputText value="{!mms.Account__r.BillingStreet}"/>
+				</apex:outputPanel>
+				<apex:outputPanel layout="block" styleClass="pull-left large">
+					<apex:outputText value="{!mms.Account__r.BillingCity}, {!mms.Account__r.BillingState} {!mms.Account__r.BillingPostalCode}"/>
+				</apex:outputPanel>				
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-right medium">
+				<apex:image value="{!$Resource.CloudQnectLogo2}" height="60%" width="60%"/>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left small">
+				<apex:outputLabel value="Invoice Number"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="{!mms.Name}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left small">
+				<apex:outputLabel value="Invoice Date"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputText value="{0, date, medium}">
+        			<apex:param value="{!mms.End_Date__c}"></apex:param>
+    			</apex:outputText>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left large header3">
+				<apex:outputText value="Cases Breakdown"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Case Allotment for Month" title="Includes cases carried over from last month"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Case_Allotment__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Total Cases for Month"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Total_Cases__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Cases Over this Month"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Cases_Over__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Cases to Carryover" title="These cases will be added to next month's case allotment"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Cases_to_Carryover__c}"/>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left large header3">
+				<apex:outputText value="Developer Breakdown"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Developer Hours for Month" title="Includes developer hours carried over from last month"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Developer_Hours__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Total Developer Hours Used"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Total_Developer_Hours__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Developer Hours Over this Month"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Developer_Hours_Over__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Developer Hours to Carryover" title="These developer hours will be added to next month's available hours"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Developer_Hours_to_Carryover__c}"/>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left large header3">
+				<apex:outputText value="Cost Breakdown"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Monthly Base Cost"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Monthly_Base_Cost__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Cost of Cases Overage"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Monthly_Case_Overage_Cost__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium">
+				<apex:outputLabel value="Cost of Developer Hours Overage"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right">
+				<apex:outputLabel value="{!mms.Monthly_Developer_Overage_Cost__c}"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left medium" style="font-weight: bold;">
+				<apex:outputLabel value="Monthly Total Cost"/>
+			</apex:outputPanel>
+			<apex:outputPanel layout="block" styleClass="pull-right medium text-right" style="font-weight: bold;">
+				<apex:outputLabel value="{!mms.Monthly_Total_Cost__c}"/>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="block" styleClass="inner">
+			<apex:outputPanel layout="block" styleClass="pull-left large header3">
+				<apex:outputText value="Activity Details"/>
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" styleClass="pull-left large">
+				<apex:repeat value="{!mmsaList}" var="mmsa">
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Activity Type"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Activity_Type__c}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Date Opened"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{0, date, MM/dd/yyyy}">
+        					<apex:param value="{!mmsa.Date_Opened__c}"></apex:param>
+    					</apex:outputText>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Who Opened"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Who_Opened__r.Name}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Date Closed"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{0, date, MM/dd/yyyy}">
+        					<apex:param value="{!mmsa.Date_Closed__c}"></apex:param>
+    					</apex:outputText>
+    				</apex:outputPanel>
+
+    				<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Who Closed"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Who_Closed__r.Name}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Case Number"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Case__r.CaseNumber}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Development Time (Hours)"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Development_Time_Hours__c}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="pull-left small">
+						<apex:outputLabel value="Summary"/>
+					</apex:outputPanel>
+					<apex:outputPanel layout="block" styleClass="pull-left medium">
+						<apex:outputText value="{!mmsa.Summary__c}"/>
+					</apex:outputPanel>
+
+					<apex:outputPanel layout="block" styleClass="inner">
+						<hr/>
+					</apex:outputPanel>
+				</apex:repeat>
+			</apex:outputPanel>
+		</apex:outputPanel>
+
+	</apex:outputPanel>
+</apex:page>

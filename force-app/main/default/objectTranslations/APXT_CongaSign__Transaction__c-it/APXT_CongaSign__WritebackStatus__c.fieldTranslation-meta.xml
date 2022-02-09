@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Write Back Status --></label>
+    <name>APXT_CongaSign__WritebackStatus__c</name>
+    <picklistValues>
+        <masterLabel>FAIL</masterLabel>
+        <translation>NON RIUSCITO</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NONE</masterLabel>
+        <translation>NESSUNO</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PARTIAL</masterLabel>
+        <translation>PARZIALE</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PENDING</masterLabel>
+        <translation>IN SOSPESO</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SUCCESS</masterLabel>
+        <translation>ESEGUITO CORRETTAMENTE</translation>
+    </picklistValues>
+</CustomFieldTranslation>

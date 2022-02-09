@@ -1,0 +1,79 @@
+<aura:component controller="TimesheetsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+
+    <aura:attribute name="timesheetId" type="String" default=""/>
+
+    <aura:attribute name="status" type="String" default=""/>
+    <aura:attribute name="client" type="String" default=""/>
+    <aura:attribute name="sow" type="String" default=""/>
+    <aura:attribute name="employee" type="String" default=""/>
+    <aura:attribute name="timePeriod" type="String" default=""/>
+    <aura:attribute name="totalHours" type="String" default=""/>
+    <aura:attribute name="totalExpenses" type="String" default=""/>
+    <aura:attribute name="contactName" type="String" default=""/>
+
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="When component change state" /> 
+    
+    <aura:method name="update" action="{!c.update}" access="public"> 
+        <aura:attribute name="data" type="Object"/>
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ltng:require scripts="{!join(',', $Resource.moment, $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <div class="slds-grid slds-p-around_large slds-grid_vertical-align-center">
+            <aura:if isTrue="{!v.status}">
+                <div>
+                    <c:DILabel type="{!v.status}"></c:DILabel>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.client}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">Client</div>
+                    <div class="slds-text-heading_small slds-m-top_small">{!v.client}</div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.sow}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">SOW</div>
+                    <div class="slds-text-heading_small slds-m-top_small">{!v.sow}</div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.employee}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">Employee</div>
+                    <div class="slds-text-heading_small slds-m-top_small">{!v.employee}</div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.timePeriod}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">Time Period</div>
+                    <div class="slds-text-heading_small slds-m-top_small">{!v.timePeriod}</div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.contactName}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">Client Manager</div>
+                    <div class="slds-text-heading_small slds-m-top_small">{!v.contactName}</div>
+                </div>
+            </aura:if>
+
+            <aura:if isTrue="{!v.totalHours}">
+                <div class="slds-col_bump-left">
+                    <div class="di-label">Hours Total</div>
+                    <div class="slds-text-heading_small slds-text-heading_small slds-m-top_small"><b>{!v.totalHours}</b></div>
+                </div>
+            </aura:if>
+
+            <aura:if isTrue="{!v.totalExpenses}">
+                <div class="slds-m-left_xx-large">
+                    <div class="di-label">Total expenses</div>
+                    <div class="slds-text-heading_small  slds-m-top_small"><b>{!v.totalExpenses}</b></div>
+                </div>
+            </aura:if>
+    </div>
+
+</aura:component>

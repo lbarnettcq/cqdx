@@ -1,0 +1,62 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="TimesheetsController">
+    <aura:attribute name="stateProcess" type="String" description="State process for component" />
+
+    <aura:attribute name="timesheetId" type="String"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="details" type="String"/>
+
+    <aura:attribute name="errorNotFound" type="Boolean" default="false"/>
+
+    <aura:attribute name="timeReportsUrl" type="String" default="/lightning/n/Time_Reports"/>
+
+    <aura:attribute name="timesheetStatus" type="String" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require scripts="{!join(',', $Resource.distdlib)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+
+    <aura:if isTrue="{!v.errorNotFound}">
+    
+    <c:DIErrorNotFound/>
+
+    <aura:set attribute="else">
+   
+    <div class="di-teamtimetracking">
+        <aura:if isTrue="{!v.timesheetId}">
+                <c:DITimesheetsHeader 
+                aura:id="diTimesheetsHeader" 
+                timesheetId="{!v.timesheetId}"
+                title="{!v.title}"
+                changeEvent="{!c.handleChange}"
+                >
+            </c:DITimesheetsHeader>
+
+            <c:DITimesheetsPanelInfo timesheetId="{!v.timesheetId}"></c:DITimesheetsPanelInfo>
+
+            <c:DITimeReportsTable aura:id="diTimeReportsTable" changeEvent="{!c.handleChange}" timesheetId="{!v.timesheetId}" timesheetStatus="{!v.timesheetStatus}" options="{userUrl: '/lightning/r/User/', timeReportsUrl: '/lightning/n/Time_Reports'}"></c:DITimeReportsTable>
+            
+            <div style="margin-top:49px;">
+                <c:DIExpensesContainer aura:id="diExpensesContainer" timesheetId="{!v.timesheetId}" timesheetStatus="{!v.timesheetStatus}"></c:DIExpensesContainer>
+            </div>           
+        <aura:set attribute="else">
+            <c:DITimesheetsHeader 
+                aura:id="diTimesheetsHeader"
+                title="{!v.title}"
+                details="{!v.details}"
+                changeEvent="{!c.handleChange}"
+                dependencies="['diTimesheetsTable']"
+                >
+            </c:DITimesheetsHeader>
+            <div style="height: 700px">  
+                <c:DITimesheetsTable aura:id="diTimesheetsTable" changeEvent="{!c.handleChange}"></c:DITimesheetsTable>   
+            </div>
+        </aura:set>
+        </aura:if>
+    </div>
+</aura:set>
+    </aura:if>
+
+
+</aura:component>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>APXT_CongaSign__Status__c</name>
+    <picklistValues>
+        <masterLabel>CANCELLED</masterLabel>
+        <translation>キャンセル済み</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>COMPLETE</masterLabel>
+        <translation>完了済み</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>DECLINED</masterLabel>
+        <translation>拒否済み</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>EXPIRED</masterLabel>
+        <translation>期限切れ済み</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>PENDING</masterLabel>
+        <translation>保留中</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>SENT</masterLabel>
+        <translation>送信済み</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,67 @@
+<aura:component controller="MenuController">
+    <aura:attribute name="stateProcess" type="String" description="State processs" />
+    
+    <aura:attribute name="dependencies" type="List" default="[]"/>
+    
+    <aura:attribute name="state" type="String" description="state" default="closed"/>
+    <aura:attribute name="classState" type="String" description="Class for open and close list"/>
+
+    <aura:attribute name="selectedSows" type="String" description="Selected sows" default="Add SOW"/>
+  
+    <aura:attribute name="list" type="Object" description="List clients"/>
+
+    <aura:attribute name="startDate" type="String" description="Start date"/>
+    <aura:attribute name="endDate" type="String" description="End date"/>
+
+    <!-- events -->
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="The event fired when change" />
+
+    <aura:method name="update" action="{!c.update}" access="public"> 
+            <aura:attribute name="data" type="Object"/>
+    </aura:method>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.distdlib, $Resource.moment)}" afterScriptsLoaded="{!c.scriptsLoaded}" />
+    
+    <div id="diList" class="di-list">
+        <aura:if isTrue="{!v.selectedSows}">
+            <span class="di-list-selected-item">
+                {!v.selectedSows}
+            </span>
+        </aura:if> 
+    
+        <div class="{! 'slds-dropdown-trigger slds-dropdown-trigger_click di-list-margin-left ' + v.classState}">
+            <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-haspopup="true" title="Show More" onclick="{!c.handleClickIconList}">
+                <lightning:icon iconName="utility:down" size="small"  aria-hidden="true"/>
+            </button>
+            <!--<div class="slds-scrollable" style="height: 15rem; width: 4rem;">-->
+                <div class="slds-dropdown slds-dropdown_left slds-dropdown_small">
+                    <ul class="slds-dropdown__list" role="menu" aria-label="Show More" onclick="{!c.hanldeClickItemList}">
+                        <aura:iteration items="{!v.list}" var="item">
+                            <aura:if isTrue="{!not(item.childs.length == 0)}">                     
+                                <li class="slds-dropdown__list-item-title">{!item.label}</li>
+                                <aura:iteration items="{!item.childs}" var="child">
+                                    <li 
+                                        class="{!'slds-dropdown__item slds-dropdown__sow-margin ' + child.classState }" 
+                                        role="presentation" 
+                                        data-client-id="{!child.parentId}" 
+                                        data-sow-id="{!child.id}">
+                                            <a href="javascript:void(0);" role="menuitemcheckbox" tabindex="0">
+                                                <span class="slds-truncate sow-container" title="{!child.label}">
+                                                    <!--<aura:if isTrue="{!child.active}">-->
+                                                    <lightning:icon iconName="utility:check" size="small" class="slds-listbox__icon-selected-c"/>
+                                                    <!--</aura:if>--> 
+                                                    <span class="sow-lable_margin-left">{!child.label}</span>
+                                                </span>
+                                            </a>
+                                    </li>
+                                </aura:iteration>                      
+                            </aura:if> 
+                        </aura:iteration>
+                    </ul>
+                </div>
+            <!--</div>-->
+        </div>
+    </div>
+</aura:component>

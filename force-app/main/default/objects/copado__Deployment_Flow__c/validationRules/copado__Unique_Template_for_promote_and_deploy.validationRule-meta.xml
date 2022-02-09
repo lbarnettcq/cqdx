@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>copado__Unique_Template_for_promote_and_deploy</fullName>
+    <active>true</active>
+    <description>A pipeline cannot have the same template for both Promote and Deploy</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(copado__Promotion_Automation__c)), 
+  copado__Promotion_Automation__c ==  copado__Deployment_Automation__c
+)</errorConditionFormula>
+    <errorDisplayField>copado__Deployment_Automation__c</errorDisplayField>
+    <errorMessage>A pipeline cannot have the same template for both Promote and Deploy</errorMessage>
+</ValidationRule>

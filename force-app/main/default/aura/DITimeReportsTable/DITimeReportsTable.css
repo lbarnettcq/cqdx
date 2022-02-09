@@ -1,0 +1,68 @@
+.THIS.hide {
+    display: none;
+}
+
+.THIS .date-container {
+    width: 284px;
+}
+
+.THIS label.uiLabel {
+   padding-right: 12px;
+}
+
+.THIS .di-header-container {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex; 
+    justify-content: space-between;
+    margin-top: 34px;
+    margin-bottom: 24px;
+}
+
+.THIS .di-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .di-margin-left {
+    margin-left: 16px;
+}
+
+.THIS .di-body-container {
+    clear: both;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.THIS .slds-icon-utility-approval svg{
+    fill: #706e6b;
+}
+
+.THIS .slds-icon-utility-inprogress svg {
+    fill: #fbb018;
+}
+
+.THIS .slds-icon-utility-approved svg {
+    fill: #0070d2;/*rgb(52,168,83);*/
+}
+
+.THIS .timeTrackingTable thead th span {   
+    text-transform: none !important;
+    font-weight: 700 !important;
+    color: #080707 !important;
+ }
+
+ .THIS .time-period /*.lightning-formatted-text*/ {
+    color: #514f4d;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    font-weight: 400;
+ }
+
+ .THIS .slds-icon-utility-approved lightning-formatted-text,
+ .THIS .slds-icon-utility-inprogress lightning-formatted-text,
+ .THIS .slds-icon-utility-approval lightning-formatted-text {
+     display: none;
+ }

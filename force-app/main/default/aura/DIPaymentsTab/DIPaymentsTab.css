@@ -1,0 +1,14 @@
+.THIS .slds-brand-band:before {
+    background-image: none !important;
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.THIS.slds-brand-band:before {
+    background-image: none !important;
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.THIS.di-tab-container {
+    width: 100%;
+    margin: 0 auto;
+}

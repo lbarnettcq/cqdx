@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Promotion Automation --></label>
+    <lookupFilter>
+        <errorMessage><!-- Only active automation templates are allowed --></errorMessage>
+    </lookupFilter>
+    <name>copado__Promotion_Automation__c</name>
+    <relationshipLabel><!-- Pipelines --></relationshipLabel>
+</CustomFieldTranslation>

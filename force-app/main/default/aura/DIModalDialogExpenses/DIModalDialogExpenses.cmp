@@ -1,0 +1,261 @@
+<aura:component controller="ExpensesController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="stateProcess" type="String" description="State process for component"/>     
+
+    <aura:attribute name="opened" type="Boolean" default="false"/>
+
+    <aura:attribute name="view" type="String" default="none"/>
+
+    <aura:attribute name="title" type="String"/>
+    <aura:attribute name="description" type="List"/>
+    
+    <aura:attribute name="message" type="Object" />
+
+    <aura:attribute name="submitLabel" type="String" default="Create"/>
+    <aura:attribute name="disableSubmit" type="Boolean" default="false"/>
+    <aura:attribute name="hideSubmit" type="Boolean" default="false"/>
+
+    <aura:attribute name="id" type="String"/>
+    <aura:attribute name="timesheetId" type="String"/>
+    <aura:attribute name="employeeId" type="String"/>
+    
+    <aura:attribute name="clientsSows" type="List" default="[]"/>
+    <aura:attribute name="selectedClientSow" type="String"/>
+    <aura:attribute name="disabledSelectedClientSow" type="Boolean" default="false"/>
+
+    <aura:attribute name="types" type="List" default="[]"/>
+    <aura:attribute name="selectedType" type="String"/>
+    <aura:attribute name="disabledSelectedType" type="Boolean" default="false"/>
+    
+    <aura:attribute name="date" type="String"/>
+    <aura:attribute name="disabledDate" type="Boolean" default="false"/>
+
+    <aura:attribute name="billable" type="Boolean" default="true"/>
+    <aura:attribute name="disabledBillable" type="Boolean" default="false"/>
+
+    <aura:attribute name="amount" type="Decimal"/>    
+    <aura:attribute name="disabledAmount" type="Boolean" default="false"/>
+
+    <aura:attribute name="comment" type="String"/>
+    <aura:attribute name="disabledComment" type="Boolean" default="false"/>
+
+    <aura:attribute name="submittalDate" type="String"/>
+    <aura:attribute name="disabledSubmittalDate" type="Boolean" default="false"/>
+
+    <aura:attribute name="invoicedAmount" type="Decimal"/>
+    <aura:attribute name="disabledInvoicedAmount" type="Boolean" default="false"/>
+    
+    <aura:attribute name="disabledFileUpload" type="Boolean" default="false"/>
+    
+    <aura:attribute name="recordId" type="Id" description="Record to which the files should be attached"/>
+
+    <aura:attribute name="showError" type="Boolean" default="false"/>
+    <aura:attribute name="errorsFields" type="String"/>
+    <aura:attribute name="errorBlankField" type="String" description="Message for empty field" default="Complete this field"/>
+
+    <!-- events -->
+    <aura:registerevent name="changeEvent" type="c:DIComponentEvent" description="The event fired when change" />
+
+    <aura:method name="update" action="{!c.update}" access="public">
+        <aura:attribute name="data" type="Object" />
+    </aura:method>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require scripts="{!join(',', $Resource.distdlib, $Resource.moment)}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+
+    <aura:if isTrue="{!v.opened}">
+        <div class="di-modal-dialog slds-m-around_xx-large">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  size="large"
+                                                  class="slds-modal__close"/>
+                            <div class="slds-text-heading_medium slds-text-color_weak">
+                                <b>{!v.title}</b>
+                            </div>
+                            <aura:if isTrue="{!v.showError}">
+                                <c:DIErrorsModal errorsFields="{!v.errorsFields}"/>
+                            </aura:if>
+                        </header>
+                        <div class="slds-modal__content slds-p-horizontal_medium slds-p-top_medium slds-p-bottom_xx-large" id="modal-content-id-1">
+                            <div class="slds-text-align_center">
+                                <aura:iteration items="{!v.description}" var="descr">
+                                    <div>{!descr}</div>
+                                </aura:iteration>
+                            </div>             
+                            <div class="slds-grid slds-grid_align-center">
+                                <div class="slds-col slds-size_7-of-12">
+                                <aura:if isTrue="{!v.message.show}">
+                                    {!v.message.description}
+                                <aura:set attribute="else">
+                                    <div class="slds-grid slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-1">
+                                        <lightning:combobox 
+                                            aura:id="selectedClientSow"
+                                            name="selectedClientSow" 
+                                            value="{!v.selectedClientSow}" 
+                                            label="Client/SOW" 
+                                            required="true"
+                                            messageWhenValueMissing="{!v.errorBlankField}"
+                                            messageWhenBadInput="Incorrect Client/SOW"
+                                            placeholder="" 
+                                            options="{!v.clientsSows}" 
+                                            disabled="{!v.disabledSelectedClientSow}"
+                                            onchange="{!c.handleSelectClientSow}"/>
+                                        </div>    
+                                    </div> 
+                                    <div class="slds-grid slds-gutters slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <ui:inputDate 
+                                                aura:id="date" 
+                                                label="Expense Date" 
+                                                labelClass="di-label"
+                                                value="{!v.date}" 
+                                                requiredIndicatorClass="start-date-error"
+                                                displayDatePicker="true"                                                
+                                                required="true"
+                                                disabled="{!v.disabledDate}"
+                                                />
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="slds-truncate" id="{!v.tdata.id}">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__control">
+                                                        <ui:inputDate 
+                                                            aura:id="submittalDate" 
+                                                            label="Submittal Date" 
+                                                            labelClass="di-label"
+                                                            value="{!v.submittalDate}" 
+                                                            requiredIndicatorClass="start-date-error"
+                                                            displayDatePicker="true"
+                                                            required="true"
+                                                            disabled="{!v.disabledSubmittalDate}"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                                                                
+                                    </div> 
+                                    <div class="slds-grid slds-gutters slds-m-top_large">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <lightning:input 
+                                                    aura:id="amount"
+                                                    type="number"
+                                                    name="amount" 
+                                                    label="Expense Amount" 
+                                                    min="0" 
+                                                    max="999999" 
+                                                    formatter="currency"
+                                                    step="0.01"
+                                                    pattern="[0-9]*[.]?[0-9]*" 
+                                                    value="{!v.amount}"                                                            
+                                                    required="true"
+                                                    disabled="{!v.disabledAmount}"
+                                                    messageWhenValueMissing="{!v.errorBlankField}"
+                                                    messageWhenBadInput="Incorrect Amount"/> 
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <div class="slds-truncate" id="{!v.tdata.id}">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <lightning:input 
+                                                                aura:id="invoicedAmount"
+                                                                type="number"
+                                                                name="invoicedAmount" 
+                                                                label="Invoiced Amount" 
+                                                                min="0" 
+                                                                max="999999" 
+                                                                formatter="currency"
+                                                                step="0.01"
+                                                                pattern="[0-9]*[.]?[0-9]*" 
+                                                                value="{!v.invoicedAmount}"
+                                                                required="true"
+                                                                disabled="{!v.disabledInvoicedAmount}"
+                                                                messageWhenValueMissing="{!v.errorBlankField}"
+                                                                messageWhenBadInput="Incorrect Invoiced Amount"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                                                                
+                                        </div>                                        
+                                    <div class="slds-grid slds-gutters slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-1">
+                                        <lightning:input 
+                                            aura:id="billable"
+                                            type="checkbox" 
+                                            name="Billable" 
+                                            label="Billable"
+                                            checked="{!v.billable}"
+                                            disabled="{!v.disabledBillable}"
+                                            />
+                                        </div>    
+                                    </div>  
+                                    <div class="slds-grid slds-gutters slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-1">
+                                        <lightning:combobox 
+                                            aura:id="selectedType"
+                                            name="selectedType" 
+                                            value="{!v.selectedType}"  
+                                            label="Type" 
+                                            required="true"
+                                            disabled="{!v.disabledSelectedType}"
+                                            messageWhenValueMissing="{!v.errorBlankField}"
+                                            messageWhenBadInput="Incorrect Type"
+                                            placeholder="" 
+                                            options="{!v.types}" 
+                                            onchange="{!c.handleSelectType}"/>
+                                        </div>    
+                                    </div>     
+                                    <div class="slds-grid slds-gutters slds-m-top_large"> 
+                                        <div class="slds-col slds-size_1-of-1">       
+                                        <lightning:textarea 
+                                            aura:id="comment"
+                                            name="comment" 
+                                            value="{!v.comment}"
+                                            disabled="{!v.disabledComment}"
+                                            label="Description"
+                                            messageWhenValueMissing="{!v.errorBlankField}"/>  
+                                        </div>                         
+                                    </div> 
+                                    <div class="slds-grid slds-gutters slds-m-top_large">
+                                        <div class="slds-col slds-size_1-of-1">                                        
+                                        <c:DIFileUpload aura:id="fileUpload" recordId="{!v.id}" changeEvent="{!c.handleChangeUploadFiles}" disable="{!v.disabledFileUpload}"></c:DIFileUpload>
+                                        </div>
+                                    </div>
+                                </aura:set>
+                                </aura:if>
+                                </div>
+                            </div>                       
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <aura:if isTrue="{!v.hideSubmit}">
+                                <lightning:button variant="brand"
+                                    label="Ok"
+                                    title="Ok"
+                                    onclick="{!c.closeModel}"
+                                />
+                            <aura:set attribute="else">
+                                <lightning:button variant="neutral"
+                                    label="Cancel"
+                                    title="Cancel"
+                                    onclick="{!c.closeModel}"
+                                />
+                                <lightning:button
+                                    disabled="{!v.disableSubmit}"
+                                    variant="brand"
+                                    label="{!v.submitLabel}"
+                                    title="{!v.submitLabel}"
+                                    onclick="{!c.submit}"/>
+                            </aura:set>
+                            </aura:if>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </aura:if>
+</aura:component>

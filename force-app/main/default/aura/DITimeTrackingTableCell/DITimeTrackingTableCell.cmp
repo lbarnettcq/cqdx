@@ -1,0 +1,28 @@
+<aura:component>
+    <aura:attribute name="cellId" type="String"/>
+    <aura:attribute name="cellRowId" type="String"/>
+    <aura:attribute name="cellColumnId" type="String"/>
+    <aura:attribute name="cellValue" type="String"/>
+    <aura:attribute name="cellState" type="String"/>
+
+    <aura:attribute name="disabled" type="Boolean" description="Disable input" default="false"/>
+
+    <aura:registerevent name="timeCellChange" type="c:DIComponentEvent" description="change time" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-truncate" id="{!v.tdata.id}">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <input class="di-input" 
+                data-id="{!v.cellId}" 
+                data-row-id="{!v.cellRowId}" 
+                data-column-id="{!v.cellColumnId}" 
+                data-previous-value="{!v.cellValue}" 
+                value="{!v.cellValue}" 
+                type="text" 
+                disabled="{!v.cellState == 'lock'}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

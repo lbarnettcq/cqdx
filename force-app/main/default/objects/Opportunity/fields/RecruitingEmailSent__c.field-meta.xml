@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RecruitingEmailSent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checked if Email is Sent to Recruiting Team</description>
+    <externalId>false</externalId>
+    <label>RecruitingEmailSent</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

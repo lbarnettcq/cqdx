@@ -1,0 +1,10 @@
+<p>Hi,</p>
+
+<p>{!Organization.Name}'s SF App Analyse CRM session has not made any progress for 24 hours.<br>
+Please investigate.</p>
+
+<p>Org ID: {!Organization.Id}<br>
+Session ID: {!cogn__Clean_Job__c.cogn__Session_Id__c}</p>
+
+<p>Regards,<br>
+Salesforce App Bot</p>

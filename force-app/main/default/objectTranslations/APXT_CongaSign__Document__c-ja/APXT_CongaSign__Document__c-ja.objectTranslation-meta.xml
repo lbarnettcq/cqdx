@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Conga Sign ドキュメント</value>
+    </caseValues>
+    <nameFieldLabel>ドキュメント名</nameFieldLabel>
+    <webLinks>
+        <label><!-- Download_File --></label>
+        <name>APXT_CongaSign__Download_File</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- View_ContentDocument --></label>
+        <name>APXT_CongaSign__View_ContentDocument</name>
+    </webLinks>
+</CustomObjectTranslation>

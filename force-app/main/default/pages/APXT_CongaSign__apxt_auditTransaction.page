@@ -1,0 +1,14 @@
+<apex:page showHeader="false" sidebar="false" standardcontroller="APXT_CongaSign__Transaction__c" extensions="APXT_CongaSign.apxt_serviceRedirect">
+    <html xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <script type="text/javascript">
+                var redirectUrl = '{!JSENCODE(auditUrl)}';
+                // Used sforce.one to navigate in lightning but actually made redirect more clunky.
+                // Always using location.href regardless of classic or lightning.
+                window.location.href = redirectUrl;
+            </script>
+        </head>
+	<body>
+	</body>
+    </html>
+</apex:page>

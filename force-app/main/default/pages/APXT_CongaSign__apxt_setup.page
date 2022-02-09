@@ -1,0 +1,72 @@
+<apex:page controller="APXT_CongaSign.apxt_setup" showHeader="true" sidebar="false" applyBodyTag="false" docType="html-5.0" title="{!$Label.apxt_congasign__apxt_setup_title}">
+  <head>
+      <meta name="robots" content="noindex, nofollow"/>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  </head>
+  <!-- insert own body tag because salesforce class/style inheriting overflow property in undeseriable ways -->
+    <body>
+
+    <apex:outputPanel layout="none" rendered="{! NOT(showPage) }">
+        <script>
+        // Self close if returning from oauth and setup page in other tab.
+        // Else refresh as normal setup page.
+        window.onload = function() {
+            // Self close if returning from oauth in separate tab.
+            try {
+                if (window.opener != null){
+                    var thisWin = window;
+                    var opnrWin = window.opener;
+                    if (opnrWin.location.origin == thisWin.location.origin && opnrWin.location.pathname == thisWin.location.pathname){
+                        opnrWin.location.reload();
+                        thisWin.close();
+                    } else {
+                        js_forceShowPage();
+                    }
+                } else {
+                    js_forceShowPage();
+                }
+            } catch (e) {
+                js_forceShowPage();
+            }
+        };
+        </script>
+        <apex:form >
+            <apex:actionFunction action="{!forceShowPage}" name="js_forceShowPage" />
+        </apex:form>
+    </apex:outputPanel>
+
+    <apex:outputPanel layout="none" rendered="{! showPage }">
+        <apex:includeLightning />
+        <div id="vf-outer-spinner" class="slds-scope slds-grid slds-grid_frame">
+            <div style="height: 6rem;">
+                <div class="slds-spinner_container">
+                    <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_large">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lightning"></div>
+        <script type="text/javascript">
+            var ns = "{!JSENCODE(NAMESPACE)}";
+            if (ns == undefined || ns.length == 0) {
+                ns = "c";
+            }
+            $Lightning.use(ns + ":apxt_lightningOut", function () {
+                $Lightning.createComponent(ns + ":Setup", {
+                }, "lightning", function (component, status) {
+                    var el = document.getElementById('vf-outer-spinner');
+                    el.parentNode.removeChild(el);
+                    // If no error then hide the error container
+                    if (status == "SUCCESS") {
+                        var errorDiv = document.getElementById("auraErrorMessage");
+                        if (errorDiv) errorDiv.style="display:none;";
+                    }
+                });
+            });
+        </script>
+    </apex:outputPanel>
+    </body>
+</apex:page>

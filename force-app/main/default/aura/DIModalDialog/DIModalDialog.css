@@ -1,0 +1,80 @@
+.THIS .di-modal-dialog-content {
+    display: flex;
+    justify-content: center;
+}
+
+.THIS .di-modal-dialog-title {
+    color: #2b2826;
+    font-family: "Salesforce Sans";
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.THIS .di-modal-dialog-description {
+    text-align: center;
+    color: #2b2826;
+    font-family: "Salesforce Sans";
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.THIS .di-modal-dialog-content_margin {
+    margin: 16px 128px 33px 128px;
+}
+
+.THIS .slds-modal__content_padding {
+    padding: 16px;
+}
+
+.THIS .di-modal-dialog__cell {
+    color: #514f4d;
+    font-family: "Salesforce Sans";
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.THIS .di-modal-dialog__cell_padding {
+    padding: 7px 41px 12px 10px;
+}
+
+.THIS .di-row-disabled .di-modal-dialog__cell {
+    opacity: 0.5;
+}
+
+.THIS .di-modal-dialog__header {
+    padding: 7px 41px 12px 10px;
+    color: #080707;
+    font-family: "Salesforce Sans";
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.THIS .slds-table_bordered {
+    border-top: none;
+}
+
+.THIS .slds-table thead th {
+    background-color: inherit !important;
+}
+
+.THIS .di-table-container {
+    width: 56%;
+    margin: 16px 0 33px 0;
+    /*table-layout: fixed;
+    width: 352px;*/
+}
+
+.THIS .slds-modal__close svg {
+    fill: #ffffff;
+}
+
+.THIS.di-modal-dialog .slds-button_brand {
+    background-color: #0070d2;
+}
+
+.THIS.di-modal-dialog .slds-button_brand[disabled] {
+    background: rgb(201, 199, 197);
+    border-color: rgb(201, 199, 197);
+    color: rgb(255, 255, 255);
+}

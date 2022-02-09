@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>copado__Unique_Template_for_promote_and_deploy</fullName>
+    <active>true</active>
+    <description>An environment cannot have the same automation template for both Promote and Deploy</description>
+    <errorConditionFormula>AND(
+   NOT(ISBLANK(copado__Promotion_Override__c)),
+   copado__Promotion_Override__c == copado__Deployment_Automation_Override__c
+)</errorConditionFormula>
+    <errorDisplayField>copado__Deployment_Automation_Override__c</errorDisplayField>
+    <errorMessage>An environment cannot have the same automation template for both Promote and Deploy</errorMessage>
+</ValidationRule>

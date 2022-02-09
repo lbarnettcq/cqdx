@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- If you want to add an additional filter to your JIRA callout, you can just modify this field.
+Usage exp: issueType=Story and resolution=Duplicate --></help>
+    <label><!-- JQL Extended Filter --></label>
+    <name>copadoccmint__JQL_Extended_Filter__c</name>
+</CustomFieldTranslation>

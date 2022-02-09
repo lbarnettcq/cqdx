@@ -1,0 +1,19 @@
+<html style="overflow-y: hidden;">
+<head>
+	<title></title>
+</head>
+<body style="height: auto; min-height: auto;">Hello {{{Recipient.FirstName}}},<br />
+<br />
+I realize Salesforce isn&#39;t your only priority.&nbsp; Please reply with the number below that applies to your situation and we&#39;ll go from there.&nbsp; It&#39;s as easy as 1,2,3,4...
+<ol>
+	<li>Yes, I do have some questions about Salesforce, let&#39;s schedule a 15-minute call on <a href="https://calendly.com/ahuneycutt-cloudqnect/15min">Calendly</a></li>
+	<li>I&#39;m not sure what I need, but I&#39;m very busy right now. Follow up in a month.</li>
+	<li>We&#39;re confident with our use of Salesforce, but thanks for reaching out.</li>
+	<li>We do not currently use Salesforce, nor do we plan to in the future.</li>
+</ol>
+Many thanks!<br />
+Andrew<br />
+<br />
+<br />
+&nbsp;</body>
+</html>

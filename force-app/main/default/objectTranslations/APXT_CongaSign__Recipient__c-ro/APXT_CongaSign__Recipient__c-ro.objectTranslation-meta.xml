@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>Definite</article>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value>Destinatar Conga Sign</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value>Destinatari Conga Sign</value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Destinatar Conga Sign --></value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Destinatari Conga Sign --></value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <nameFieldLabel>Numele destinatarului</nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- You cannot Reparent this record. --></errorMessage>
+        <name>APXT_CongaSign__Prevent_Reparent</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Reassign --></label>
+        <name>APXT_CongaSign__Reassign</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Payment type --></label>
+    <name>Payment_type__c</name>
+    <picklistValues>
+        <masterLabel>Commissions</masterLabel>
+        <translation><!-- Commissions --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Expenses Reimbursement</masterLabel>
+        <translation><!-- Expenses Reimbursement --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Referral</masterLabel>
+        <translation><!-- Referral --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Subcontractor</masterLabel>
+        <translation><!-- Subcontractor --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

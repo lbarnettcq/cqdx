@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Apex Batch Job</fullName>
+        <default>false</default>
+        <label>Apex Batch Job</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Apex Trigger</fullName>
+        <default>false</default>
+        <label>Apex Trigger</label>
+    </standardValue>
+    <standardValue>
+        <fullName>App/Tab Creation</fullName>
+        <default>false</default>
+        <label>App/Tab Creation</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Approval Process</fullName>
+        <default>false</default>
+        <label>Approval Process</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Custom Object/Field</fullName>
+        <default>false</default>
+        <label>Custom Object/Field</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Dashboard/Report</fullName>
+        <default>false</default>
+        <label>Dashboard/Report</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Data Load</fullName>
+        <default>false</default>
+        <label>Data Load</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Email Sync Setup</fullName>
+        <default>false</default>
+        <label>Email Sync Setup</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Feature Request</fullName>
+        <default>false</default>
+        <label>Feature Request</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Mass Email</fullName>
+        <default>false</default>
+        <label>Mass Email</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Page Layout Change</fullName>
+        <default>false</default>
+        <label>Page Layout Change</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Password Reset</fullName>
+        <default>false</default>
+        <label>Password Reset</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Problem</fullName>
+        <default>false</default>
+        <label>Problem</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Process Builder</fullName>
+        <default>false</default>
+        <label>Process Builder</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Question</fullName>
+        <default>false</default>
+        <label>Question</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Security Change</fullName>
+        <default>false</default>
+        <label>Security Change</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Training</fullName>
+        <default>false</default>
+        <label>Training</label>
+    </standardValue>
+    <standardValue>
+        <fullName>User Set Up</fullName>
+        <default>false</default>
+        <label>User Set Up</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Validation Rule</fullName>
+        <default>false</default>
+        <label>Validation Rule</label>
+    </standardValue>
+    <standardValue>
+        <fullName>VisualForce/Lightning Page</fullName>
+        <default>false</default>
+        <label>VisualForce/Lightning Page</label>
+    </standardValue>
+</StandardValueSet>

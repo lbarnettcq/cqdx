@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Available --></label>
+    <name>Available__c</name>
+    <picklistValues>
+        <masterLabel>2 Weeks</masterLabel>
+        <translation><!-- 2 Weeks --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Immediately</masterLabel>
+        <translation><!-- Immediately --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+</CustomFieldTranslation>
